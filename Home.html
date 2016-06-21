@@ -9,11 +9,24 @@
     <meta name="author" content="TryMe">
     <link rel="icon" href="bootstrap/favicon.ico">
 
-    <title>Home</title>
+    <title>Начало</title>
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="bootstrap\docs\examples\starter-template\starter-template.css" rel="stylesheet">
     <script src="bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <style type="text/css">
+      .fontCursive {
+        font-family: cursive;
+        text-align: center;
+      }
+
+      .bottom {
+        margin-top: 2em;
+        margin-bottom: 6em;
+      }
+    </style>
+
   </head>
 
   <body>
@@ -36,16 +49,61 @@
             <li><a href="#contact">Класации</a></li>
           </ul>
           <form class="navbar-form navbar-right">
-            <button type="submit" class="btn btn-success">Вписване</button>
-            <button type="submit" class="btn btn-success">Регистриране</button>
+            <button type="submit" class="btn btn-primary">Вписване</button>
+            <button type="submit" class="btn btn-primary">Регистриране</button>
           </form>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
-    <div class="container">
+    <div class="container bottom">
 
-      <h1>Container</h1>
+      <div class="page-header">
+        <h1 class="fontCursive">Тествай себе си</h1>
+        <h3 class="fontCursive">Виж дали си подготвен за училищния тест.</h3>
+      </div>
+      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#myCarousel" data-slide-to="1"></li>
+          <li data-target="#myCarousel" data-slide-to="2"></li>
+          <li data-target="#myCarousel" data-slide-to="3"></li>
+          <li data-target="#myCarousel" data-slide-to="4"></li>
+          <li data-target="#myCarousel" data-slide-to="5"></li>
+          <li data-target="#myCarousel" data-slide-to="6"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <img src="imgs/1_maxresdefault.jpg" alt="First slide" width="1200" height="400">
+          </div>
+          <div class="item">
+            <img src="imgs/2_How-to-study.jpg" alt="Second slide" width="1200" height="400">
+          </div>
+          <div class="item">
+            <img src="imgs/3_Studying-Main.jpg" alt="Third slide" width="1200" height="400">
+          </div>
+          <div class="item">
+            <img src="imgs/4_iStock.jpg" alt="4 slide" width="1200" height="400">
+          </div>
+          <div class="item">
+            <img src="imgs/5_homepage-study-image.jpg" alt="5 slide" width="1200" height="400">
+          </div>
+          <div class="item">
+            <img src="imgs/6_maxres.jpg" alt="6 slide" width="1200" height="400">
+          </div>
+          <div class="item">
+            <img src="imgs/7_maxresdefaultt.jpg" alt="7 slide" width="1200" height="400">
+          </div>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
 
     </div><!-- /.container -->
 
