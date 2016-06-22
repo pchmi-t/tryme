@@ -15,7 +15,15 @@
     <script src="../bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
   </head>
 <style type="text/css">
-
+.prg {
+  height: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+          box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+}
       .bottom {
         margin-top: 2em;
         margin-bottom: 6em;
@@ -50,6 +58,11 @@
         float: left;
         width: 70%;
       }
+	  
+	  #clock {
+		text-align: center;
+	}
+	  
     </style>
 
   </head>
@@ -86,9 +99,13 @@
       <br/>
       <div class="info">
         <h3>Остават:</h3>
-        <h2>19:49</h1>
-        <h3>Попълнени:</h3>
-        <h2>40%</h1>
+        <span id="clock"></span>
+        <h3>Прогрес:</h3>
+		
+		<div class = "progress">
+			<div class = "progress-bar" role = "progressbar" aria-valuenow = "1" aria-valuemin = "0" aria-valuemax = "100" style = "width: 1%;">
+			</div>
+		</div>
       </div>
       <div class="question">
         <h1><span class="numOfQuestion">1</span>. Какво наричаме вектор?</h1>
@@ -115,6 +132,16 @@
     <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
+	<script src="../jquery.countdown/jquery.countdown.js"></script>
+	<script>
+	var endTest = new Date(new Date().getTime() + 30 * 60000);
+	
+	$('#clock').countdown(endTest, function(event) {
+		$(this).html('<h1>' + event.strftime('%M:%S') + '</h1>');
+	});
+	
+	</script>
+	
     <script>
 
         $(document).ready(function() {
