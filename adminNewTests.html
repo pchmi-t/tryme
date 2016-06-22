@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="TryMe">
+        <link rel="icon" href="bootstrap/favicon.ico">
+        <title>Тестове</title>
+        <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+        <link href="bootstrap\docs\examples\starter-template\starter-template.css" rel="stylesheet">
+        <script src="bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <style type="text/css">
+            .modal-body {
+            max-height: calc(100vh - 210px);
+            overflow-y: auto;
+            }
+        </style>
+        <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+        </style>
+        <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#myTable').dataTable();
+            });
+        </script>
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">TryMe</a>
+                </div>
+                <div id="navbar" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Начало</a></li>
+                        <li><a href="#about">Тестове</a></li>
+                        <li><a href="#contact">Класации</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-right">
+                        <button type="submit" class="btn btn-default">Изход</button>
+                    </form>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <h1>Нови тестове</h1>
+            <ul class="nav nav-tabs">
+                <li role="presentation"><a href="admin.html">Потребители</a></li>
+                <li role="presentation"><a href="adminTests.html">Тестове</a></li>
+                <li role="presentation" class="active"><a href="adminNewTests.html">Нови тестове</a></li>
+            </ul>
+            <div class="table-responsive">
+                <table id="myTable" class="display table" width="100%" >
+                    <thead>
+                        <tr>
+                            <th>Номер</th>
+                            <th>Категория</th>
+                            <th>Автор</th>
+                            <th>Сложност</th>
+                            <th>Статус</th>
+                            <th>Линк</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td><a href="">Български език</a></td>
+                            <td><a href="">Anusha</a></td>
+                            <td>1</td>
+                            <td>
+                                <p class="bg-success">Приет <span class=" glyphicon glyphicon-ok"></span></p>
+                            </td>
+                            <td><a href="#" id="myHref1"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td><a href="">Литература</a></td>
+                            <td><a href="">AlexDimo</a></td>
+                            <td>2</td>
+                            <td>
+                                <p class="bg-danger">Отхвърлен <span class=" glyphicon glyphicon-remove"></span></p>
+                            </td>
+                            <td><a href="#" id="myHref2"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td>003</td>
+                            <td><a href="">История</a></td>
+                            <td><a href="">Kolio</a></td>
+                            <td>7</td>
+                            <td>
+                                <p class="bg-info">Чакащ одобрение <span class="glyphicon glyphicon-refresh"></span></p>
+                            </td>
+                            <td><a href="#" id="myHref3"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td>004</td>
+                            <td><a href="">География</a></td>
+                            <td><a href="">Simo</a></td>
+                            <td>8</td>
+                            <td>
+                                <p class="bg-danger">Отхвърлен <span class=" glyphicon glyphicon-remove"></span></p>
+                            </td>
+                            <td><a href="#" id="myHref4"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td>005</td>
+                            <td><a href="">Математика</a></td>
+                            <td><a href="">Marrti</a></td>
+                            <td>1</td>
+                            <td>
+                                <p class="bg-success">Приет <span class=" glyphicon glyphicon-ok"></span></p>
+                            </td>
+                            <td><a href="#" id="myHref5"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td>006</td>
+                            <td><a href="">Физика</a></td>
+                            <td><a href="">Chehov90</a></td>
+                            <td>5</td>
+                            <td>
+                                <p class="bg-success">Приет <span class=" glyphicon glyphicon-ok"></span></p>
+                            </td>
+                            <td><a href="#" id="myHref6"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td>007</td>
+                            <td><a href="">Химия</a></td>
+                            <td><a href="">Primus</a></td>
+                            <td>7</td>
+                            <td>
+                                <p class="bg-info">Чакащ одобрение <span class="glyphicon glyphicon-refresh"></span></p>
+                            </td>
+                            <td><a href="#" id="myHref7"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td>008</td>
+                            <td><a href="">Биология</a></td>
+                            <td><a href="">LoreIpsum</a></td>
+                            <td>10</td>
+                            <td>
+                                <p class="bg-danger">Отхвърлен <span class=" glyphicon glyphicon-remove"></span></p>
+                            </td>
+                            <td><a href="#" id="myHref8"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td>009</td>
+                            <td><a href="">Английски език</a></td>
+                            <td><a href="">antigona92</a></td>
+                            <td>4</td>
+                            <td>
+                                <p class="bg-success">Приет <span class=" glyphicon glyphicon-ok"></span></p>
+                            </td>
+                            <td><a href="#" id="myHref9"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td>010</td>
+                            <td><a href="">Немски език</a></td>
+                            <td><a href="">omirEZhiv</a></td>
+                            <td>3</td>
+                            <td>
+                                <p class="bg-success">Приет <span class=" glyphicon glyphicon-ok"></span></p>
+                            </td>
+                            <td><a href="#" id="myHref10"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td>011</td>
+                            <td><a href="">Испански език</a></td>
+                            <td><a href="">charlesBukovski89</a></td>
+                            <td>7</td>
+                            <td>
+                                <p class="bg-success">Приет <span class=" glyphicon glyphicon-ok"></span></p>
+                            </td>
+                            <td><a href="#" id="myHref11"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                        </tr>
+                        <tr>
+                            <td>012</td>
+                            <td><a href="">Матури</a></td>
+                            <td><a href="">anitaM</a></td>
+                            <td>6</td>
+                            <td>
+                                <p class="bg-info">Чакащ одобрение <span class="glyphicon glyphicon-refresh"></span></p>
+                            </td>
+                            <td><a href="#" id="myHref12"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <nav>
+                <ul class="pagination pagination-sm">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- /.container -->
+        <script type="text/javascript">
+            $("#myHref1").on('click', function() {
+              $('#viewQuestion').modal('show');
+            });
+            $("#myHref2").on('click', function() {
+              $('#viewQuestion').modal('show');
+            });
+            $("#myHref3").on('click', function() {
+              $('#viewQuestion').modal('show');
+            });
+            $("#myHref4").on('click', function() {
+              $('#viewQuestion').modal('show');
+            });
+            $("#myHref5").on('click', function() {
+              $('#viewQuestion').modal('show');
+            });
+            $("#myHref6").on('click', function() {
+              $('#viewQuestion').modal('show');
+            });
+            $("#myHref7").on('click', function() {
+              $('#viewQuestion').modal('show');
+            });
+            $("#myHref8").on('click', function() {
+              $('#viewQuestion').modal('show');
+            });
+            $("#myHref9").on('click', function() {
+              $('#viewQuestion').modal('show');
+            });
+            $("#myHref10").on('click', function() {
+              $('#viewQuestion').modal('show');
+            });
+            $("#myHref11").on('click', function() {
+              $('#viewQuestion').modal('show');
+            });
+            $("#myHref12").on('click', function() {
+              $('#viewQuestion').modal('show');
+            });
+        </script>
+        <div id="viewQuestion" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Преглед на въпрос</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <!-- Текст на въпроса -->
+                            <div class="form-group row">
+                                <label for="question" class="col-sm-2 form-control-label">Въпрос</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" rows="10" id="question">Цар Калоян сключва уния с папата, което се изразява в :</textarea>
+                                </div>
+                            </div>
+                            <!-- Автор на въпроса -->
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 form-control-label">Автор</label>
+                                <div class="col-sm-10">
+                                    <a href="">Samarov94</a>
+                                </div>
+                            </div>
+                            <!-- Отговори -->
+                            <div class="form-group row">
+                                <label class="col-sm-2">Отговори</label>
+                                <div class="col-sm-10">
+                                    <div class="radio">
+                                        <label>
+                                        <input type="radio" name="gridRadios" id="gridRadios1" value="option1">
+                                        Специална клетва на Калоян положена пред папски пратеник; 
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                        <input type="radio" name="gridRadios" id="gridRadios2" value="option2" checked>
+                                        Признаване върховенството на папството в църковно отношение чрез ръкополагане на българския архиепископ за примас и коронация на Калоян за “крал на България и Влахия”;
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                        <input type="radio" name="gridRadios" id="gridRadios3" value="option3">
+                                        Пълна промяна на църковната литургия и обреди;
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                        <input type="radio" name="gridRadios" id="gridRadios1" value="option1">
+                                        Няма верен отговор. 
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Категория -->
+                            <div class="form-group row">
+                                <label class="col-sm-2">Категория</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control form-control-sm">
+                                        <option>Български език</option>
+                                        <option>Литература</option>
+                                        <option>Математика</option>
+                                        <option>Физика</option>
+                                        <option>Химия</option>
+                                        <option selected>Биология</option>
+                                        <option>География</option>
+                                        <option>История</option>
+                                        <option>Английски език</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- Сложност на въпроса -->
+                            <div class="form-group row">
+                                <label class="col-sm-2">Сложност</label>
+                                <div class="col-sm-10">
+                                    <select class="form-control form-control-sm">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option selected>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        <option>9</option>
+                                        <option>10</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-2">Статус</label>
+                                <div class="col-sm-10">
+                                    <p class="bg-success">Приет <span class=" glyphicon glyphicon-ok"></span></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Затвори</button>
+                        <button type="button" class="btn btn-danger">Откажи</button>
+                        <button type="button" class="btn btn-primary">Приеми</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal -->
+        <!-- Bootstrap core JavaScript
+            ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="bootstrap/assets/js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
+    </body>
+</html>
