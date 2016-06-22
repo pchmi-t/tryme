@@ -35,7 +35,7 @@
 	  }
 	  
 	  div.jumbotron {
-		 background-image: url("../imgs/patt10.jpg");
+		 background-image: url("../imgs/patt2.jpg");
 		background-repeat: repeat;
 	} 
 	  
@@ -71,15 +71,7 @@
           <ul class="nav navbar-nav">
             <li><a class="btn btn-success" href="Home.html">Начало</a></li>
             <li><a class="btn btn-success" href="#about">Тестове</a></li>
-            <li class="dropdown">
-    <a class="dropdown-toggle btn btn-success" data-toggle="dropdown" href="scoreboard.html">Класации
-    <span class="caret"></span></a>
-    <ul class="dropdown-menu" id="scoremenu">
-      <li id="dailyli"><a href="scoreboard.html#daily">Дневна класация</a></li>
-      <li id="weeklyli"><a href="scoreboard.html#weeklyli">Седмична класация</a></li>
-      <li id="monthlyli"><a href="#">Месечна класация</a></li> 
-    </ul>
-  </li>
+			<li><a class="btn btn-success" href="scoreboard.html">Класации</a></li>
           </ul>
 		  <img class="img-responsive" src="../imgs/logo2.png" alt="Chania">
           <form class="navbar-form navbar-right">
@@ -117,11 +109,11 @@ showDaily();
   "November", "December"
 ];
 
-$("#scoretitle").addClass('page-header').html("<h2 class='fontCursive' id='dailydate'>Дневна класация за </h2>");
+$("#scoretitle").addClass('page-header').html("<h2 class='fontCursive' id='dailydate'>Kласация за </h2>");
 	
 	var date = new Date();
 	console.log(date);
-	$("#dailydate").append(date.getDate() + " " + monthNames[date.getMonth()] + " " + "2016 г.");
+	$("#dailydate").append(monthNames[date.getMonth()] + " " + "2016 г.");
 	
 	var users = [{"name": "Емине", "surname": "Башева", "points":913, "town": "Сърница"},
 	{"name": "Христо", "surname": "Тодоров", "points":901, "town": "Ловеч"}, {"name": "Павел", "surname": "Тошев", "points":895, "town": "Бургас"},{"name": "Таня", "surname": "Христова", "points":873, "town": "Добрич"},
