@@ -33,6 +33,7 @@
 		background-repeat: repeat;
 	  }
 	  
+	  
 	  body {
 		 padding:5px 19px;
 		 width: auto;
@@ -44,6 +45,40 @@
 		 padding:5px 19px;
 		 width: auto;
 	  }
+	  
+	  #profilepage {
+	  
+	  background-image: url("../imgs/patt2.jpg") !important;
+		 background-repeat: repeat;
+	  
+	  }
+	  
+	   .media
+    {
+        /*box-shadow:0px 0px 4px -2px #000;*/
+        margin: 20px 0;
+        padding:30px;
+    }
+    .dp
+    {
+        border:15px solid #eee;
+        transition: all 0.2s ease-in-out;
+    }
+    .dp:hover
+    {
+        border:4px solid #eee;
+        transform:rotate(360deg);
+        -ms-transform:rotate(360deg);  
+        -webkit-transform:rotate(360deg);  
+        /*-webkit-font-smoothing:antialiased;*/
+    }
+	  
+	  #badges {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 50px; 
+}
 	  
     </style>
 
@@ -71,6 +106,48 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+	
+	 <div class="container">
+	 
+		<div class="container" id="profilepage">
+
+		
+		<div class="row" align="center">
+
+
+    <div class="col-lg-6">
+        <div class="media">
+            <img class="media-object dp img-circle pull-left" src="../imgs/happy_math_boy1.jpg" style="width: 200px;height:200px;">
+            <div class="media-body" align="center">
+                <h4 class="media-heading">Иван Иванов <small> София</small></h4>
+                <h5>Ученик в СМГ "Паисий Хилендарски"</h5>
+                <hr style="margin:8px auto">
+
+                <span class="label label-default">Метаматика</span>
+                <span class="label label-default">Физика</span>
+                <span class="label label-default">История</span>
+                <span class="label label-default">Химия</span>
+				<h5>Както можете да се досетите, това съм аз. Както също така можете да видите, да си избирам вкусни неща за ядене, да пътувам и да ми разказват смешни неща.</h5>
+            </div>
+        </div>
+
+    </div>
+
+   
+</div>
+		<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-header">Значки</div>
+  </div>
+  <img class="media-object dp img-circle pull-left" src="../imgs/01badge.png" style="width: 100px;height:100px;">
+	 <img class="media-object dp img-circle pull-left" src="../imgs/02badge.png" style="width: 100px;height:100px;">
+	 <img class="media-object dp img-circle pull-left" src="../imgs/03badge.png" style="width: 100px;height:100px;">
+	 <img class="media-object dp img-circle pull-left" src="../imgs/04badge.png" style="width: 100px;height:100px;">
+	 <img class="media-object dp img-circle pull-left" src="../imgs/05badge.png" style="width: 100px;height:100px;">
+	 <img class="media-object dp img-circle pull-left" src="../imgs/06badge.png" style="width: 100px;height:100px;">
+</div>
+	 
+	 </div>
     
 	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -79,9 +156,7 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
 	<script>
-	$("h3").hide().fadeIn(2000).animate({
-			fontSize: '2em'
-	}, 2000);
+
 	</script>
 
   </body>
