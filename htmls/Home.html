@@ -13,25 +13,45 @@
     <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="..\bootstrap\docs\examples\starter-template\starter-template.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
     <script src="../bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
 
     <style type="text/css">
-      .fontCursive {
-        font-family: cursive;
-        text-align: center;
-      }
 
       .bottom {
         margin-top: 2em;
         margin-bottom: 6em;
       }
+	  
+	  .fontCursive {
+        font-family: cursive;
+        text-align: center;
+      }
+	  
+	  .jumbotron {
+	    background-image: url("../imgs/patt7.jpg");
+		background-repeat: repeat;
+	  }
+	  
+	  body {
+		 padding:5px 19px;
+		 width: auto;
+	  }
+	  
+	  #page {
+		 background-image: url("../imgs/patt8.jpg") !important;
+		 background-repeat: repeat;
+		 padding:5px 19px;
+		 width: auto;
+	  }
+	  
     </style>
 
   </head>
 
   <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+<div class="container" id="page">
+<nav class="navbar-light bg-faded jumbotron">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -40,36 +60,31 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">TryMe</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="Home.html">Начало</a></li>
-            <li><a href="#about">Тестове</a></li>
-            <li class="active" class="dropdown">
-    <a class="dropdown-toggle" data-toggle="dropdown" href="scoreboard.html">Класации
+            <li><a class="btn btn-success" href="Home.html">Начало</a></li>
+            <li><a class="btn btn-success" href="#about">Тестове</a></li>
+            <li class="dropdown">
+    <a class="dropdown-toggle btn btn-success" data-toggle="dropdown" href="scoreboard.html">Класации
     <span class="caret"></span></a>
-    <ul class="dropdown-menu">
-      <li class="active"><a href="scoreboard.html#daily">Дневна класация</a></li>
-      <li><a href="scoreboard.html#weeklyli">Седмична класация</a></li>
-      <li><a href="#">Месечна класация</a></li> 
+    <ul class="dropdown-menu" id="scoremenu">
+      <li id="dailyli"><a href="scoreboard.html#daily">Дневна класация</a></li>
+      <li id="weeklyli"><a href="scoreboard.html#weeklyli">Седмична класация</a></li>
+      <li id="monthlyli"><a href="#">Месечна класация</a></li> 
     </ul>
   </li>
           </ul>
+		  <img class="img-responsive" src="../imgs/logo2.png" alt="Chania">
           <form class="navbar-form navbar-right">
-            <button type="submit" class="btn btn-primary">Вписване</button>
-            <button type="submit" class="btn btn-primary">Регистриране</button>
+            <a class="btn btn-success" style="text-decoration:none;color:white;" href="login.html">Вписване</a>
+            <a class="btn btn-success" style="text-decoration:none;color:white;" href="sign-up.html">Регистриране</a>
           </form>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-    <div class="container bottom">
-
-      <div class="page-header">
-        <h1 class="fontCursive">Тествай себе си</h1>
-        <h3 class="fontCursive">Виж дали си подготвен за училищния тест.</h3>
-      </div>
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel" style="width:100%; max-height: 400px !important;">
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
           <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -79,27 +94,30 @@
           <li data-target="#myCarousel" data-slide-to="5"></li>
           <li data-target="#myCarousel" data-slide-to="6"></li>
         </ol>
-        <div class="carousel-inner" role="listbox">
-          <div class="item active">
-            <img src="../imgs/1_maxresdefault.jpg" alt="First slide" width="1200" height="400">
+        <div class="carousel-inner carousel-fade" role="listbox">
+			<div class="item active">
+				<div class="carousel-caption">
+					<h2 style="color:black">Примерни тестове</h2>
+				</div>
+				<img src="../imgs/study1.jpg" alt="First slide">
+			</div>
+          <div class="item">
+            <img src="../imgs/5_homepage-study-image.jpg" alt="Second slide">
           </div>
           <div class="item">
-            <img src="../imgs/2_How-to-study.jpg" alt="Second slide" width="1200" height="400">
+            <img src="../imgs/3_Studying-Main.jpg" alt="Third slide">
           </div>
           <div class="item">
-            <img src="../imgs/3_Studying-Main.jpg" alt="Third slide" width="1200" height="400">
+            <img src="../imgs/college-students.jpg" alt="4 slide">
           </div>
           <div class="item">
-            <img src="../imgs/4_iStock.jpg" alt="4 slide" width="1200" height="400">
+            <img src="../imgs/study2.jpg" alt="5 slide">
           </div>
           <div class="item">
-            <img src="../imgs/5_homepage-study-image.jpg" alt="5 slide" width="1200" height="400">
+            <img src="../imgs/hgih-school-teachers.jpg" alt="6 slide">
           </div>
           <div class="item">
-            <img src="../imgs/6_maxres.jpg" alt="6 slide" width="1200" height="400">
-          </div>
-          <div class="item">
-            <img src="../imgs/7_maxresdefaultt.jpg" alt="7 slide" width="1200" height="400">
+            <img src="../imgs/Graduate_caps.jpg" alt="7>
           </div>
         </div>
         <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -111,7 +129,7 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-	
+	</div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -121,5 +139,11 @@
     <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
+	<script>
+	$("h3").hide().fadeIn(2000).animate({
+			fontSize: '2em'
+	}, 2000);
+	</script>
+
   </body>
 </html>
