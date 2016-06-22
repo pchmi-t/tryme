@@ -9,13 +9,14 @@
     <meta name="author" content="TryMe">
     <link rel="icon" href="bootstrap/favicon.ico">
 
-    <title>Влизане</title>
+    <title>Начало</title>
     <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="..\bootstrap\docs\examples\starter-template\starter-template.css" rel="stylesheet">
+	<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
     <script src="../bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
 
-         <style type="text/css">
+    <style type="text/css">
 
       .bottom {
         margin-top: 2em;
@@ -27,15 +28,10 @@
         text-align: center;
       }
 	  
-	  nav.jumbotron {
+	  .jumbotron {
 	    background-image: url("../imgs/patt7.jpg");
 		background-repeat: repeat;
 	  }
-	  
-	  div.jumbotron {
-		 background-image: url("../imgs/patt2.jpg");
-		background-repeat: repeat;
-	} 
 	  
 	  body {
 		 padding:5px 19px;
@@ -70,57 +66,23 @@
             <li><a class="btn btn-success" href="Home.html">Начало</a></li>
             <li><a class="btn btn-success" href="#about">Тестове</a></li>
 			<li><a class="btn btn-success" href="scoreboard.html">Класации</a></li>
+			<li><a class="btn btn-success loggeduser" href="profile.html">Профил</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <a class="btn btn-success" style="text-decoration:none;color:white;" href="sign-in.html">Вписване</a>
-            <a class="btn btn-success" style="text-decoration:none;color:white;" href="sign-up.html">Регистриране</a>
-          </form>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
-
-    <div class="container bottom">
-
-      <div class="page-header">
-        <h1 class="fontCursive">Влез в профила си :)</h1>
-        <h3 class="fontCursive">Решавай тестове</h3>
-        <h3 class="fontCursive">и разбери дали си подготвен за училищния тест.</h3>
-      </div>
-	  <div id="errormsg" class="alert alert-danger" hidden>
-		<strong>Грешка!</strong> Моля въведете валидни имейл и парола
-	  </div>
-      <div class="inputs">
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="sizing-addon1"></span>
-          <input type="text" id="useremail" class="form-control" placeholder="E-mail" aria-describedby="sizing-addon1">
-        </div>
-        <div class="input-group input-group-lg">
-          <span class="input-group-addon" id="sizing-addon1"></span>
-          <input type="password" class="form-control" placeholder="Парола" aria-describedby="sizing-addon1">
-        </div>
-      </div>
-      <button  onclick="login()" type="submit" id="signin" class="btn btn-success signIn">Влез</button>
-    </div><!-- /.container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
+    
+	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../bootstrap/assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
 	<script>
-	function login() {
-		var userEmail = $("#useremail").val();
-		if (userEmail == null || userEmail == "") {
-			$("#errormsg").show();
-			$("#errormsg").slideToggle(3000);
-		} else {
-			localStorage.user = userEmail;
-		}
-	}
+	$("h3").hide().fadeIn(2000).animate({
+			fontSize: '2em'
+	}, 2000);
 	</script>
+
   </body>
 </html>

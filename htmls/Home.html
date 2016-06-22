@@ -66,10 +66,10 @@
             <li><a class="btn btn-success" href="Home.html">Начало</a></li>
             <li><a class="btn btn-success" href="#about">Тестове</a></li>
 			<li><a class="btn btn-success" href="scoreboard.html">Класации</a></li>
+			<li><a class="btn btn-success loggeduser" href="profile.html">Профил</a></li>
           </ul>
-		  <img class="img-responsive" src="../imgs/logo2.png" alt="Chania">
-          <form class="navbar-form navbar-right">
-            <a class="btn btn-success" style="text-decoration:none;color:white;" href="login.html">Вписване</a>
+          <form id="unauthenticated" class="navbar-form navbar-right">
+            <a class="btn btn-success" style="text-decoration:none;color:white;" href="sign-in.html">Вписване</a>
             <a class="btn btn-success" style="text-decoration:none;color:white;" href="sign-up.html">Регистриране</a>
           </form>
         </div><!--/.nav-collapse -->
@@ -136,6 +136,19 @@
 			fontSize: '2em'
 	}, 2000);
 	</script>
+	<script>
 
-  </body>
+		$(document).ready(function() {
+				if (localStorage.user  == null || localStorage.user  == "") {
+					$("#unauthenticated").show();
+					$(".loggeduser").hide();
+				} else {
+					$("#unauthenticated").hide();
+					$(".loggeduser").show();
+					console.log($(".loggeduser"))
+				}
+		});
+
+</script>
+</body>
 </html>
