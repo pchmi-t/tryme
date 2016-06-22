@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="TryMe">
 
-    <title>Тестове</title>
+    <title>Теми за тестове</title>
     <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="..\bootstrap\docs\examples\starter-template\starter-template.css" rel="stylesheet">
@@ -64,6 +64,7 @@
             <li><a class="btn btn-success" href="Home.html">Начало</a></li>
             <li><a class="btn btn-success" href="#about">Тестове</a></li>
             <li><a class="btn btn-success" href="scoreboard.html">Класации</a></li>
+            <li><a class="btn btn-success loggeduser" href="profile.html">Профил</a></li>
           </ul>
           <form id="unauthenticated" class="navbar-form navbar-right">
             <a class="btn btn-success" style="text-decoration:none;color:white;" href="login.html">Вписване</a>
@@ -73,27 +74,31 @@
       </div>
     </nav>
     <div class="container">
-
-      <h1>Избери предмет ...</h1>
-      <button class="subjects">Български език</button>
+    
+      <h1>Избери си тема ...</h1>
+      <button class="theme">Квадратен корен</button>
       <br/>
-      <button class="subjects">Литература</button>
+      <button class="theme">Квадратни уравнения</button>
       <br/>
-      <button class="subjects">Математика</button>
+      <button class="theme">Системи линейни уравнения</button>
       <br/>
-      <button class="subjects">История</button>
+      <button class="theme">Системи линейни неравенства</button>
       <br/>
-      <button class="subjects">География</button>
+      <button class="theme">Вектори</button>
       <br/>
-      <button class="subjects">Биология</button>
+      <button class="theme">Средна отсечка</button>
       <br/>
-      <button class="subjects">Физика</button>
+      <button class="theme">Функции</button>
       <br/>
-      <button class="subjects">Химия</button>
+      <button class="theme">Еднаквости в равнина</button>
       <br/>
-      <button class="subjects">Английски език</button>
+      <button class="theme">Окръжности</button>
       <br/>
-      <button class="subjects">Философски цикъл</button>
+      <button class="theme">Окръжност и ъгъл</button>
+      <br/>
+      <button class="theme">Окръжност и многоъгълник</button>
+      <br/>
+      <button class="theme">Забележителни точки в триъгълник</button>
       <br/>
 
     </div><!-- /.container -->
@@ -109,17 +114,17 @@
     <script src="../bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
     <script>
 
-    $(document).ready(function() {
-        if (localStorage.user  == null || localStorage.user  == "") {
-          $("#unauthenticated").show();
-          $(".loggeduser").hide();
-        } else {
-          $("#unauthenticated").hide();
-          $(".loggeduser").show();
-          console.log($(".loggeduser"))
-        }
-    });
+        $(document).ready(function() {
+                if (localStorage.user  == null || localStorage.user  == "") {
+                    $("#unauthenticated").show();
+                    $(".loggeduser").hide();
+                } else {
+                    $("#unauthenticated").hide();
+                    $(".loggeduser").show();
+                    console.log($(".loggeduser"))
+                }
+        });
 
-</script>
+    </script>
   </body>
 </html>

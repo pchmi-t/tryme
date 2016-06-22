@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="TryMe">
 
-    <title>Тестове</title>
+    <title>Класове</title>
     <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
     <link href="..\bootstrap\docs\examples\starter-template\starter-template.css" rel="stylesheet">
@@ -65,7 +65,7 @@
             <li><a class="btn btn-success" href="#about">Тестове</a></li>
             <li><a class="btn btn-success" href="scoreboard.html">Класации</a></li>
           </ul>
-          <form id="unauthenticated" class="navbar-form navbar-right">
+          <form class="navbar-form navbar-right">
             <a class="btn btn-success" style="text-decoration:none;color:white;" href="login.html">Вписване</a>
             <a class="btn btn-success" style="text-decoration:none;color:white;" href="sign-up.html">Регистриране</a>
           </form>
@@ -74,27 +74,29 @@
     </nav>
     <div class="container">
 
-      <h1>Избери предмет ...</h1>
-      <button class="subjects">Български език</button>
-      <br/>
-      <button class="subjects">Литература</button>
-      <br/>
-      <button class="subjects">Математика</button>
-      <br/>
-      <button class="subjects">История</button>
-      <br/>
-      <button class="subjects">География</button>
-      <br/>
-      <button class="subjects">Биология</button>
-      <br/>
-      <button class="subjects">Физика</button>
-      <br/>
-      <button class="subjects">Химия</button>
-      <br/>
-      <button class="subjects">Английски език</button>
-      <br/>
-      <button class="subjects">Философски цикъл</button>
-      <br/>
+      <h1>Избери клас ...</h1>
+      <div class="classes">
+        <button class="klass">1 клас</button>
+        <button class="klass">2 клас</button>
+        <button class="klass">3 клас</button>
+        <button class="klass">4 клас</button>
+      </div>
+      <div class="classes">
+        <button class="klass">5 клас</button>
+        <button class="klass">6 клас</button>
+        <button class="klass">7 клас</button>
+        <button class="klass">8 клас</button>
+      </div>
+      <div class="classes">
+        <button class="klass">9 клас</button>
+        <button class="klass">10 клас</button>
+        <button class="klass">11 клас</button>
+        <button class="klass">12 клас</button>
+      </div>
+      <div class="classes">
+        <button class="matura">Матури за 7 клас</button>
+        <button class="matura">Матури за 12 клас</button>
+      </div>
 
     </div><!-- /.container -->
 
@@ -107,19 +109,5 @@
     <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script>
-
-    $(document).ready(function() {
-        if (localStorage.user  == null || localStorage.user  == "") {
-          $("#unauthenticated").show();
-          $(".loggeduser").hide();
-        } else {
-          $("#unauthenticated").hide();
-          $(".loggeduser").show();
-          console.log($(".loggeduser"))
-        }
-    });
-
-</script>
   </body>
 </html>
