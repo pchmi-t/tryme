@@ -19,7 +19,12 @@
 	<script src="../dynatable/jquery.dynatable.js"></script>
 
         <style type="text/css">
-	  
+		
+		 /* Popover */
+		.popover {
+			border: 2px dotted black;
+		}
+
 	  body {
 		 padding:5px 19px;
 		 /*width: auto;*/
@@ -90,6 +95,18 @@
 		<li class="next"><a href="#">Следващи</a></li>
 	</ul>
 	</div>
+	<div id="user-profile" class="hidden" class="media-body" align="center">
+			<img class="media-object dp img-circle pull-left" src="../imgs/happy_math_boy1.jpg" style="width: 200px;height:200px;">
+			<h4 class="media-heading">Иван Иванов <small> София</small></h4>
+			<h5>Ученик в СМГ "Паисий Хилендарски"</h5>
+			<hr style="margin:10px auto">
+
+			<span class="label label-default">Метаматика</span>
+			<span class="label label-default">Физика</span>
+			<span class="label label-default">История</span>
+			<span class="label label-default">Химия</span>
+			<h5>Както можете да се досетите, това съм аз. Както също така можете да видите, да си избирам вкусни неща за ядене, да пътувам и да ми разказват смешни неща.</h5>
+	</div>
   </div>
   
 
@@ -99,7 +116,16 @@
 	<script src="auth.js"></script>
 	<script>
 
-showDaily();
+	showDaily();
+	
+	$("tr").hover(userHover).popover({trigger:'hover',  html : true, placement: "auto bottom",  content: function() {
+         var userHtml = '<div id="user-profile" class="media-body" align="center">';
+		 userHtml += getPicHtml(hoverusr[1]);
+		 userHtml += '<h4 class="media-heading">';
+		 userHtml += hoverusr[1] + ' ' + hoverusr[2] + ' <small>'+ hoverusr[3] +'</small></h4><h5 class="label label-success">' + hoverusr[4] + '</h5>';
+		 userHtml+='</div>';
+		 return userHtml;
+        }});
 	
 	function showDaily() {
 	
@@ -122,7 +148,7 @@ $("#scoretitle").addClass('page-header').html("<h2 class='text-center' id='daily
 	{"name": "Милка", "surname": "Ферезлийска", "points":712, "town": "Пазарджик"}, {"name": "Светимир", "surname": "Игнатор", "points":697, "town": "Ботевград"},
 	{"name": "Пламена", "surname": "Григотова", "points":402, "town": "Варна"}, {"name": "Николай", "surname": "Балев", "points":341, "town": "Плевен"}];
 	
-	var html = '<table class="table table-inverse"><thead><tr><th>N.</th><th>Име</th><th>Фамилия</th><th>Град</th><th>Точки</th></tr></thead><tbody>';
+	var html = '<table class="table table-hover"><thead><tr><th>N.</th><th>Име</th><th>Фамилия</th><th>Град</th><th>Точки</th></tr></thead><tbody>';
 for(var i=0; i<users.length; i++){
 var user = users[i];
     html += "<tr><td>" + (i+1) + "</td><td>" + user.name + "</td><td>" + user.surname + "</td><td>" + user.town + "</td><td>" + user.points + "</td></tr>"
@@ -132,11 +158,34 @@ html+="</tbody></table>";
 	
 	}
 	
-	function showWeekly() {
-	
-$("#scoretitle").html("<h2 id='dailydate'>Седмична класация</h2>");
-	
+	function userHover(event) {
+		hoverusr = $(this).closest("tr").text().split(/([А-Я][а-я]+)|([0-9]+)/).filter(Boolean);
 	}
+	
+	function showWeekly() {
+		$("#scoretitle").html("<h2 id='dailydate'>Седмична класация</h2>");
+	}
+
+		
+	function getPicHtml(name) {
+		if (name == 'Емине') {
+			return '<img class="media-object dp img-circle" src="../imgs/emine.jpg" style="width: 200px;height:200px;"><br>';
+		}
+		if (name == 'Павел') {
+			return '<img class="media-object dp img-circle" src="../imgs/pavel.jpg" style="width: 200px;height:200px;"><br>';
+		}
+		if (name == 'Христо') {
+			return '<img class="media-object dp img-circle" src="../imgs/hristo.jpg" style="width: 200px;height:200px;"><br>';
+		}
+		if (name == 'Милка') {
+			return '<img class="media-object dp img-circle" src="../imgs/milka.jpg" style="width: 200px;height:200px;"><br>';
+		}
+		if (name == 'Таня') {
+			return '<img class="media-object dp img-circle" src="../imgs/tanya.jpg" style="width: 200px;height:200px;"><br>';
+		} 
+		return '<img class="media-object dp img-circle" src="../imgs/no-profile-img.gif" style="width: 200px;height:200px;"><br>';
+	}
+
 
 	</script>
   </body>
