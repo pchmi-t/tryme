@@ -20,7 +20,7 @@ $(document).ready(function() {
 
 function login() {
 	var userEmail = $("#useremail").val();
-	if (userEmail == null || userEmail == "") {
+	if (userEmail != 'ivan.ivanov@gmail.com') {
 		$("#errormsg").show();
 		$("#errormsg").slideToggle(3000);
 	} else {
