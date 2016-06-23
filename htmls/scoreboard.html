@@ -72,12 +72,12 @@
             <li><a class="active" href="Home.html">Начало</a></li>
             <li><a href="tests.html">Тестове</a></li>
       			<li><a href="scoreboard.html">Класации</a></li>
-      			<li><a class=" loggeduser" href="profile.html">Профил</a></li>
+      			<li><a class="logOut" href="profile.html">Профил</a></li>
           </ul>
-          <form id="unauthenticated" class="navbar-form navbar-right">
-            <a class="btn btn-success" style="text-decoration:none;color:white;" href="sign-in.html">Вписване</a>
-            <a class="btn btn-success" style="text-decoration:none;color:white;" href="sign-up.html">Регистриране</a>
-            <a class="btn btn-success logOut" style="text-decoration:none;color:white;" href="Home.html">Излез</a>
+          <form class="navbar-form navbar-right">
+            <a class="btn btn-success unauth" style="text-decoration:none;color:white;" href="sign-in.html">Вписване</a>
+            <a class="btn btn-success unauth" style="text-decoration:none;color:white;" href="sign-up.html">Регистриране</a>
+            <a id="logoutbtn" class="btn btn-success logOut" style="text-decoration:none;color:white;" href="Home.html">Излез</a>
           </form>
         </div><!--/.nav-collapse -->
       <!-- </div> -->
@@ -97,6 +97,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../bootstrap/assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="auth.js"></script>
 	<script>
 
 showDaily();
@@ -139,20 +140,5 @@ $("#scoretitle").html("<h2 id='dailydate'>Седмична класация</h2>
 	}
 
 	</script>
-	
-	<script>
-
-		$(document).ready(function() {
-				if (localStorage.user  == null || localStorage.user  == "") {
-					$("#unauthenticated").show();
-					$(".loggeduser").hide();
-				} else {
-					$("#unauthenticated").hide();
-					$(".loggeduser").show();
-					console.log($(".loggeduser"))
-				}
-		});
-
-</script>
   </body>
 </html>
