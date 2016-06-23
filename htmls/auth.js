@@ -20,12 +20,17 @@ $(document).ready(function() {
 
 function login() {
 	var userEmail = $("#useremail").val();
-	if (userEmail != 'ivan.ivanov@gmail.com') {
+	if (userEmail != 'ivan.ivanov@gmail.com' && userEmail != 'admin') {
 		$("#errormsg").show();
 		$("#errormsg").slideToggle(3000);
 	} else {
 		sessionStorage.setItem("user", userEmail);
-		window.location.href= "profile.html";
+		if (userEmail == 'ivan.ivanov@gmail.com' ){
+			window.location.href= "profile.html";
+		} else {
+			window.location.href= "admin.html";
+		}
+		
 	}
 }
 
