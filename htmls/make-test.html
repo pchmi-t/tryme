@@ -203,7 +203,7 @@
 	}
 	
 	function buildQuestion(question) {
-		var qHtml = '<h1>' + question.text + '</h1>';
+		var qHtml = '<h2>' + question.text + '</h2>';
 		qHtml += ' <br/><form action="demo_form.asp" method="get">';
 		question.options.forEach(function(option) {
 				qHtml += '<input type="radio" name="ans" value="' + option + '">   ' + option +'<br>';
