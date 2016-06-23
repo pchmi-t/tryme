@@ -193,16 +193,16 @@
 	
     <script>
 
-    // $(document).ready(function() {
-    //     if (localStorage.user  == null || localStorage.user  == "") {
-    //       $("#unauthenticated").show();
-    //       $(".loggeduser").hide();
-    //     } else {
-    //       $("#unauthenticated").hide();
-    //       $(".loggeduser").show();
-    //       console.log($(".loggeduser"))
-    //     }
-    // });
+    $(document).ready(function() {
+        if (localStorage.user  == null || localStorage.user  == "") {
+          $("#unauthenticated").show();
+          $(".loggeduser").hide();
+        } else {
+          $("#unauthenticated").hide();
+          $(".loggeduser").show();
+          console.log($(".loggeduser"))
+        }
+    });
 
 </script>
   </body>
