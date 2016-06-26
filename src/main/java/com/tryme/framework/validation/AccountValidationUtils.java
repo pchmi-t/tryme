@@ -32,10 +32,10 @@ import com.tryme.managers.AccountManager;
  *
  */
 public class AccountValidationUtils {
-	
+
 	/** An account manager instance. */
 	private static AccountManager accountManager;
-	
+
 	static {
 		accountManager = Factory.getInstance().getAccountManager();
 	}
@@ -46,14 +46,14 @@ public class AccountValidationUtils {
 	 * @param email the user's e-mail
 	 * @return <code>true</code> if and only if the email is in a correct format
 	 * <b>AND</b> is not taken, <code>false</code> otherwise.
-	 * @throws InvalidAccountException 
+	 * @throws Exception 
 	 */
-	public static boolean validateEmail(String email) throws InvalidAccountException {
+	public static boolean validateEmail(String email) throws Exception {
 		EmailValidator validator = getEmailValidator();
 		if (!StringUtils.isBlank(email)) {
-			return validator.validate(email);
+			return validator.validate(email) && !isEmailTaken(email);
 		} else {
-			throw new InvalidAccountException("The email is mandatory.");
+			throw new InvalidAccountException("The e-mail is mandatory.");
 		}
 	}
 
@@ -72,7 +72,7 @@ public class AccountValidationUtils {
 		}
 		criterion.email(email);
 		Account account = accountManager.getAccount(criterion);
-		return account == null;
+		return account != null;
 	}
 
 	/**
@@ -81,12 +81,13 @@ public class AccountValidationUtils {
 	 * @param username the username
 	 * @return <code>true</code> if the username is already in use. <br />
 	 * <b>NOTE: This not validate the username! Instead use {@link isUsernameValid()}</b>
+	 * @throws Exception 
 	 * @throws InvalidAccountException
 	 */
-	private static boolean isUsernameTaken(String username) {
+	private static boolean isUsernameTaken(String username) throws Exception {
 		AccountCriterion criterion = accountManager.getAccountCriterion();
 		criterion.username(username);//Possible NPE?
-		return false;
+		return accountManager.getAccount(criterion) != null;
 	}
 
 	/**
@@ -94,18 +95,18 @@ public class AccountValidationUtils {
 	 * 
 	 * @param account the account to be validated.
 	 * @return <code>true</code> if the account is a valid, <code>false</code> otherwise.
-	 * @throws InvalidAccountException 
+	 * @throws Exception 
 	 * @throws DuplicateAccountException 
 	 */
 	public static boolean validateUsername(Account account) throws 
-	InvalidAccountException {
+	Exception {
 		//TODO Check for the correctneses for this function behavior
 		if(account == null) {
 			throw new InvalidAccountException("The account can not be null");
 		}
-		
+
 		String username = account.getUsername();
-		
+
 		if(StringUtils.isBlank(username)) {
 			final String errorMessage = "The username can't be null or empty.";
 			throw new InvalidAccountException(errorMessage);
@@ -120,11 +121,14 @@ public class AccountValidationUtils {
 			final String errorMessage = "The username can't be number-only.";
 			throw new InvalidAccountException(errorMessage);
 		}
-		
+
 		//Check of the username is occupy
+
+
 		if(isUsernameTaken(account.getUsername())) {
 			throw new InvalidAccountException("The username is already taken.");
 		}
+
 		return true;
 	}
 
@@ -135,18 +139,15 @@ public class AccountValidationUtils {
 	 * @param updateAccount the updated account
 	 * @return the newly updated account or <code>null</code> 
 	 * if the update account and the domain account are the same.
-	 * @throws InvalidAccountException 
-	 * @throws UnsupportedEncodingException 
-	 * @throws NoSuchAlgorithmException 
+	 * @throws Exception 
 	 */
 	public static Account mergeToDomainAccount(Account account, Account updateAccount) 
-			throws InvalidAccountException, NoSuchAlgorithmException, 
-			UnsupportedEncodingException {
-		
+			throws Exception {
+
 		if (account == null || updateAccount == null) {
 			return null;
 		}
-		
+
 		//The user's e-mail can not be changed
 		if (!StringUtils.isBlank(updateAccount.getEmail()) &&
 				!account.getEmail().equals(updateAccount.getEmail())) {
@@ -161,7 +162,7 @@ public class AccountValidationUtils {
 			validateUsername(updateAccount);
 			account.setUsername(updateAccount.getUsername());
 		}
-		
+
 		if (!StringUtils.isBlank(updateAccount.getPassword())) {
 			String plainPassword = updateAccount.getPassword();
 			if (PasswordValidationUtils.isPasswordStrongEnough(plainPassword)) {
@@ -183,7 +184,7 @@ public class AccountValidationUtils {
 			return;
 		}
 	}
-	
+
 	public static boolean updateAccountAvatar(String fileName, InputStream inputStream) 
 			throws IOException{
 
@@ -231,8 +232,8 @@ public class AccountValidationUtils {
 		private Matcher matcher;
 
 		private static final String EMAIL_PATTERN = 
-			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+						+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 		public EmailValidator() {
 			pattern = Pattern.compile(EMAIL_PATTERN);
