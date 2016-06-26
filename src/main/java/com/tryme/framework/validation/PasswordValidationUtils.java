@@ -1,16 +1,14 @@
-package com.tryme.core.utils;
+package com.tryme.framework.validation;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.tryme.constants.AccountConstants;
 
 /**
- * The password policy class.
  * 
- * @author Hrista
+ * The password validation class.
  *
  */
-public class PasswordPolicy {
+public class PasswordValidationUtils {
 	
 	/**
 	 * Is password valid in means that it should not be empty, or contains any whitespaces.
@@ -38,7 +36,7 @@ public class PasswordPolicy {
 		if(isPassowrdContainSpaces(password)) {
 			return false;
 		}
-		
+		//TODO Finish this function
 		return true;
 	}
 	
