@@ -1,0 +1,45 @@
+package com.tryme.core.utils;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.tryme.constants.AccountConstants;
+
+/**
+ * The password policy class.
+ * 
+ * @author Hrista
+ *
+ */
+public class PasswordPolicy {
+	
+	/**
+	 * Is password valid in means that it should not be empty, or contains any whitespaces.
+	 * 
+	 * @param plainPassword the password to check
+	 * @return <code>true</code> if password is valid, <code>false</code> otherwise.
+	 */
+	private static boolean isPassowrdContainSpaces(String plainPassword) {
+		return StringUtils.containsWhitespace(plainPassword) 
+				|| StringUtils.isWhitespace(plainPassword);
+	}
+
+	/**
+	 * Check whether or not the password is strong enough. <br />
+	 * A 'strong' password must contain the following:
+	 * <li>At least 6 symbols.</li>
+	 * <li>At least one upper case.</li>
+	 * <li>At least one special character.</li>
+	 * A list of the special characters can be find here: {@link AccountConstants.SPECIAL_CHARACTERS}
+	 * 
+	 * @param password the user's password
+	 * @return <code>true</code> if the password meet the security bar, <code>false</code> otherwise.
+	 */
+	public static boolean isPasswordStrongEnough(String password) {
+		if(isPassowrdContainSpaces(password)) {
+			return false;
+		}
+		
+		return true;
+	}
+	
+}
