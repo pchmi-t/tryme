@@ -30,6 +30,10 @@ public class UserInformation {
 	private String id;
 	
 	@Field
+	@DBRef
+	private Account account;
+	
+	@Field
 	private String fullName = "";
 	
 	@Field
@@ -45,7 +49,8 @@ public class UserInformation {
 	@Field
 	private String avatar;
 
-	public UserInformation() {
+	public UserInformation(Account account) {
+		this.account = account;
 	}
 	
 	public UserInformation(String id, String fullName, Integer age, 
@@ -100,6 +105,14 @@ public class UserInformation {
 	
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 }

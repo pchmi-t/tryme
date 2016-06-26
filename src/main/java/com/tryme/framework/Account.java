@@ -68,7 +68,7 @@ public class Account {
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.userInformation = new UserInformation();
+		this.userInformation = new UserInformation(this);
 	}
 
 	/**

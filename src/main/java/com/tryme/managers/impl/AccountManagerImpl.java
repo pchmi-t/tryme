@@ -18,6 +18,7 @@ import com.tryme.core.exceptions.WSBaseException;
 import com.tryme.core.utils.PasswordService;
 import com.tryme.core.utils.Session;
 import com.tryme.framework.Account;
+import com.tryme.framework.UserInformation;
 import com.tryme.framework.criteria.AccountCriterion;
 import com.tryme.framework.validation.AccountValidationUtils;
 import com.tryme.managers.AccountManager;
@@ -50,13 +51,16 @@ public class AccountManagerImpl implements AccountManager {
 		try (Session session = new Session()) {
 			if (AccountValidationUtils.validateUsername(account) && 
 					AccountValidationUtils.validateEmail(account.getEmail())) {
-
 				account.setPassword(PasswordService
 						.getInstance()
 						.encrypt(account.getPassword()));
 				session.openSession().insert(account, CoreConstants.ACCOUNT);
+			} else {
+				throw new InvalidAccountException("The account can not be created. "
+						+ "Check the username and e-mail.");
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new InvalidAccountException("An error occure while adding the account.");
 		}
 	}
@@ -127,11 +131,7 @@ public class AccountManagerImpl implements AccountManager {
 			Account account = (Account) session
 					.openSession()
 					.findOne(criterion.getQuery(), Account.class, CoreConstants.ACCOUNT);
-			if (account != null) {
-				return account;
-			} else {
-				throw new NoSuchAccountException("The account does not exist.");
-			}
+			return account;
 		}
 	}
 
