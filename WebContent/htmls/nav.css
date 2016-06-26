@@ -1,0 +1,43 @@
+#page {
+   font-family: cursive;
+    text-align: center;
+   background-image: url("../imgs/patt4.jpg") !important;
+   background-repeat: repeat;
+   padding:5px 19px;
+   padding-left: 20px;
+   padding-right: 20px;
+   width: auto;
+}
+.navbar {
+  margin-top: 10em;
+}
+.upperNavImg {
+  display: block;
+  margin-left: 5em;
+  margin-bottom: 5em;
+  margin-top: 1em;
+  float: left;
+}
+.upperNavImgContent{
+  display: block;
+  width: 7em;
+  height: 7em;
+}
+.upperNavP{
+  font-size: 5em;
+  float: center;
+}
+.btn-success{
+  text-decoration: none;
+  color: white;
+}
+#logoutbtn {
+  visibility: hidden;
+}
+.navbar-fixed-top {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.navbar-right {
+  margin-right: 20px;
+}
