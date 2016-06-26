@@ -5,12 +5,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+
 public class WSBaseException extends WebApplicationException {
 
-	/** The serial. */
-    private static final long serialVersionUID = 1L;
+        /** The serial. */
+        private static final long serialVersionUID = 1L;
 
-    /** The error message. */
+        /** The error message. */
 	private String errorMessage;
 
 	/**
@@ -22,6 +23,10 @@ public class WSBaseException extends WebApplicationException {
 	public WSBaseException(Status code, String errorMessage) {
 		super(Response.status(code).entity(errorMessage).build());
 		this.errorMessage = errorMessage;
+	}
+        
+	/** The default constructor. */
+	public WSBaseException() {
 	}
 
 	/**
@@ -43,12 +48,13 @@ public class WSBaseException extends WebApplicationException {
 		this.errorMessage = errorMessage;
 	}
 
+
 	/**
 	 * Get the error message.
 	 * 
 	 * @return the error message.
 	 */
-	public String errorMessage() {
+	public String getErrorMessage() {
 		return this.errorMessage;
 	}
 }
