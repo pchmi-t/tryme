@@ -1,4 +1,4 @@
-package com.tryme.core.utils;
+package com.tryme.framework.validation;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,15 +14,21 @@ import java.text.MessageFormat;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import com.tryme.constants.AccountConstants;
-import com.tryme.core.exceptions.DuplicateAccountException;
+import com.tryme.constants.CoreConstants;
 import com.tryme.core.exceptions.InvalidAccountException;
+import com.tryme.core.utils.Factory;
+import com.tryme.core.utils.PasswordService;
 import com.tryme.framework.Account;
 import com.tryme.framework.UserInformation;
 import com.tryme.framework.criteria.AccountCriterion;
 import com.tryme.managers.AccountManager;
 
-public class AccountUtils {
+/**
+ * 
+ * Perform the validation process over the account.
+ *
+ */
+public class AccountValidationUtils {
 	
 	/** An account manager instance. */
 	private static AccountManager accountManager;
@@ -39,6 +45,7 @@ public class AccountUtils {
 	 * <b>AND</b> is not taken, <code>false</code> otherwise.
 	 */
 	public static boolean verifyEmail(String email) {
+		//TODO Finish the function
 		return true;
 	}
 
@@ -50,6 +57,9 @@ public class AccountUtils {
 	 * <code>false</code> otherwise.
 	 */
 	private static boolean isEmailTaken(String email) {
+		AccountCriterion criterion = accountManager.getAccountCriterion();
+		criterion.email(email);
+		//TODO finish the function
 		return true;
 	}
 
@@ -76,8 +86,8 @@ public class AccountUtils {
 	 * @throws DuplicateAccountException 
 	 */
 	public static boolean validateUsername(Account account) throws 
-	InvalidAccountException, DuplicateAccountException {
-
+	InvalidAccountException {
+		//TODO Check for the correctneses for this function behavior
 		if(account == null) {
 			throw new InvalidAccountException("");
 		}
@@ -101,7 +111,8 @@ public class AccountUtils {
 		
 		//Check of the username is occupy
 		if(isUsernameTaken(account.getUsername())) {
-			throw new DuplicateAccountException();
+			//TODO Add meaningfull error message
+			throw new InvalidAccountException("");
 		}
 		return true;
 	}
@@ -113,14 +124,13 @@ public class AccountUtils {
 	 * @param updateAccount the updated account
 	 * @return the newly updated account or <code>null</code> 
 	 * if the update account and the domain account are the same.
-	 * @throws DuplicateAccountException 
 	 * @throws InvalidAccountException 
 	 * @throws UnsupportedEncodingException 
 	 * @throws NoSuchAlgorithmException 
 	 */
 	public static Account mergeToDomainAccount(Account account, Account updateAccount) 
-			throws InvalidAccountException, DuplicateAccountException, 
-			NoSuchAlgorithmException, UnsupportedEncodingException {
+			throws InvalidAccountException, NoSuchAlgorithmException, 
+			UnsupportedEncodingException {
 		
 		if (account == null || updateAccount == null) {
 			return null;
@@ -143,7 +153,7 @@ public class AccountUtils {
 		
 		if (!StringUtils.isBlank(updateAccount.getPassword())) {
 			String plainPassword = updateAccount.getPassword();
-			if (PasswordPolicy.isPasswordStrongEnough(plainPassword)) {
+			if (PasswordValidationUtils.isPasswordStrongEnough(plainPassword)) {
 				String newPassword = PasswordService.getInstance().encrypt(plainPassword);
 				if (!account.getPassword().equals(newPassword)) {
 					account.setPassword(newPassword);
@@ -159,7 +169,7 @@ public class AccountUtils {
 	private static void mergeToDomainUserInfo(Account account, Account updateAccount) {
 		UserInformation userInfo = account.getUserInformation();
 		UserInformation updateUserInfo = updateAccount.getUserInformation();
-		
+		//TODO finish the function
 		if (updateAccount == null) {
 			return;
 		}
@@ -167,7 +177,7 @@ public class AccountUtils {
 	}
 	
 	public static boolean updateAccountAvatar(String fileName, InputStream inputStream) throws IOException{
-		File file = new File(AccountConstants.AVATAR_DIR_PREFIX.concat(fileName));
+		File file = new File(CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
 		try (OutputStream outputStream = new FileOutputStream(file);) {
 			int read = 0;
 			byte[] bytes = new byte[1024];
@@ -184,6 +194,6 @@ public class AccountUtils {
 	 * @param account the account
 	 */
 	public static void rollbackAccountInfo(Account account) {
-		//For now check if the account is change his picture
+		//TODO For now check if the account is change his picture
 	}
 }

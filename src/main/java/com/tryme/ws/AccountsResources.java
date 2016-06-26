@@ -31,15 +31,15 @@ import org.apache.commons.lang3.StringUtils;
 import com.sun.istack.NotNull;
 import com.sun.jersey.multipart.BodyPart;
 import com.sun.jersey.multipart.MultiPart;
-import com.tryme.constants.AccountConstants;
-import com.tryme.core.exceptions.DuplicateAccountException;
+import com.tryme.constants.CoreConstants;
 import com.tryme.core.exceptions.InvalidAccountException;
 import com.tryme.core.exceptions.NoSuchAccountException;
-import com.tryme.core.utils.AccountUtils;
+import com.tryme.core.exceptions.WSBaseException;
 import com.tryme.core.utils.Factory;
 import com.tryme.framework.Account;
 import com.tryme.framework.UserInformation;
 import com.tryme.framework.criteria.AccountCriterion;
+import com.tryme.framework.validation.AccountValidationUtils;
 import com.tryme.managers.AccountManager;
 
 @Path("/accounts")
@@ -79,12 +79,21 @@ public class AccountsResources {
 	public Account getAccountById(@PathParam("id") String id) {
 		AccountCriterion criterion = accountManager.getAccountCriterion();
 		criterion.id(id);
-		Account account = accountManager.getAccount(criterion);
-		if (account != null) {
-			return account;
-		} else {
-			//TODO Do something
-			return null;
+		Account account;
+		try {
+			account = accountManager.getAccount(criterion);
+			if (account != null) {
+				return account;
+			} else {
+				throw new WSBaseException("The account with the specify id does not exist");
+			}
+		} catch (Exception e) {
+			if (e instanceof NoSuchAccountException || e instanceof WSBaseException) {
+				throw new WSBaseException("The specified account does not exist.");
+			} else {
+				throw new WSBaseException(Status.INTERNAL_SERVER_ERROR, 
+						CoreConstants.GENERAL_ERROR_MSG);
+			}
 		}
 	}
 
@@ -93,16 +102,26 @@ public class AccountsResources {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Account getAccountByUsername(@PathParam("id") String id,
 			@PathParam("username") String username, @PathParam("email") String email) {
+
 		AccountCriterion criterion = accountManager.getAccountCriterion();
 		criterion.email(email);
 		criterion.id(id);
 		criterion.username(username);
-		Account account = accountManager.getAccount(criterion);
-		if (account != null) {
-			return account;
-		} else {
-			//TODO Do something
-			return null;
+		Account account;
+		try {
+			account = accountManager.getAccount(criterion);
+			if (account != null) {
+				return account;
+			} else {
+				throw new WSBaseException("No such account exist");
+			}
+		} catch (Exception e) {
+			if (e instanceof NoSuchAccountException || e instanceof WSBaseException) {
+				throw new WSBaseException("The specified account does not exist.");
+			} else {
+				throw new WSBaseException(Status.INTERNAL_SERVER_ERROR, 
+						CoreConstants.GENERAL_ERROR_MSG);
+			}
 		}
 	}
 
@@ -116,12 +135,12 @@ public class AccountsResources {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response createAccount(Account account) {
 		try {
-			if(!AccountUtils.validateUsername(account)) {
+			if(!AccountValidationUtils.validateUsername(account)) {
 				throw new InvalidAccountException("The account is not valid.");
 			}
 			accountManager.addAccount(account);
-		} catch (InvalidAccountException | DuplicateAccountException e) {
-			//PossibleNPE
+		} catch (InvalidAccountException e) {
+			//TODO PossibleNPE
 			final String errorMessage = MessageFormat.format("An error occured while saving the account {0}.", 
 					account.getUsername());
 			throw new WebApplicationException(e, Status.BAD_REQUEST);
@@ -161,15 +180,15 @@ public class AccountsResources {
 	
 		if (!StringUtils.isBlank(fileName) && inputStream != null) {
 			try {
-				if (AccountUtils.updateAccountAvatar(fileName, inputStream)) {
+				if (AccountValidationUtils.updateAccountAvatar(fileName, inputStream)) {
 					if (updatedAccount != null) {
 						if (updatedAccount.getUserInformation() != null) {
 							updatedAccount.getUserInformation().setAvatar(
-									AccountConstants.AVATAR_DIR_PREFIX.concat(fileName));
+									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
 						} else {
 							updatedAccount.setUserInformation(new UserInformation());
 							updatedAccount.getUserInformation().setAvatar(
-									AccountConstants.AVATAR_DIR_PREFIX.concat(fileName));
+									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
 						}
 					}
 				}
@@ -178,10 +197,11 @@ public class AccountsResources {
 			}
 		}
 		try {
-			AccountUtils.mergeToDomainAccount(account, updatedAccount);
-		} catch (NoSuchAlgorithmException | UnsupportedEncodingException | InvalidAccountException
-				| DuplicateAccountException e) {
-			AccountUtils.rollbackAccountInfo(updatedAccount);
+			AccountValidationUtils.mergeToDomainAccount(account, updatedAccount);
+		} catch (NoSuchAlgorithmException | UnsupportedEncodingException 
+				| InvalidAccountException e) {
+
+			AccountValidationUtils.rollbackAccountInfo(updatedAccount);
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

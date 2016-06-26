@@ -5,8 +5,6 @@ import java.util.List;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
-import com.tryme.core.exceptions.DuplicateAccountException;
-import com.tryme.core.exceptions.IllegalIDFormatException;
 import com.tryme.core.exceptions.InvalidAccountException;
 import com.tryme.core.exceptions.NoSuchAccountException;
 import com.tryme.framework.Account;
@@ -28,7 +26,7 @@ public interface AccountManager {
 	 * @throws NoSuchAccountException in case there is no such account
 	 * @throws IllegalIDFormatException in case the id is invalid by some reasons
 	 */
-	Account updateAccount(Account account) throws NoSuchAccountException, IllegalIDFormatException;
+	Account updateAccount(Account account) throws NoSuchAccountException;
 	
 	/**
 	 * Adding an account.
@@ -38,7 +36,7 @@ public interface AccountManager {
 	 * @throws InvalidAccountException in case the account is not valid
 	 * @throws DuplicateAccountException in case the user already exist
 	 */
-	void addAccount(Account account) throws InvalidAccountException, DuplicateAccountException;
+	void addAccount(Account account) throws InvalidAccountException;
 	
 	/**
 	 * Get all the accounts specified by the account criteria.
@@ -61,6 +59,6 @@ public interface AccountManager {
 	 * @param id the account's id
 	 * @return the account with the given id.
 	 */
-	Account getAccount(AccountCriterion criterion);
+	Account getAccount(AccountCriterion criterion) throws Exception;
 	
 }
