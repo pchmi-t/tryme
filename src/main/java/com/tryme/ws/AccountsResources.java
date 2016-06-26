@@ -181,7 +181,7 @@ public class AccountsResources {
 							updatedAccount.getUserInformation().setAvatar(
 									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
 						} else {
-							updatedAccount.setUserInformation(new UserInformation());
+//							updatedAccount.setUserInformation(new UserInformation());
 							updatedAccount.getUserInformation().setAvatar(
 									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
 						}
