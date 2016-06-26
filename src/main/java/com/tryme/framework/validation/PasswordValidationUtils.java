@@ -2,6 +2,8 @@ package com.tryme.framework.validation;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.tryme.constants.CoreConstants;
+
 
 /**
  * 
@@ -36,8 +38,11 @@ public class PasswordValidationUtils {
 		if(isPassowrdContainSpaces(password)) {
 			return false;
 		}
-		//TODO Finish this function
-		return true;
+		if (password.length() < 6) {
+			return false;
+		}
+		return StringUtils.containsAny(password, CoreConstants.SPECIAL_CHARACTERS) && 
+				!password.equals(password.toLowerCase());
 	}
 	
 }

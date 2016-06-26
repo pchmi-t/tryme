@@ -26,7 +26,7 @@ public interface AccountManager {
 	 * @throws NoSuchAccountException in case there is no such account
 	 * @throws IllegalIDFormatException in case the id is invalid by some reasons
 	 */
-	Account updateAccount(Account account) throws NoSuchAccountException;
+	void updateAccount(Account account) throws Exception;
 	
 	/**
 	 * Adding an account.

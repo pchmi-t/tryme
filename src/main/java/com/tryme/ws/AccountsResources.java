@@ -135,17 +135,12 @@ public class AccountsResources {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response createAccount(Account account) {
 		try {
-			if(!AccountValidationUtils.validateUsername(account)) {
-				throw new InvalidAccountException("The account is not valid.");
-			}
 			accountManager.addAccount(account);
 		} catch (InvalidAccountException e) {
-			//TODO PossibleNPE
-			final String errorMessage = MessageFormat.format("An error occured while saving the account {0}.", 
-					account.getUsername());
+			final String errorMessage = "An error occured while saving the account.";
 			throw new WebApplicationException(e, Status.BAD_REQUEST);
 		}
-		return Response.status(Status.OK).entity(account).build();
+		return Response.status(Status.CREATED).entity(account).build();
 	}
 
 	@PUT
@@ -197,13 +192,11 @@ public class AccountsResources {
 			}
 		}
 		try {
-			AccountValidationUtils.mergeToDomainAccount(account, updatedAccount);
-		} catch (NoSuchAlgorithmException | UnsupportedEncodingException 
-				| InvalidAccountException e) {
-
+			accountManager.updateAccount(updatedAccount);
+			Response.status(Status.NO_CONTENT).build();
+		} catch (Exception e) {
 			AccountValidationUtils.rollbackAccountInfo(updatedAccount);
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Response.status(Status.BAD_REQUEST).build();
 		}
 		return null;
 	}

@@ -8,8 +8,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.text.MessageFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -43,10 +46,15 @@ public class AccountValidationUtils {
 	 * @param email the user's e-mail
 	 * @return <code>true</code> if and only if the email is in a correct format
 	 * <b>AND</b> is not taken, <code>false</code> otherwise.
+	 * @throws InvalidAccountException 
 	 */
-	public static boolean verifyEmail(String email) {
-		//TODO Finish the function
-		return true;
+	public static boolean validateEmail(String email) throws InvalidAccountException {
+		EmailValidator validator = getEmailValidator();
+		if (!StringUtils.isBlank(email)) {
+			return validator.validate(email);
+		} else {
+			throw new InvalidAccountException("The email is mandatory.");
+		}
 	}
 
 	/**
@@ -55,12 +63,16 @@ public class AccountValidationUtils {
 	 * @param email the email that is about to be verify.
 	 * @return <code>true</code> if and only if the email is not taken so far, 
 	 * <code>false</code> otherwise.
+	 * @throws Exception 
 	 */
-	private static boolean isEmailTaken(String email) {
+	private static boolean isEmailTaken(String email) throws Exception {
 		AccountCriterion criterion = accountManager.getAccountCriterion();
+		if (StringUtils.isBlank(email)) {
+			throw new InvalidAccountException("The e-mail is mandatory.");
+		}
 		criterion.email(email);
-		//TODO finish the function
-		return true;
+		Account account = accountManager.getAccount(criterion);
+		return account == null;
 	}
 
 	/**
@@ -89,7 +101,7 @@ public class AccountValidationUtils {
 	InvalidAccountException {
 		//TODO Check for the correctneses for this function behavior
 		if(account == null) {
-			throw new InvalidAccountException("");
+			throw new InvalidAccountException("The account can not be null");
 		}
 		
 		String username = account.getUsername();
@@ -111,8 +123,7 @@ public class AccountValidationUtils {
 		
 		//Check of the username is occupy
 		if(isUsernameTaken(account.getUsername())) {
-			//TODO Add meaningfull error message
-			throw new InvalidAccountException("");
+			throw new InvalidAccountException("The username is already taken.");
 		}
 		return true;
 	}
@@ -160,9 +171,7 @@ public class AccountValidationUtils {
 				}
 			}
 		}
-		
 		mergeToDomainUserInfo(account, updateAccount);
-		
 		return account;
 	}
 
@@ -173,10 +182,11 @@ public class AccountValidationUtils {
 		if (updateAccount == null) {
 			return;
 		}
-
 	}
 	
-	public static boolean updateAccountAvatar(String fileName, InputStream inputStream) throws IOException{
+	public static boolean updateAccountAvatar(String fileName, InputStream inputStream) 
+			throws IOException{
+
 		File file = new File(CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
 		try (OutputStream outputStream = new FileOutputStream(file);) {
 			int read = 0;
@@ -194,6 +204,49 @@ public class AccountValidationUtils {
 	 * @param account the account
 	 */
 	public static void rollbackAccountInfo(Account account) {
-		//TODO For now check if the account is change his picture
+		UserInformation userInfo = account.getUserInformation();
+		if (userInfo != null) {
+			String avatarPath = userInfo.getAvatar();
+			try {
+				Files.deleteIfExists(Paths.get(
+						CoreConstants.AVATAR_DIR_PREFIX.concat(avatarPath)));
+			} catch (IOException e) {
+				//Do nothing
+			}
+		}
+	}
+
+	public static EmailValidator getEmailValidator() {
+		return new EmailValidator();
+	}
+
+	/**
+	 * 
+	 * The email validator.
+	 *
+	 */
+	private static class EmailValidator {
+
+		private Pattern pattern;
+		private Matcher matcher;
+
+		private static final String EMAIL_PATTERN = 
+			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+		public EmailValidator() {
+			pattern = Pattern.compile(EMAIL_PATTERN);
+		}
+
+		/**
+		 * Validate hex with regular expression
+		 * 
+		 * @param hex hex for validation
+		 * @return <code>true</code> valid hex, <code>false</code> otherwise.
+		 */
+		public boolean validate(final String hex) {
+			matcher = pattern.matcher(hex);
+			return matcher.matches();
+		}
 	}
 }

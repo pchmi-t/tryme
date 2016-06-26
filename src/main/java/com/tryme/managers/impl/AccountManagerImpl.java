@@ -29,7 +29,7 @@ import com.tryme.managers.AccountManager;
 public class AccountManagerImpl implements AccountManager {
 
 	@Override
-	public Account updateAccount(Account account) throws NoSuchAccountException {
+	public void updateAccount(Account account) throws Exception {
 		try (Session session = new Session()) {
 			Account domainAccount = session
 					.openSession()
@@ -38,23 +38,26 @@ public class AccountManagerImpl implements AccountManager {
 				throw new NoSuchAccountException("The account with the specifyed "
 						+ "id does not exist!");
 			} else {
-				//TODO call the update function
+				Account newAccount = AccountValidationUtils.
+						mergeToDomainAccount(domainAccount, account);
+				session.openSession().save(newAccount);
 			}
-		} catch (Exception e) {
-			
 		}
-		return null;
 	}
 
 	@Override
-	public void addAccount(Account account) {
+	public void addAccount(Account account) throws InvalidAccountException {
 		try (Session session = new Session()) {
-			//TODO Verify the username and the login name
-			account.setPassword(PasswordService.getInstance().encrypt(account.getPassword()));
-			session.openSession().insert(account, CoreConstants.ACCOUNT);
+			if (AccountValidationUtils.validateUsername(account) && 
+					AccountValidationUtils.validateEmail(account.getEmail())) {
+
+				account.setPassword(PasswordService
+						.getInstance()
+						.encrypt(account.getPassword()));
+				session.openSession().insert(account, CoreConstants.ACCOUNT);
+			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new InvalidAccountException("An error occure while adding the account.");
 		}
 	}
 
