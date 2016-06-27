@@ -1,2 +1,2 @@
 # tryme
-FMI course project repository
+A course project for WWW Technology FMI, 2016.

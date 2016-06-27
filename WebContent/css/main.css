@@ -1,0 +1,14 @@
+body {
+  /*padding:5px 19px;*/
+}
+#page {
+   font-family: cursive;
+    text-align: center;
+   background-image: url("../imgs/patt4.jpg") !important;
+   background-repeat: repeat;
+   padding-top: 10em;
+   padding-bottom: 30em;
+   padding-left: 20px;
+   padding-right: 20px;
+   width: auto;
+}

@@ -29,7 +29,6 @@ public class UserInformation {
 	@Id
 	private String id;
 	
-	@Field
 	@DBRef
 	private Account account;
 	
@@ -49,8 +48,8 @@ public class UserInformation {
 	@Field
 	private String avatar;
 
-	public UserInformation(Account account) {
-		this.account = account;
+	/** The default constructor. */
+	public UserInformation() {
 	}
 	
 	public UserInformation(String id, String fullName, Integer age, 
