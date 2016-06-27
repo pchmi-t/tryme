@@ -32,15 +32,16 @@ import com.sun.istack.NotNull;
 import com.sun.jersey.multipart.BodyPart;
 import com.sun.jersey.multipart.MultiPart;
 import com.tryme.constants.CoreConstants;
+import com.tryme.core.Factory;
 import com.tryme.core.exceptions.InvalidAccountException;
 import com.tryme.core.exceptions.NoSuchAccountException;
 import com.tryme.core.exceptions.WSBaseException;
-import com.tryme.core.utils.Factory;
 import com.tryme.framework.Account;
 import com.tryme.framework.UserInformation;
 import com.tryme.framework.criteria.AccountCriterion;
 import com.tryme.framework.validation.AccountValidationUtils;
 import com.tryme.managers.AccountManager;
+import com.tryme.managers.UserInformationManager;
 
 @Path("/accounts")
 public class AccountsResources {
@@ -48,7 +49,12 @@ public class AccountsResources {
 	/**
 	 * An account manager instance.
 	 */
-	private AccountManager accountManager = Factory.getAccountManager();
+	private AccountManager accountManager = Factory.getInstance().getAccountManager();
+
+	/**
+	 * An user information instance.
+	 */
+	private UserInformationManager userInfoManager = Factory.getInstance().getUserInformationManager();
 
 	/** The context. */
 	@Context 
@@ -63,8 +69,15 @@ public class AccountsResources {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<Account> getAccounts() {
+		List<Account> accounts = new LinkedList<>();
 		AccountCriterion criterion = accountManager.getAccountCriterion();
-		return accountManager.getAccounts(criterion, Integer.MAX_VALUE, 0);
+		try {
+			accounts = accountManager.getAccounts(criterion, Integer.MAX_VALUE, 0);
+		} catch (Exception e) {
+			// TODO Throw some exception
+			e.printStackTrace();
+		}
+		return accounts;
 	}
 
 	/**
@@ -136,17 +149,51 @@ public class AccountsResources {
 	public Response createAccount(Account account) {
 		try {
 			accountManager.addAccount(account);
-		} catch (InvalidAccountException e) {
-			final String errorMessage = "An error occured while saving the account.";
-			throw new WebApplicationException(e, Status.BAD_REQUEST);
+		} catch (Exception e) {
+			if (e instanceof InvalidAccountException) {
+				final String errorMessage = "An error occured while saving the account.";
+				throw new WebApplicationException(e, Status.BAD_REQUEST);
+			}
 		}
 		return Response.status(Status.CREATED).entity(account).build();
 	}
 
 	@PUT
-	@Consumes({ MediaType.MULTIPART_FORM_DATA })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response updateAccount(MultiPart multiPart) {
+	public Response updateAccount(Account updatedAccount) {
+		Account domainAccount = new Account();
+		AccountCriterion criterion = accountManager.getAccountCriterion();
+		criterion.id(updatedAccount.getId());
+		try {
+			domainAccount = accountManager.getAccount(criterion);
+			AccountValidationUtils.mergeToDomainAccount(domainAccount, updatedAccount);
+			if (domainAccount != null) {
+				accountManager.updateAccount(domainAccount);
+				return Response.ok().build();
+			} else {
+				return Response.serverError().build();
+			}
+		} catch (Exception e) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+	}
+
+	@POST
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public UserInformation createUserInformation(UserInformation userInfo) {
+		Account account = userInfo.getAccount();
+		if (account == null) {
+			//TODO throw exception
+		}
+		//First check if the account already has an user information
+		return userInfo;
+	}
+
+//	@Consumes({ MediaType.MULTIPART_FORM_DATA })
+
+	private Response updateUserProfile(MultiPart  multiPart) {
 		List<BodyPart> bodyParts = multiPart.getBodyParts();
 		Account updatedAccount = null;
 		Account account = null;
@@ -168,38 +215,42 @@ public class AccountsResources {
 		}
 		AccountCriterion criterion = accountManager.getAccountCriterion();
 		criterion.id(updatedAccount.getId());
-		List<Account> accounts = accountManager.getAccounts(criterion, 1, 0);
+		List<Account> accounts = new LinkedList<>();
+		try {
+			accounts = accountManager.getAccounts(criterion, 1, 0);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		if (accounts != null && accounts.isEmpty()) {
 			account = accounts.get(0);
 		}
 	
-		if (!StringUtils.isBlank(fileName) && inputStream != null) {
-			try {
-				if (AccountValidationUtils.updateAccountAvatar(fileName, inputStream)) {
-					if (updatedAccount != null) {
-						if (updatedAccount.getUserInformation() != null) {
-							updatedAccount.getUserInformation().setAvatar(
-									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
-						} else {
-//							updatedAccount.setUserInformation(new UserInformation());
-							updatedAccount.getUserInformation().setAvatar(
-									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
-						}
-					}
-				}
-			} catch (IOException e) {
-				return Response.status(Status.BAD_REQUEST).build();
-			}
-		}
+//		if (!StringUtils.isBlank(fileName) && inputStream != null) {
+//			try {
+//				if (AccountValidationUtils.updateAccountAvatar(fileName, inputStream)) {
+//					if (updatedAccount != null) {
+//						if (updatedAccount.getUserInformation() != null) {
+//							updatedAccount.getUserInformation().setAvatar(
+//									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
+//						} else {
+////							updatedAccount.setUserInformation(new UserInformation());
+//							updatedAccount.getUserInformation().setAvatar(
+//									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
+//						}
+//					}
+//				}
+//			} catch (IOException e) {
+//				return Response.status(Status.BAD_REQUEST).build();
+//			}
+//		}
 		try {
 			accountManager.updateAccount(updatedAccount);
 			Response.status(Status.NO_CONTENT).build();
 		} catch (Exception e) {
-			AccountValidationUtils.rollbackAccountInfo(updatedAccount);
+			//AccountValidationUtils.rollbackAccountInfo(updatedAccount);
 			Response.status(Status.BAD_REQUEST).build();
 		}
 		return null;
 	}
-	
-	
 }

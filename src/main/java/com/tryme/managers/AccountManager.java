@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import com.tryme.core.exceptions.InvalidAccountException;
 import com.tryme.core.exceptions.NoSuchAccountException;
 import com.tryme.framework.Account;
+import com.tryme.framework.UserInformation;
 import com.tryme.framework.criteria.AccountCriterion;
 
 /**
@@ -34,17 +35,19 @@ public interface AccountManager {
 	 * @param account the account to be added
 	 * @return the added account
 	 * @throws InvalidAccountException in case the account is not valid
+	 * @throws Exception 
 	 * @throws DuplicateAccountException in case the user already exist
 	 */
-	void addAccount(Account account) throws InvalidAccountException;
+	void addAccount(Account account) throws Exception;
 	
 	/**
 	 * Get all the accounts specified by the account criteria.
 	 * 
 	 * @param criterion the account criteria
 	 * @return the all the accounts matched the given criteria
+	 * @throws Exception 
 	 */
-	List<Account> getAccounts(AccountCriterion criterion, int limit, int offset);
+	List<Account> getAccounts(AccountCriterion criterion, int limit, int offset) throws Exception;
 	
 	/**
 	 * Get the account criteria
@@ -60,5 +63,5 @@ public interface AccountManager {
 	 * @return the account with the given id.
 	 */
 	Account getAccount(AccountCriterion criterion) throws Exception;
-	
+
 }

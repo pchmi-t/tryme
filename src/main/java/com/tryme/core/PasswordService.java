@@ -1,4 +1,4 @@
-package com.tryme.core.utils;
+package com.tryme.core;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
