@@ -15,8 +15,6 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  * The Account representation
- * 
- * @author Hristo
  *
  */
 @Document
@@ -49,10 +47,6 @@ public class Account {
 	private String password;
 
 	@Field
-	@DBRef
-	private UserInformation userInformation;
-
-	@Field
 	@XmlTransient
 	private Boolean active;
 
@@ -62,8 +56,7 @@ public class Account {
 	public Account() {
 	}
 
-	public Account(String id, String username, String email, String password, 
-			UserInformation userInformation) {
+	public Account(String id, String username, String email, String password) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
@@ -141,14 +134,6 @@ public class Account {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public UserInformation getUserInformation() {
-		return userInformation;
-	}
-
-	public void setUserInformation(UserInformation userInformation) {
-		this.userInformation = userInformation;
 	}
 
 	public Boolean getActive() {
