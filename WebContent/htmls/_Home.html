@@ -1,57 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <meta name="description" content="">
-  <meta name="author" content="TryMe">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="TryMe">
 
-  <title>TryMe</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="../css/main.css">
-  <link rel="stylesheet" type="text/css" href="../css/nav.css">
-  <link rel="stylesheet" type="text/css" href="../css/carousel.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-</head>
-<style type="text/css"></style>
-</head>
+    <title>Начало</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	  <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
 
-<body>
+    <style type="text/css">
+	  
+	  body {
+		 padding:5px 19px;
+	  }
+	  
+	  #page {
+     font-family: cursive;
+      text-align: center;
+		 background-image: url("../imgs/patt6.jpg") !important;
+		 background-repeat: repeat;
+		 padding:5px 19px;
+     padding-left: 20px;
+     padding-right: 20px;
+		 width: auto;
+	  }
+	  .page-header {
+      background-color: white;
+      width: 844px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    img {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .logOut {
+      visibility: hidden;
+    }
+    .navbar-fixed-top {
+      margin-left: 20px;
+      margin-right: 20px;
+    }
+    .navbar-right {
+      margin-right: 20px;
+    }
+    .carousel-inner {
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
+    </style>
+
+  </head>
+
+  <body>
 <div class="container" id="page">
 <!-- ======================== NAVBAR ======================== -->
-  <div class="navWrapper navbar-fixed-top">
-    <div class="upper">
-      <img src="../imgs/upperNav.png">
-    </div>
-    <nav class="navbar navbar-inverse ">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        </button>
-        <a class="navbar-brand" href="Home.html">TryMe</a>
-      </div>
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li><a class="active" href="Home.html">Начало</a></li>
-          <li><a href="tests.html">Тестове</a></li>
-          <li><a href="scoreboard.html">Класации</a></li>
-          <li><a id="profilebtn" href="profile.html">Профил</a></li>
-        </ul>
-        <form class="navbar-form navbar-right">
-          <a id="loginbtn" class="btn btn-success" href="sign-in.html">Вписване</a>
-          <a id="regbtn" class="btn btn-success" href="sign-up.html">Регистриране</a>
-          <a id="logoutbtn" class="btn btn-success" href="Home.html">Излез</a>
-        </form>
-      </div><!--/.nav-collapse -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+      <!--  -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          </button>
+          <a class="navbar-brand" href="Home.html">TryMe</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a class="active" href="Home.html">Начало</a></li>
+            <li><a href="tests.html">Тестове</a></li>
+                <li><a href="scoreboard.html">Класации</a></li>
+                <li><a id="profilebtn" href="profile.html">Профил</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <a id="loginbtn" class="btn btn-success" style="text-decoration:none;color:white;" href="sign-in.html">Вписване</a>
+            <a id="regbtn" class="btn btn-success" style="text-decoration:none;color:white;" href="sign-up.html">Регистриране</a>
+            <a id="logoutbtn" class="btn btn-success" style="text-decoration:none;color:white;" href="Home.html">Излез</a>
+          </form>
+        </div><!--/.nav-collapse -->
     </nav>
-  </div>
+    
 <!-- ======================== NAVBAR ======================== -->
-
-<!-- ======================== CONTENT ======================== -->
-  <div id="content" class="content">
-    <div class="carousel-inner" role="listbox">
+    <div class="content">
+      <div class="carousel-inner" role="listbox">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -60,16 +94,16 @@
             <li data-target="#myCarousel" data-slide-to="3"></li>
             <li data-target="#myCarousel" data-slide-to="4"></li>
             <li data-target="#myCarousel" data-slide-to="5"></li>
-            <li data-target="#myCarousel" data-slide-to="6"></li>
-            <li data-target="#myCarousel" data-slide-to="7"></li>
+            <li data-target="#myCarousel" data-slide-to="5"></li>
+            <li data-target="#myCarousel" data-slide-to="5"></li>
           </ol>
           <div class="carousel-inner carousel-fade" role="listbox">
-        <div class="item active">
-          <div class="carousel-caption">
-            <h2 style="color:white;font-family: cursive;">Знанието е сила!</h2>
-          </div>
-          <img src="../imgs/_1_maxresdefault.jpg" alt="First slide">
-        </div>
+  			<div class="item active">
+  				<div class="carousel-caption">
+  					<h2 style="color:white;font-family: cursive;">Знанието е сила!</h2>
+  				</div>
+  				<img src="../imgs/_1_maxresdefault.jpg" alt="First slide">
+  			</div>
             <div class="item">
               <div class="carousel-caption">
                 <h2 style="color:white;font-family: cursive;">Учи усърдно!</h2>
@@ -117,15 +151,19 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-    </div>
+  	</div>
   </div>
-<!-- ======================== CONTENT ======================== -->
 </div>
-
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="../js/navbar.js"></script>
-  </body>
+	<script type="text/javascript" src="auth.js"></script>
+	<script>
+	$("h3").hide().fadeIn(2000).animate({
+			fontSize: '2em'
+	}, 2000);
+	</script>
+</body>
 </html>

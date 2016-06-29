@@ -2,3 +2,8 @@
   margin-top: 50px;
   margin-bottom: 20px;
 }
+.carouselImg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
