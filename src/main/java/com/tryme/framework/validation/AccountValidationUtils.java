@@ -41,23 +41,6 @@ public class AccountValidationUtils {
 	}
 
 	/**
-	 * Verify the user's email.
-	 * 
-	 * @param email the user's e-mail
-	 * @return <code>true</code> if and only if the email is in a correct format
-	 * <b>AND</b> is not taken, <code>false</code> otherwise.
-	 * @throws Exception 
-	 */
-	public static boolean validateEmail(String email) throws Exception {
-		EmailValidator validator = getEmailValidator();
-		if (!StringUtils.isBlank(email)) {
-			return validator.validate(email) && !isEmailTaken(email);
-		} else {
-			throw new InvalidAccountException("The e-mail is mandatory.");
-		}
-	}
-
-	/**
 	 * Verify if the user's email is already taken.
 	 * 
 	 * @param email the email that is about to be verify.
@@ -196,36 +179,6 @@ public class AccountValidationUtils {
 			} catch (IOException e) {
 				//Do nothing
 			}
-		}
-	}
-
-	public static EmailValidator getEmailValidator() {
-		return new EmailValidator();
-	}
-
-	/**
-	 * 
-	 * The email validator.
-	 *
-	 */
-	private static class EmailValidator {
-
-		private Pattern pattern;
-		private Matcher matcher;
-
-		public EmailValidator() {
-			pattern = Pattern.compile(CoreConstants.EMAIL_PATTERN);
-		}
-
-		/**
-		 * Validate hex with regular expression
-		 * 
-		 * @param hex hex for validation
-		 * @return <code>true</code> valid hex, <code>false</code> otherwise.
-		 */
-		public boolean validate(final String hex) {
-			matcher = pattern.matcher(hex);
-			return matcher.matches();
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package com.tryme.framework.bean;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -8,6 +9,9 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.bson.types.ObjectId;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Transient;
@@ -49,10 +53,6 @@ public class Account {
 	private String password;
 
 	@Field
-	@XmlTransient
-	private Boolean active;
-
-	@Field
 	private UserInformation userInformation;
 	
 	/**
@@ -84,6 +84,7 @@ public class Account {
 	 * 
 	 * @param username the username
 	 */
+	@NotBlank(message = "The username can not be empty nor empty.")
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -102,6 +103,7 @@ public class Account {
 	 * 
 	 * @param email the email to be set
 	 */
+	@Email
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -138,16 +140,9 @@ public class Account {
 	 * 
 	 * @param password the user's password
 	 */
+	@NotBlank(message = "The password can not be empty nor empty.")
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public Boolean getActive() {
-		return this.active;
-	}
-	
-	public void setActive(Boolean active) {
-		this.active = active;
 	}
 
 	public UserInformation getUserInformation() {

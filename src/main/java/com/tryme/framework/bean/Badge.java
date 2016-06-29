@@ -18,19 +18,15 @@ public class Badge {
 
 	@Transient
 	public static final String BEGGINER = "begginer";
-	
-	@Id
-	private String badgeId;
 
 	@Field
 	private String name = BEGGINER;
 	
+	/** The default constructor. */
 	public Badge() {
-		
 	}
 	
-	public Badge(String badgeId, String name) {
-		this.badgeId = badgeId;
+	public Badge(String name) {
 		this.name = name;
 	}
 

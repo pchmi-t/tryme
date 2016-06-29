@@ -1,9 +1,11 @@
 package com.tryme.framework.bean;
 
+import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -25,6 +27,7 @@ public class Test {
 	private Category category;
 	
 	@Field
+	@Pattern(regexp = "PENDING | ACCEPT | REJECT")
 	private Status status;
 	
 	/** The default constructor. */
@@ -59,6 +62,7 @@ public class Test {
 		return status;
 	}
 
+	@Email
 	public void setStatus(Status status) {
 		this.status = status;
 	}
