@@ -18,9 +18,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.tryme.constants.CoreConstants;
+import com.tryme.core.Factory;
+import com.tryme.core.PasswordService;
 import com.tryme.core.exceptions.InvalidAccountException;
-import com.tryme.core.utils.Factory;
-import com.tryme.core.utils.PasswordService;
 import com.tryme.framework.Account;
 import com.tryme.framework.UserInformation;
 import com.tryme.framework.criteria.AccountCriterion;
@@ -135,54 +135,36 @@ public class AccountValidationUtils {
 	/**
 	 * Merge to domain account.
 	 * 
-	 * @param account the old account
+	 * @param domainAccount the old account
 	 * @param updateAccount the updated account
 	 * @return the newly updated account or <code>null</code> 
 	 * if the update account and the domain account are the same.
 	 * @throws Exception 
 	 */
-	public static Account mergeToDomainAccount(Account account, Account updateAccount) 
+	public static void mergeToDomainAccount(Account domainAccount, Account updateAccount) 
 			throws Exception {
 
-		if (account == null || updateAccount == null) {
-			return null;
-		}
-
-		//The user's e-mail can not be changed
-		if (!StringUtils.isBlank(updateAccount.getEmail()) &&
-				!account.getEmail().equals(updateAccount.getEmail())) {
-			rollbackAccountInfo(updateAccount);
-			throw new IllegalArgumentException("The user email can not be changed!");
-		}
-
-		//The user's username is changed
-		if (!StringUtils.isBlank(updateAccount.getUsername())
-				&& !account.getUsername().equals(updateAccount.getUsername())) {
-			//The username is different, so perform the basic verifications over the new one
-			validateUsername(updateAccount);
-			account.setUsername(updateAccount.getUsername());
+		if (domainAccount == null || updateAccount == null) {
+			return;
 		}
 
 		if (!StringUtils.isBlank(updateAccount.getPassword())) {
 			String plainPassword = updateAccount.getPassword();
 			if (PasswordValidationUtils.isPasswordStrongEnough(plainPassword)) {
 				String newPassword = PasswordService.getInstance().encrypt(plainPassword);
-				if (!account.getPassword().equals(newPassword)) {
-					account.setPassword(newPassword);
+				if (!domainAccount.getPassword().equals(newPassword)) {
+					domainAccount.setPassword(newPassword);
 				}
 			}
 		}
-		mergeToDomainUserInfo(account, updateAccount);
-		return account;
+		
+		//Update  the user information
+		mergeToDomainUserInfo(domainAccount.getUserInformation(), updateAccount.getUserInformation());
+		
 	}
 
-	private static void mergeToDomainUserInfo(Account account, Account updateAccount) {
-		UserInformation userInfo = account.getUserInformation();
-		UserInformation updateUserInfo = updateAccount.getUserInformation();
-		//TODO finish the function
-		if (updateAccount == null) {
-			return;
-		}
+	private static void mergeToDomainUserInfo(UserInformation domainUserInfo, UserInformation updateUserInfo) {
+		
 	}
 
 	public static boolean updateAccountAvatar(String fileName, InputStream inputStream) 
@@ -204,8 +186,8 @@ public class AccountValidationUtils {
 	 * 
 	 * @param account the account
 	 */
-	public static void rollbackAccountInfo(Account account) {
-		UserInformation userInfo = account.getUserInformation();
+	public static void rollbackAccountInfo(UserInformation userInfo) {
+		//UserInformation userInfo = account.getUserInformation();
 		if (userInfo != null) {
 			String avatarPath = userInfo.getAvatar();
 			try {

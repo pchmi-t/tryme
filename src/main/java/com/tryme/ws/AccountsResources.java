@@ -27,15 +27,18 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bson.types.ObjectId;
 
 import com.sun.istack.NotNull;
 import com.sun.jersey.multipart.BodyPart;
 import com.sun.jersey.multipart.MultiPart;
 import com.tryme.constants.CoreConstants;
+import com.tryme.core.Factory;
+import com.tryme.core.PasswordService;
 import com.tryme.core.exceptions.InvalidAccountException;
+import com.tryme.core.exceptions.InvalidUserInfoException;
 import com.tryme.core.exceptions.NoSuchAccountException;
 import com.tryme.core.exceptions.WSBaseException;
-import com.tryme.core.utils.Factory;
 import com.tryme.framework.Account;
 import com.tryme.framework.UserInformation;
 import com.tryme.framework.criteria.AccountCriterion;
@@ -48,7 +51,7 @@ public class AccountsResources {
 	/**
 	 * An account manager instance.
 	 */
-	private AccountManager accountManager = Factory.getAccountManager();
+	private AccountManager accountManager = Factory.getInstance().getAccountManager();
 
 	/** The context. */
 	@Context 
@@ -63,8 +66,15 @@ public class AccountsResources {
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public List<Account> getAccounts() {
+		List<Account> accounts = new LinkedList<>();
 		AccountCriterion criterion = accountManager.getAccountCriterion();
-		return accountManager.getAccounts(criterion, Integer.MAX_VALUE, 0);
+		try {
+			accounts = accountManager.getAccounts(criterion, Integer.MAX_VALUE, 0);
+		} catch (Exception e) {
+			// TODO Throw some exception
+			e.printStackTrace();
+		}
+		return accounts;
 	}
 
 	/**
@@ -135,10 +145,20 @@ public class AccountsResources {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response createAccount(Account account) {
 		try {
-			accountManager.addAccount(account);
-		} catch (InvalidAccountException e) {
-			final String errorMessage = "An error occured while saving the account.";
-			throw new WebApplicationException(e, Status.BAD_REQUEST);
+			if (AccountValidationUtils.validateUsername(account) && 
+					AccountValidationUtils.validateEmail(account.getEmail())) {
+				UserInformation userInfo = new UserInformation();
+				account.setUserInformation(userInfo);
+				account.setPassword(PasswordService
+						.getInstance()
+						.encrypt(account.getPassword()));
+				accountManager.addAccount(account);
+			}
+		} catch (Exception e) {
+			if (e instanceof InvalidAccountException) {
+				final String errorMessage = "An error occured while saving the account.";
+				throw new WebApplicationException(e, Status.BAD_REQUEST);
+			}
 		}
 		return Response.status(Status.CREATED).entity(account).build();
 	}
@@ -146,10 +166,10 @@ public class AccountsResources {
 	@PUT
 	@Consumes({ MediaType.MULTIPART_FORM_DATA })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response updateAccount(MultiPart multiPart) {
+	public Account updateAccount(MultiPart multiPart) {
 		List<BodyPart> bodyParts = multiPart.getBodyParts();
-		Account updatedAccount = null;
 		Account account = null;
+		Account updatedAccount = null;
 		MediaType type;
 		String fileName = null;
 		InputStream inputStream = null;
@@ -164,15 +184,21 @@ public class AccountsResources {
 			}
 		}
 		if (updatedAccount == null) {
-			return Response.status(Status.BAD_REQUEST).build();
+			return null;
 		}
 		AccountCriterion criterion = accountManager.getAccountCriterion();
 		criterion.id(updatedAccount.getId());
-		List<Account> accounts = accountManager.getAccounts(criterion, 1, 0);
+		List<Account> accounts = new LinkedList<>();
+		try {
+			accounts = accountManager.getAccounts(criterion, 1, 0);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		if (accounts != null && accounts.isEmpty()) {
 			account = accounts.get(0);
 		}
-	
+
 		if (!StringUtils.isBlank(fileName) && inputStream != null) {
 			try {
 				if (AccountValidationUtils.updateAccountAvatar(fileName, inputStream)) {
@@ -181,25 +207,24 @@ public class AccountsResources {
 							updatedAccount.getUserInformation().setAvatar(
 									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
 						} else {
-//							updatedAccount.setUserInformation(new UserInformation());
+							updatedAccount.setUserInformation(new UserInformation());
 							updatedAccount.getUserInformation().setAvatar(
 									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
 						}
 					}
 				}
 			} catch (IOException e) {
-				return Response.status(Status.BAD_REQUEST).build();
+				return null;
 			}
 		}
 		try {
 			accountManager.updateAccount(updatedAccount);
 			Response.status(Status.NO_CONTENT).build();
 		} catch (Exception e) {
-			AccountValidationUtils.rollbackAccountInfo(updatedAccount);
+			//AccountValidationUtils.rollbackAccountInfo(updatedAccount);
 			Response.status(Status.BAD_REQUEST).build();
 		}
 		return null;
 	}
-	
-	
+
 }

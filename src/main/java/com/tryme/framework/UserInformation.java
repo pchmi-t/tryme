@@ -10,7 +10,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -21,18 +23,9 @@ import org.springframework.data.mongodb.core.mapping.Field;
  * @author Hristo
  *
  */
-@Document
-@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class UserInformation {
-	
-	@Id
-	private String id;
-	
-	@Field
-	@DBRef
-	private Account account;
-	
+
 	@Field
 	private String fullName = "";
 	
@@ -43,29 +36,15 @@ public class UserInformation {
 	private String description = "Type your description here ... ";
 	
 	@Field
-	@DBRef
-	private List<Badge> badges;
+	private Badges badges;
 	
 	@Field
 	private String avatar;
 
-	public UserInformation(Account account) {
-		this.account = account;
+	/** The default constructor. */
+	public UserInformation() {
 	}
 	
-	public UserInformation(String id, String fullName, Integer age, 
-			String description, List<Badge> badges, String avatar) {
-
-		super();
-		this.id = id;
-		this.fullName = fullName;
-		this.age = age;
-		this.description = description;
-		this.badges = new LinkedList<>();
-		this.badges.add(new Badge());
-		this.avatar = avatar;
-	}
-
 	public String getFullName() {
 		return fullName;
 	}
@@ -84,21 +63,14 @@ public class UserInformation {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public List<Badge> getBadges() {
+	
+	public Badges getBadges() {
 		return badges;
 	}
-	public void setBadges(List<Badge> badges) {
+	public void setBadges(Badges badges) {
 		this.badges = badges;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-	
 	public String getAvatar() {
 		return this.avatar;
 	}
@@ -106,13 +78,4 @@ public class UserInformation {
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
 }

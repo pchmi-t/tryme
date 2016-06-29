@@ -6,18 +6,19 @@ import java.util.List;
 
 import javax.ws.rs.core.Response.Status;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import com.mongodb.WriteResult;
-import com.tryme.constants.CoreConstants;
+import com.tryme.core.PasswordService;
+import com.tryme.core.Session;
 import com.tryme.core.exceptions.InvalidAccountException;
 import com.tryme.core.exceptions.NoSuchAccountException;
 import com.tryme.core.exceptions.WSBaseException;
-import com.tryme.core.utils.PasswordService;
-import com.tryme.core.utils.Session;
 import com.tryme.framework.Account;
+import com.tryme.framework.Entity;
 import com.tryme.framework.UserInformation;
 import com.tryme.framework.criteria.AccountCriterion;
 import com.tryme.framework.validation.AccountValidationUtils;
@@ -32,44 +33,23 @@ public class AccountManagerImpl implements AccountManager {
 	@Override
 	public void updateAccount(Account account) throws Exception {
 		try (Session session = new Session()) {
-			Account domainAccount = session
-					.openSession()
-					.findById(account.getId(), Account.class);
-			if (domainAccount == null) {
-				throw new NoSuchAccountException("The account with the specifyed "
-						+ "id does not exist!");
-			} else {
-				Account newAccount = AccountValidationUtils.
-						mergeToDomainAccount(domainAccount, account);
-				session.openSession().save(newAccount);
-			}
+			session.openSession().save(account);
 		}
 	}
 
 	@Override
-	public void addAccount(Account account) throws InvalidAccountException {
+	public void addAccount(Account account) throws Exception {
 		try (Session session = new Session()) {
-			if (AccountValidationUtils.validateUsername(account) && 
-					AccountValidationUtils.validateEmail(account.getEmail())) {
-				account.setPassword(PasswordService
-						.getInstance()
-						.encrypt(account.getPassword()));
-				session.openSession().insert(account, CoreConstants.ACCOUNT);
-			} else {
-				throw new InvalidAccountException("The account can not be created. "
-						+ "Check the username and e-mail.");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new InvalidAccountException("An error occure while adding the account.");
+			session.openSession().insert(account, Entity.ACCOUNT);
 		}
 	}
 
+	//TODO REMOVE OFFSET AND CRITERION
 	@Override
-	public List<Account> getAccounts(AccountCriterion criterion, int limit, int offset) {
+	public List<Account> getAccounts(AccountCriterion criterion, int limit, int offset) throws Exception {
 		try (Session session = new Session()) {
 			List<Account> allAccounts = 
-					session.openSession().findAll(Account.class, CoreConstants.ACCOUNT);
+					session.openSession().findAll(Account.class, Entity.ACCOUNT);
 			List<Account> result = new LinkedList<>();
 			for (Iterator iterator = allAccounts.iterator(); iterator.hasNext();) {
 				if (limit > 0) {
@@ -80,8 +60,6 @@ public class AccountManagerImpl implements AccountManager {
 				}
 			}
 			return result;
-		} catch (Exception e) {
-			throw new WSBaseException("The specified account does not exist.");		
 		}
 	}
 
@@ -130,7 +108,7 @@ public class AccountManagerImpl implements AccountManager {
 		try(Session session = new Session()) {
 			Account account = (Account) session
 					.openSession()
-					.findOne(criterion.getQuery(), Account.class, CoreConstants.ACCOUNT);
+					.findOne(criterion.getQuery(), Account.class, Entity.ACCOUNT);
 			return account;
 		}
 	}

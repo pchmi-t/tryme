@@ -1,5 +1,6 @@
 package com.tryme.framework.criteria;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.query.Query;
 
 /**
@@ -13,10 +14,10 @@ public interface AccountCriterion extends BaseCriteria {
 	/**
 	 * Add account 'id' criteria to search.
 	 * 
-	 * @param id the account id
+	 * @param objectId the account id
 	 * @return the account criteria
 	 */
-	AccountCriterion id(String id);
+	AccountCriterion id(String objectId);
 	
 	/**
 	 * Add account 'username' criteria to search.

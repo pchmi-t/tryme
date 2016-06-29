@@ -1,4 +1,4 @@
-package com.tryme.core.utils;
+package com.tryme.core;
 
 import com.tryme.managers.AccountManager;
 import com.tryme.managers.AuthenticationManager;
@@ -40,4 +40,5 @@ public final class Factory {
 	public static AuthenticationManager getAuthenticationManager() {
 		return new AuthenticationManagerImpl();
 	}
+	
 }

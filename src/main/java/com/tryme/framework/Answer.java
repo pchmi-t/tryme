@@ -1,7 +1,9 @@
 package com.tryme.framework;
 
 public class Answer {
+	
 	private String content;
+	
 	private Boolean correct;
 	
 	public Answer() {	
