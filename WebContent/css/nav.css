@@ -1,21 +1,5 @@
 .navbar {
-  margin-top: 10em;
-}
-.upperNavImg {
-  display: block;
-  margin-left: 5em;
-  margin-bottom: 5em;
-  margin-top: 1em;
-  float: left;
-}
-.upperNavImgContent{
-  display: block;
-  width: 7em;
-  height: 7em;
-}
-.upperNavP{
-  font-size: 5em;
-  float: center;
+  padding-left: 20px;
 }
 .btn-success{
   text-decoration: none;
