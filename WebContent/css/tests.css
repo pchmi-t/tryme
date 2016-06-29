@@ -1,0 +1,21 @@
+.page-header {
+  background-color: white;
+  width: 844px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+ #testspage {
+  text-align: center;
+  padding-top: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.form-control {
+  text-align: left;
+  margin: auto;
+  width: 40%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
