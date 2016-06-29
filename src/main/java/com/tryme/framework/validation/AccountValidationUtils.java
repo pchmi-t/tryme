@@ -21,8 +21,8 @@ import com.tryme.constants.CoreConstants;
 import com.tryme.core.Factory;
 import com.tryme.core.PasswordService;
 import com.tryme.core.exceptions.InvalidAccountException;
-import com.tryme.framework.Account;
-import com.tryme.framework.UserInformation;
+import com.tryme.framework.bean.Account;
+import com.tryme.framework.bean.UserInformation;
 import com.tryme.framework.criteria.AccountCriterion;
 import com.tryme.managers.AccountManager;
 
@@ -213,12 +213,8 @@ public class AccountValidationUtils {
 		private Pattern pattern;
 		private Matcher matcher;
 
-		private static final String EMAIL_PATTERN = 
-				"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-						+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
 		public EmailValidator() {
-			pattern = Pattern.compile(EMAIL_PATTERN);
+			pattern = Pattern.compile(CoreConstants.EMAIL_PATTERN);
 		}
 
 		/**

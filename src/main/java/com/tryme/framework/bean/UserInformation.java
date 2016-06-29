@@ -1,4 +1,4 @@
-package com.tryme.framework;
+package com.tryme.framework.bean;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,6 +16,8 @@ import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.tryme.framework.beans.Badges;
 
 /**
  * This class holds all the user information.
@@ -48,18 +50,23 @@ public class UserInformation {
 	public String getFullName() {
 		return fullName;
 	}
+	
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
+	
 	public Integer getAge() {
 		return age;
 	}
+	
 	public void setAge(Integer age) {
 		this.age = age;
 	}
+	
 	public String getDescription() {
 		return description;
 	}
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
