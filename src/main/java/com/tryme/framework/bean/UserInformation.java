@@ -1,4 +1,4 @@
-package com.tryme.framework;
+package com.tryme.framework.bean;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,6 +16,8 @@ import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.tryme.framework.beans.Badges;
 
 /**
  * This class holds all the user information.

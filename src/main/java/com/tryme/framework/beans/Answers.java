@@ -1,4 +1,4 @@
-package com.tryme.framework;
+package com.tryme.framework.beans;
 
 import java.util.List;
 
@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.tryme.framework.bean.Answer;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Answers {

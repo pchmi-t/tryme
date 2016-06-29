@@ -1,4 +1,4 @@
-package com.tryme.framework;
+package com.tryme.framework.bean;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -7,6 +7,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+
+import com.tryme.framework.beans.Questions;
 
 @Document
 @XmlRootElement

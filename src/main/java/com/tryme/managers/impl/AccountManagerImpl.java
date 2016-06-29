@@ -12,14 +12,14 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import com.mongodb.WriteResult;
+import com.tryme.constants.Entity;
 import com.tryme.core.PasswordService;
 import com.tryme.core.Session;
 import com.tryme.core.exceptions.InvalidAccountException;
 import com.tryme.core.exceptions.NoSuchAccountException;
 import com.tryme.core.exceptions.WSBaseException;
-import com.tryme.framework.Account;
-import com.tryme.framework.Entity;
-import com.tryme.framework.UserInformation;
+import com.tryme.framework.bean.Account;
+import com.tryme.framework.bean.UserInformation;
 import com.tryme.framework.criteria.AccountCriterion;
 import com.tryme.framework.validation.AccountValidationUtils;
 import com.tryme.managers.AccountManager;

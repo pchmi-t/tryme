@@ -1,4 +1,4 @@
-package com.tryme.framework;
+package com.tryme.constants;
 
 public class Entity {
 

@@ -1,4 +1,4 @@
-package com.tryme.framework;
+package com.tryme.framework.bean;
 
 public class Answer {
 	

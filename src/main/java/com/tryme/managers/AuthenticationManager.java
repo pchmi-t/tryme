@@ -1,6 +1,6 @@
 package com.tryme.managers;
 
-import com.tryme.framework.Account;
+import com.tryme.framework.bean.Account;
 
 public interface AuthenticationManager {
 	

@@ -1,4 +1,4 @@
-package com.tryme.framework;
+package com.tryme.framework.bean;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
