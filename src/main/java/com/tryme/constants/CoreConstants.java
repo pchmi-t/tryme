@@ -29,7 +29,4 @@ public class CoreConstants {
 	public static char[] SPECIAL_CHARACTERS = 
 		{'@', '!', '`', '"', '^', ';', ':', 
 				'-', '+', '(', ')', '#', '$', '*', '{', '}'};
-
-	/** The account String representation. */
-	public static String ACCOUNT = "Account";
 }

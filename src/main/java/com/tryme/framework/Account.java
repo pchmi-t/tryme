@@ -6,8 +6,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
+import org.bson.types.ObjectId;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -50,17 +52,22 @@ public class Account {
 	@XmlTransient
 	private Boolean active;
 
+	@Field("userInfo")
+	private UserInformation userInformation;
+	
 	/**
 	 * The default constructor.
 	 */
 	public Account() {
 	}
 
+	@PersistenceConstructor
 	public Account(String id, String username, String email, String password) {
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.userInformation = new UserInformation();
 	}
 
 	/**
@@ -142,4 +149,14 @@ public class Account {
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
+
+	public UserInformation getUserInformation() {
+		return userInformation;
+	}
+
+	public void setUserInformation(UserInformation userInformation) {
+		this.userInformation = userInformation;
+	}
+	
+	
 }

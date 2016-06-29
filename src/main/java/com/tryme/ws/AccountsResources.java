@@ -27,21 +27,24 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bson.types.ObjectId;
 
 import com.sun.istack.NotNull;
 import com.sun.jersey.multipart.BodyPart;
 import com.sun.jersey.multipart.MultiPart;
 import com.tryme.constants.CoreConstants;
 import com.tryme.core.Factory;
+import com.tryme.core.PasswordService;
 import com.tryme.core.exceptions.InvalidAccountException;
+import com.tryme.core.exceptions.InvalidUserInfoException;
 import com.tryme.core.exceptions.NoSuchAccountException;
 import com.tryme.core.exceptions.WSBaseException;
 import com.tryme.framework.Account;
 import com.tryme.framework.UserInformation;
 import com.tryme.framework.criteria.AccountCriterion;
+import com.tryme.framework.criteria.UserInformationCriterion;
 import com.tryme.framework.validation.AccountValidationUtils;
 import com.tryme.managers.AccountManager;
-import com.tryme.managers.UserInformationManager;
 
 @Path("/accounts")
 public class AccountsResources {
@@ -54,7 +57,6 @@ public class AccountsResources {
 	/**
 	 * An user information instance.
 	 */
-	private UserInformationManager userInfoManager = Factory.getInstance().getUserInformationManager();
 
 	/** The context. */
 	@Context 
@@ -148,7 +150,15 @@ public class AccountsResources {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response createAccount(Account account) {
 		try {
-			accountManager.addAccount(account);
+			if (AccountValidationUtils.validateUsername(account) && 
+					AccountValidationUtils.validateEmail(account.getEmail())) {
+				UserInformation userInfo = new UserInformation();
+				account.setUserInformation(userInfo);
+				account.setPassword(PasswordService
+						.getInstance()
+						.encrypt(account.getPassword()));
+				accountManager.addAccount(account);
+			}
 		} catch (Exception e) {
 			if (e instanceof InvalidAccountException) {
 				final String errorMessage = "An error occured while saving the account.";
@@ -170,7 +180,7 @@ public class AccountsResources {
 			AccountValidationUtils.mergeToDomainAccount(domainAccount, updatedAccount);
 			if (domainAccount != null) {
 				accountManager.updateAccount(domainAccount);
-				return Response.ok().build();
+				return Response.ok().entity(domainAccount).build();
 			} else {
 				return Response.serverError().build();
 			}
@@ -179,19 +189,7 @@ public class AccountsResources {
 		}
 	}
 
-	@POST
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public UserInformation createUserInformation(UserInformation userInfo) {
-		Account account = userInfo.getAccount();
-		if (account == null) {
-			//TODO throw exception
-		}
-		//First check if the account already has an user information
-		return userInfo;
-	}
-
-//	@Consumes({ MediaType.MULTIPART_FORM_DATA })
+	//	@Consumes({ MediaType.MULTIPART_FORM_DATA })
 
 	private Response updateUserProfile(MultiPart  multiPart) {
 		List<BodyPart> bodyParts = multiPart.getBodyParts();
@@ -225,25 +223,25 @@ public class AccountsResources {
 		if (accounts != null && accounts.isEmpty()) {
 			account = accounts.get(0);
 		}
-	
-//		if (!StringUtils.isBlank(fileName) && inputStream != null) {
-//			try {
-//				if (AccountValidationUtils.updateAccountAvatar(fileName, inputStream)) {
-//					if (updatedAccount != null) {
-//						if (updatedAccount.getUserInformation() != null) {
-//							updatedAccount.getUserInformation().setAvatar(
-//									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
-//						} else {
-////							updatedAccount.setUserInformation(new UserInformation());
-//							updatedAccount.getUserInformation().setAvatar(
-//									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
-//						}
-//					}
-//				}
-//			} catch (IOException e) {
-//				return Response.status(Status.BAD_REQUEST).build();
-//			}
-//		}
+
+		//		if (!StringUtils.isBlank(fileName) && inputStream != null) {
+		//			try {
+		//				if (AccountValidationUtils.updateAccountAvatar(fileName, inputStream)) {
+		//					if (updatedAccount != null) {
+		//						if (updatedAccount.getUserInformation() != null) {
+		//							updatedAccount.getUserInformation().setAvatar(
+		//									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
+		//						} else {
+		////							updatedAccount.setUserInformation(new UserInformation());
+		//							updatedAccount.getUserInformation().setAvatar(
+		//									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
+		//						}
+		//					}
+		//				}
+		//			} catch (IOException e) {
+		//				return Response.status(Status.BAD_REQUEST).build();
+		//			}
+		//		}
 		try {
 			accountManager.updateAccount(updatedAccount);
 			Response.status(Status.NO_CONTENT).build();
