@@ -11,6 +11,11 @@ body {
    width: auto;
 }
 #content {
-    margin-top: 10em;
-    padding-left: 20px;
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-top: 15em;
+  padding-top: 2em;
+  padding-left: 2em;
+  padding-right: 2em;
+  background-color: rgba(255,255,255,0.9);
 }
