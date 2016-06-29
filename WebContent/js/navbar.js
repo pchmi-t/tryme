@@ -1,19 +1,17 @@
-var windw = this;
+$(document).ready(function() {
 
-$.fn.followTo = function ( pos ) {
-    var $this = this,
-        $window = $(windw);
-
-    $window.scroll(function(e){
-        if ($window.scrollTop() > pos) {
-            $this.attr('style', 'position: absolute !important');
-            console.log("absolute");
-        }
-        else {
-            $this.attr('style', 'position: fixed !important');
-            console.log("fixed");
-        }
-    });
-};
-
-$('.navbar-fixed-top').followTo(200);
+  $(window).scroll(function () {
+      //if you hard code, then use console
+      //.log to determine when you want the
+      //nav bar to stick.
+      console.log($(window).scrollTop())
+    if ($(window).scrollTop() < 201) {
+      $('.upper').slideDown("fast");
+      $('.navbar').attr("style", "top: 0 !important");
+    }
+    if ($(window).scrollTop() > 200) {
+      $('.upper').slideUp("fast");
+      $('.navbar').attr("style", "top:" + $(window).scrollTop() + " !important");
+    }
+  });
+});
