@@ -35,4 +35,12 @@ public interface AccountCriterion extends BaseCriteria {
 	 */
 	AccountCriterion email(String email);
 	
+	/**
+	 * Add the password criteria to search by.
+	 * 
+	 * @param password the account's password in plain text
+	 * @return the account criteria
+	 */
+	AccountCriterion password(String password);
+	
 }
