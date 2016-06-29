@@ -22,10 +22,10 @@ public class Test {
 	
 	@Field
 	private Questions questions;
-	
+
 	@Field
 	private Category category;
-	
+
 	@Field
 	@Pattern(regexp = "PENDING | ACCEPT | REJECT")
 	private Status status;
@@ -62,7 +62,6 @@ public class Test {
 		return status;
 	}
 
-	@Email
 	public void setStatus(Status status) {
 		this.status = status;
 	}

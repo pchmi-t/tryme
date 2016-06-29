@@ -100,6 +100,12 @@ public class AccountManagerImpl implements AccountManager {
 			return this.accountQuery;
 		}
 
+		@Override
+		public AccountCriterion password(String password) {
+			accountQuery.addCriteria(Criteria.where("password").is(password));
+			return this;
+		}
+
 	}
 
 	@Override
