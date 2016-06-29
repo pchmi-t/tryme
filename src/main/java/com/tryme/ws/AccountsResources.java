@@ -42,7 +42,6 @@ import com.tryme.core.exceptions.WSBaseException;
 import com.tryme.framework.Account;
 import com.tryme.framework.UserInformation;
 import com.tryme.framework.criteria.AccountCriterion;
-import com.tryme.framework.criteria.UserInformationCriterion;
 import com.tryme.framework.validation.AccountValidationUtils;
 import com.tryme.managers.AccountManager;
 
@@ -53,10 +52,6 @@ public class AccountsResources {
 	 * An account manager instance.
 	 */
 	private AccountManager accountManager = Factory.getInstance().getAccountManager();
-
-	/**
-	 * An user information instance.
-	 */
 
 	/** The context. */
 	@Context 
@@ -169,32 +164,12 @@ public class AccountsResources {
 	}
 
 	@PUT
-	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Consumes({ MediaType.MULTIPART_FORM_DATA })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response updateAccount(Account updatedAccount) {
-		Account domainAccount = new Account();
-		AccountCriterion criterion = accountManager.getAccountCriterion();
-		criterion.id(updatedAccount.getId());
-		try {
-			domainAccount = accountManager.getAccount(criterion);
-			AccountValidationUtils.mergeToDomainAccount(domainAccount, updatedAccount);
-			if (domainAccount != null) {
-				accountManager.updateAccount(domainAccount);
-				return Response.ok().entity(domainAccount).build();
-			} else {
-				return Response.serverError().build();
-			}
-		} catch (Exception e) {
-			return Response.status(Status.BAD_REQUEST).build();
-		}
-	}
-
-	//	@Consumes({ MediaType.MULTIPART_FORM_DATA })
-
-	private Response updateUserProfile(MultiPart  multiPart) {
+	public Account updateAccount(MultiPart multiPart) {
 		List<BodyPart> bodyParts = multiPart.getBodyParts();
-		Account updatedAccount = null;
 		Account account = null;
+		Account updatedAccount = null;
 		MediaType type;
 		String fileName = null;
 		InputStream inputStream = null;
@@ -209,7 +184,7 @@ public class AccountsResources {
 			}
 		}
 		if (updatedAccount == null) {
-			return Response.status(Status.BAD_REQUEST).build();
+			return null;
 		}
 		AccountCriterion criterion = accountManager.getAccountCriterion();
 		criterion.id(updatedAccount.getId());
@@ -224,24 +199,24 @@ public class AccountsResources {
 			account = accounts.get(0);
 		}
 
-		//		if (!StringUtils.isBlank(fileName) && inputStream != null) {
-		//			try {
-		//				if (AccountValidationUtils.updateAccountAvatar(fileName, inputStream)) {
-		//					if (updatedAccount != null) {
-		//						if (updatedAccount.getUserInformation() != null) {
-		//							updatedAccount.getUserInformation().setAvatar(
-		//									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
-		//						} else {
-		////							updatedAccount.setUserInformation(new UserInformation());
-		//							updatedAccount.getUserInformation().setAvatar(
-		//									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
-		//						}
-		//					}
-		//				}
-		//			} catch (IOException e) {
-		//				return Response.status(Status.BAD_REQUEST).build();
-		//			}
-		//		}
+		if (!StringUtils.isBlank(fileName) && inputStream != null) {
+			try {
+				if (AccountValidationUtils.updateAccountAvatar(fileName, inputStream)) {
+					if (updatedAccount != null) {
+						if (updatedAccount.getUserInformation() != null) {
+							updatedAccount.getUserInformation().setAvatar(
+									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
+						} else {
+							updatedAccount.setUserInformation(new UserInformation());
+							updatedAccount.getUserInformation().setAvatar(
+									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
+						}
+					}
+				}
+			} catch (IOException e) {
+				return null;
+			}
+		}
 		try {
 			accountManager.updateAccount(updatedAccount);
 			Response.status(Status.NO_CONTENT).build();
@@ -251,4 +226,5 @@ public class AccountsResources {
 		}
 		return null;
 	}
+
 }

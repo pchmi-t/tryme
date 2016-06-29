@@ -36,8 +36,7 @@ public class UserInformation {
 	private String description = "Type your description here ... ";
 	
 	@Field
-	@DBRef
-	private List<Badge> badges;
+	private Badges badges;
 	
 	@Field
 	private String avatar;
@@ -65,10 +64,10 @@ public class UserInformation {
 		this.description = description;
 	}
 	
-	public List<Badge> getBadges() {
+	public Badges getBadges() {
 		return badges;
 	}
-	public void setBadges(List<Badge> badges) {
+	public void setBadges(Badges badges) {
 		this.badges = badges;
 	}
 

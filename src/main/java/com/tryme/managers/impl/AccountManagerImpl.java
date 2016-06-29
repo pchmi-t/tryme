@@ -21,7 +21,6 @@ import com.tryme.framework.Account;
 import com.tryme.framework.Entity;
 import com.tryme.framework.UserInformation;
 import com.tryme.framework.criteria.AccountCriterion;
-import com.tryme.framework.criteria.UserInformationCriterion;
 import com.tryme.framework.validation.AccountValidationUtils;
 import com.tryme.managers.AccountManager;
 

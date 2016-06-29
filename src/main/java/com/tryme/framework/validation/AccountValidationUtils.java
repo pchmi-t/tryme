@@ -135,16 +135,16 @@ public class AccountValidationUtils {
 	/**
 	 * Merge to domain account.
 	 * 
-	 * @param account the old account
+	 * @param domainAccount the old account
 	 * @param updateAccount the updated account
 	 * @return the newly updated account or <code>null</code> 
 	 * if the update account and the domain account are the same.
 	 * @throws Exception 
 	 */
-	public static void mergeToDomainAccount(Account account, Account updateAccount) 
+	public static void mergeToDomainAccount(Account domainAccount, Account updateAccount) 
 			throws Exception {
 
-		if (account == null || updateAccount == null) {
+		if (domainAccount == null || updateAccount == null) {
 			return;
 		}
 
@@ -152,15 +152,19 @@ public class AccountValidationUtils {
 			String plainPassword = updateAccount.getPassword();
 			if (PasswordValidationUtils.isPasswordStrongEnough(plainPassword)) {
 				String newPassword = PasswordService.getInstance().encrypt(plainPassword);
-				if (!account.getPassword().equals(newPassword)) {
-					account.setPassword(newPassword);
+				if (!domainAccount.getPassword().equals(newPassword)) {
+					domainAccount.setPassword(newPassword);
 				}
 			}
 		}
+		
+		//Update  the user information
+		mergeToDomainUserInfo(domainAccount.getUserInformation(), updateAccount.getUserInformation());
+		
 	}
 
-	private static void mergeToDomainUserInfo(Account account, Account updateAccount) {
-
+	private static void mergeToDomainUserInfo(UserInformation domainUserInfo, UserInformation updateUserInfo) {
+		
 	}
 
 	public static boolean updateAccountAvatar(String fileName, InputStream inputStream) 

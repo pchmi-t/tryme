@@ -52,7 +52,7 @@ public class Account {
 	@XmlTransient
 	private Boolean active;
 
-	@Field("userInfo")
+	@Field
 	private UserInformation userInformation;
 	
 	/**
