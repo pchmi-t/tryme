@@ -28,6 +28,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.lang3.StringUtils;
 import org.bson.types.ObjectId;
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.sun.istack.NotNull;
 import com.sun.jersey.multipart.BodyPart;
@@ -84,11 +85,11 @@ public class AccountsResources {
 	 * @return the account
 	 */
 	@GET
-	@Path("{id}")
+	@Path("{username}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Account getAccountById(@PathParam("id") String id) {
+	public Account getAccountByUsername(@PathParam("username") String username) {
 		AccountCriterion criterion = accountManager.getAccountCriterion();
-		criterion.id(id);
+		criterion.username(username);
 		Account account;
 		try {
 			account = accountManager.getAccount(criterion);
@@ -106,6 +107,34 @@ public class AccountsResources {
 			}
 		}
 	}
+
+	@POST
+	@Path("{username}")
+	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	public Response authenticateAccount(@NotBlank(message="Username can not be empty")
+	@PathParam("username")String username, @NotBlank(message="Please specify the account") Account account) {
+		try {
+			if (!username.equals(account.getUsername())) {
+				return Response.status(Status.BAD_REQUEST).build();
+			}
+			String plainPassword = account.getPassword();
+			String encryptedPassword = PasswordService.getInstance().encrypt(plainPassword);
+			AccountCriterion criterion = accountManager.getAccountCriterion();
+			criterion.username(username);
+			criterion.password(encryptedPassword);
+			Account domainAccount = accountManager.getAccount(criterion);
+			if (domainAccount != null) {
+				return Response.ok().build();
+			} else {
+				return Response.status(Status.BAD_REQUEST).build();
+			}
+		} catch (Exception e) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+	}
+
+
 
 	@GET
 	@Path("{id}/{username}/{email}")
