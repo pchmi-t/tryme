@@ -1,114 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <meta name="description" content="">
-        <meta name="author" content="TryMe">
-        <link rel="icon" href="bootstrap/favicon.ico">
-        <title>Нови Тестове</title>
-        <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-        <link href="..\bootstrap\docs\examples\starter-template\starter-template.css" rel="stylesheet">
-        <script src="../bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-        <style type="text/css">
-            .modal-body {
-            max-height: calc(100vh - 210px);
-            overflow-y: auto;
-            }
-            
-        body {
-         padding:5px 19px;
-        }
-      
-       #page {
-         font-family: cursive;
-         text-align: center;
-         background-image: url("../imgs/patt6.jpg") !important;
-         background-repeat: repeat;
-         padding:5px 19px;
-         padding-left: 20px;
-         padding-right: 20px;
-         width: auto;
-         padding-bottom: 5px;
-      }
-      .logOut {
-        visibility: hidden;
-      }
-      .navbar-fixed-top {
-        margin-left: 20px;
-        margin-right: 20px;
-      }
-      .navbar-right {
-        margin-right: 20px;
-      }
-     .containerr {
-        padding-left: 4em;
-        padding-right: 4em;
-        padding-top: 3em;
-       background-color: rgba(255,255,255,0.9);
-       margin-top: 50px;
-     }
-        </style>
-        <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
-        </style>
-        <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
-        <script>
-            $(document).ready(function(){
-                $('#myTable').dataTable();
-            });
-        </script>
-    </head>
-    <body>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="TryMe">
+
+  <title>TryMe</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <link rel="stylesheet" type="text/css" href="../css/nav.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+  <script>
+    // $(document).ready(function(){
+    //     $('#myTable').dataTable();
+    // });
+  </script>
+</head>
+<body>
 <div class="container" id="page">
 <!-- ======================== NAVBAR ======================== -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-      <!--  -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          </button>
-          <a class="navbar-brand" href="Home.html">TryMe</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a class="active" href="Home.html">Начало</a></li>
-            <li><a href="tests.html">Тестове</a></li>
-                <li><a href="scoreboard.html">Класации</a></li>
-                <li><a id="profilebtn" href="profile.html">Профил</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <a id="loginbtn" class="btn btn-success" style="text-decoration:none;color:white;" href="sign-in.html">Вписване</a>
-            <a id="regbtn" class="btn btn-success" style="text-decoration:none;color:white;" href="sign-up.html">Регистриране</a>
-            <a id="logoutbtn" class="btn btn-success" style="text-decoration:none;color:white;" href="Home.html">Излез</a>
-          </form>
-        </div><!--/.nav-collapse -->
-      <!-- </div> -->
+  <div class="navWrapper navbar-fixed-top">
+    <div class="upper">
+      <img src="../imgs/upperNav.png">
+    </div>
+    <nav class="navbar navbar-inverse ">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        </button>
+        <a class="navbar-brand" href="Home.html">TryMe</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a class="active" href="Home.html">Начало</a></li>
+          <li><a href="tests.html">Тестове</a></li>
+          <li><a href="scoreboard.html">Класации</a></li>
+          <li><a id="profilebtn" href="profile.html">Профил</a></li>
+        </ul>
+        <form class="navbar-form navbar-right">
+          <a id="loginbtn" class="btn btn-success" href="sign-in.html">Вписване</a>
+          <a id="regbtn" class="btn btn-success" href="sign-up.html">Регистриране</a>
+          <a id="logoutbtn" class="btn btn-success" href="Home.html">Излез</a>
+        </form>
+      </div>
     </nav>
-    
+  </div>
 <!-- ======================== NAVBAR ======================== -->
-        <div class="containerr">
-            <h1>Нови тестове</h1>
-            <ul class="nav nav-tabs">
-                <li role="presentation"><a href="admin.html">Потребители</a></li>
-                <li role="presentation"><a href="adminTests.html">Тестове</a></li>
-                <li role="presentation" class="active"><a href="adminNewTests.html">Нови тестове</a></li>
-            </ul>
-            <div class="table-responsive">
-                <table id="myTable" class="display table" width="100%" >
-                    <thead>
-                        <tr>
-                            <th>Номер</th>
-                            <th>Категория</th>
-                            <th>Автор</th>
-                            <th>Сложност</th>
-                            <th>Статус</th>
-                            <th>Линк</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+
+<!-- ======================== CONTENT ======================== -->
+  <div id="content" class="content">
+    <h1>Нови тестове</h1>
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="admin.html">Потребители</a></li>
+        <li role="presentation"><a href="adminTests.html">Тестове</a></li>
+        <li role="presentation" class="active"><a href="adminNewTests.html">Нови тестове</a></li>
+    </ul>
+    <div class="table-responsive">
+        <table id="myTable" class="display table" width="100%" >
+            <thead>
+                <tr>
+                    <th class="text-center">Номер</th>
+                    <th class="text-center">Категория</th>
+                    <th class="text-center">Автор</th>
+                    <th class="text-center">Сложност</th>
+                    <th class="text-center">Статус</th>
+                    <th class="text-center">Линк</th>
+                </tr>
+            </thead>
+            <tbody>
                         <tr>
                             <td>001</td>
                             <td><a href="">Български език</a></td>
@@ -229,70 +193,34 @@
                             </td>
                             <td><a href="#" id="myHref12"><span class="glyphicon glyphicon-eye-open"></span></a></td>
                         </tr>
-                    </tbody>
-                </table>
-            </div>
-            <nav>
-                <ul class="pagination pagination-sm">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+            </tbody>
+        </table>
     </div>
+    <nav>
+        <ul class="pagination pagination-sm">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+  </div>
+<!-- ======================== CONTENT ======================== -->
+</div>
         <!-- /.container -->
-        <script type="text/javascript">
-            $("#myHref1").on('click', function() {
-              $('#viewQuestion').modal('show');
-            });
-            $("#myHref2").on('click', function() {
-              $('#viewQuestion').modal('show');
-            });
-            $("#myHref3").on('click', function() {
-              $('#viewQuestion').modal('show');
-            });
-            $("#myHref4").on('click', function() {
-              $('#viewQuestion').modal('show');
-            });
-            $("#myHref5").on('click', function() {
-              $('#viewQuestion').modal('show');
-            });
-            $("#myHref6").on('click', function() {
-              $('#viewQuestion').modal('show');
-            });
-            $("#myHref7").on('click', function() {
-              $('#viewQuestion').modal('show');
-            });
-            $("#myHref8").on('click', function() {
-              $('#viewQuestion').modal('show');
-            });
-            $("#myHref9").on('click', function() {
-              $('#viewQuestion').modal('show');
-            });
-            $("#myHref10").on('click', function() {
-              $('#viewQuestion').modal('show');
-            });
-            $("#myHref11").on('click', function() {
-              $('#viewQuestion').modal('show');
-            });
-            $("#myHref12").on('click', function() {
-              $('#viewQuestion').modal('show');
-            });
-        </script>
-        <div id="viewQuestion" class="modal fade">
+
+<div id="viewQuestion" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -397,15 +325,50 @@
                 <!-- /.modal-content -->
             </div>
             <!-- /.modal-dialog -->
-        </div>
+</div>
         <!-- /.modal -->
-        <!-- Bootstrap core JavaScript
-            ================================================== -->
-        <!-- Placed at the end of the document so the pages load faster -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="../bootstrap/assets/js/vendor/jquery.min.js"><\/script>')</script>
-        <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="../bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
-    </body>
+    <!-- Bootstrap core JavaScript
+        ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript">
+    $("#myHref1").on('click', function() {
+      $('#viewQuestion').modal('show');
+    });
+    $("#myHref2").on('click', function() {
+      $('#viewQuestion').modal('show');
+    });
+    $("#myHref3").on('click', function() {
+      $('#viewQuestion').modal('show');
+    });
+    $("#myHref4").on('click', function() {
+      $('#viewQuestion').modal('show');
+    });
+    $("#myHref5").on('click', function() {
+      $('#viewQuestion').modal('show');
+    });
+    $("#myHref6").on('click', function() {
+      $('#viewQuestion').modal('show');
+    });
+    $("#myHref7").on('click', function() {
+      $('#viewQuestion').modal('show');
+    });
+    $("#myHref8").on('click', function() {
+      $('#viewQuestion').modal('show');
+    });
+    $("#myHref9").on('click', function() {
+      $('#viewQuestion').modal('show');
+    });
+    $("#myHref10").on('click', function() {
+      $('#viewQuestion').modal('show');
+    });
+    $("#myHref11").on('click', function() {
+      $('#viewQuestion').modal('show');
+    });
+    $("#myHref12").on('click', function() {
+      $('#viewQuestion').modal('show');
+    });
+</script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="../js/navbar.js"></script>
+</body>
 </html>
