@@ -1,0 +1,53 @@
+#profilepage {
+  padding-top: 2em;
+  background-color: rgba(255,255,255,0.9);
+  margin-top: 5em;
+  margin-bottom: 3em;
+   
+  text-align: left;
+  width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.media {
+  margin: 20px 0;
+  padding:30px;
+}
+.dp {
+  border:15px solid #eee;
+  transition: all 0.2s ease-in-out;
+}
+.dp:hover {
+  border:4px solid #eee;
+  transform:rotate(360deg);
+  -ms-transform:rotate(360deg);
+  -webkit-transform:rotate(360deg);
+}
+#badges {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 50px;
+}
+.page-header {
+  background-color: white;
+  width: 844px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.badges {
+  text-align: center;
+  margin: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: tr;
+  padding-bottom: 10em;
+}

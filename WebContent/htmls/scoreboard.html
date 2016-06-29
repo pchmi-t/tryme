@@ -1,149 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="TryMe">
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="TryMe">
-    <link rel="icon" href="bootstrap/favicon.ico">
-
-    <title>Класации</title>
-    <link href="../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-    <link href="../bootstrap/docs/examples\starter-template/starter-template.css" rel="stylesheet">
-	<link href="./dynatable/jquery.dynatable.css" rel="stylesheet">
-    <script src="../bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
-	<script src="../dynatable/jquery.dynatable.js"></script>
-
-        <style type="text/css">
-		
-		 /* Popover */
-		.popover {
-			border: 2px dotted black;
-		}
-
-	  body {
-		 padding:5px 19px;
-		 /*width: auto;*/
-	  }
-	  
-	  #page {
-     font-family: cursive;
-      text-align: center;
-       background-image: url("../imgs/patt6.jpg") !important;
-       background-repeat: repeat;
-       padding:5px 19px;
-       padding-left: 20px;
-       padding-right: 20px;
-       width: auto;
-       padding-bottom: 5px;
-	  }
-    img {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .logOut {
-      visibility: hidden;
-    }
-    .navbar-fixed-top {
-      margin-left: 20px;
-      margin-right: 20px;
-    }
-    .navbar-right {
-      margin-right: 20px;
-    }
-    .carousel-inner {
-      margin-top: 50px;
-      margin-bottom: 20px;
-    }
-	   #scoretile{
-        padding-top: 2em;
-       background-color: rgba(255,255,255,0.9);
-       margin-top: 5em;
-       margin-bottom: 3em;
-       
-        text-align: left;
-        width: 70%;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-     }
-    </style>
-
-  </head>
-
-  <body>
+  <title>TryMe</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="../css/main.css">
+  <link rel="stylesheet" type="text/css" href="../css/nav.css">
+  <link rel="stylesheet" type="text/css" href="../css/scoreboard.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <style type="text/css"></style>
+</head>
+<body>
 <div class="container" id="page">
 <!-- ======================== NAVBAR ======================== -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-      <!--  -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          </button>
-          <a class="navbar-brand" href="Home.html">TryMe</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a class="active" href="Home.html">Начало</a></li>
-            <li><a href="tests.html">Тестове</a></li>
-                <li><a href="scoreboard.html">Класации</a></li>
-                <li><a id="profilebtn" href="profile.html">Профил</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <a id="loginbtn" class="btn btn-success" style="text-decoration:none;color:white;" href="sign-in.html">Вписване</a>
-            <a id="regbtn" class="btn btn-success" style="text-decoration:none;color:white;" href="sign-up.html">Регистриране</a>
-            <a id="logoutbtn" class="btn btn-success" style="text-decoration:none;color:white;" href="Home.html">Излез</a>
-          </form>
-        </div><!--/.nav-collapse -->
+  <div class="navWrapper navbar-fixed-top">
+    <div class="upper">
+      <img src="../imgs/upperNav.png">
+    </div>
+    <nav class="navbar navbar-inverse ">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        </button>
+        <a class="navbar-brand" href="Home.html">TryMe</a>
+      </div>
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a class="active" href="Home.html">Начало</a></li>
+          <li><a href="tests.html">Тестове</a></li>
+          <li><a href="scoreboard.html">Класации</a></li>
+          <li><a id="profilebtn" href="profile.html">Профил</a></li>
+        </ul>
+        <form class="navbar-form navbar-right">
+          <a id="loginbtn" class="btn btn-success" href="sign-in.html">Вписване</a>
+          <a id="regbtn" class="btn btn-success" href="sign-up.html">Регистриране</a>
+          <a id="logoutbtn" class="btn btn-success" href="Home.html">Излез</a>
+        </form>
+      </div>
     </nav>
-	
-	<div id="scoretile" class="jumbotron">
-	<div id="scoretitle"></div>
-    <div class="container" id="score"></div>
-	<ul class="pager">
-		<li class="previous"><a href="#">Предищни</a></li>
-		<li class="next"><a href="#">Следващи</a></li>
-	</ul>
-	</div>
-	<div id="user-profile" class="hidden" class="media-body" align="center">
-			<img class="media-object dp img-circle pull-left" src="../imgs/happy_math_boy1.jpg" style="width: 200px;height:200px;">
-			<h4 class="media-heading">Иван Иванов <small> София</small></h4>
-			<h5>Ученик в СМГ "Паисий Хилендарски"</h5>
-			<hr style="margin:10px auto">
-
-			<span class="label label-default">Метаматика</span>
-			<span class="label label-default">Физика</span>
-			<span class="label label-default">История</span>
-			<span class="label label-default">Химия</span>
-			<h5>Както можете да се досетите, това съм аз. Както също така можете да видите, да си избирам вкусни неща за ядене, да пътувам и да ми разказват смешни неща.</h5>
-	</div>
   </div>
+<!-- ======================== NAVBAR ======================== -->
+
+<!-- ======================== CONTENT ======================== -->
+  <div id="content" class="content">
+    <div id="scoretile" class="jumbotron">
+      <div id="scoretitle"></div>
+      <div class="container" id="score"></div>
+      <ul class="pager">
+        <li class="previous"><a href="#">Предищни</a></li>
+        <li class="next"><a href="#">Следващи</a></li>
+      </ul>
+    </div>
+    <div id="user-profile" class="hidden" class="media-body" align="center">
+      <img class="media-object dp img-circle pull-left" src="../imgs/happy_math_boy1.jpg" style="width: 200px;height:200px;">
+      <h4 class="media-heading">Иван Иванов <small> София</small></h4>
+      <h5>Ученик в СМГ "Паисий Хилендарски"</h5>
+      <hr style="margin:10px auto">
+
+      <span class="label label-default">Метаматика</span>
+      <span class="label label-default">Физика</span>
+      <span class="label label-default">История</span>
+      <span class="label label-default">Химия</span>
+      <h5>Както можете да се досетите, това съм аз. Както също така можете да видите, да си избирам вкусни неща за ядене, да пътувам и да ми разказват смешни неща.</h5>
+    </div>
+  </div>
+<!-- ======================== CONTENT ======================== -->
   
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="../js/navbar.js"></script>
+  <script src="auth.js"></script>
+  <script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../bootstrap/assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="auth.js"></script>
-	<script>
-
-	showDaily();
-	
-	$("tr").hover(userHover).popover({trigger:'hover',  html : true, placement: "auto bottom",  content: function() {
+  showDaily();
+  
+  $("tr").hover(userHover).popover({trigger:'hover',  html : true, placement: "auto bottom",  content: function() {
          var userHtml = '<div id="user-profile" class="media-body" align="center">';
-		 userHtml += getPicHtml(hoverusr[1]);
-		 userHtml += '<h4 class="media-heading">';
-		 userHtml += hoverusr[1] + ' ' + hoverusr[2] + ' <small>'+ hoverusr[3] +'</small></h4><h5 class="label label-success">' + hoverusr[4] + '</h5>';
-		 userHtml+='</div>';
-		 return userHtml;
+     userHtml += getPicHtml(hoverusr[1]);
+     userHtml += '<h4 class="media-heading">';
+     userHtml += hoverusr[1] + ' ' + hoverusr[2] + ' <small>'+ hoverusr[3] +'</small></h4><h5 class="label label-success">' + hoverusr[4] + '</h5>';
+     userHtml+='</div>';
+     return userHtml;
         }});
-	
-	function showDaily() {
-	
-	var monthNames = [
+  
+  function showDaily() {
+  
+  var monthNames = [
   "Януари", "February", "March",
   "April", "Май", "Юни", "Юли",
   "August", "September", "October",
@@ -151,56 +98,56 @@
 ];
 
 $("#scoretitle").addClass('page-header').html("<h2 class='text-center' id='dailydate'>Kласация за </h2>");
-	
-	var date = new Date();
-	console.log(date);
-	$("#dailydate").append(monthNames[date.getMonth()] + " " + "2016 г.");
-	
-	var users = [{"name": "Емине", "surname": "Башева", "points":913, "town": "Сърница"},
-	{"name": "Христо", "surname": "Тодоров", "points":901, "town": "Ловеч"}, {"name": "Павел", "surname": "Тошев", "points":895, "town": "Бургас"},{"name": "Таня", "surname": "Христова", "points":873, "town": "Добрич"},
-	{"name": "Християн", "surname": "Димитров", "points":872, "town": "Велико Търново"}, {"name": "Елияна", "surname": "Христова", "points":792, "town": "София"},
-	{"name": "Милка", "surname": "Ферезлийска", "points":712, "town": "Пазарджик"}, {"name": "Светимир", "surname": "Игнатор", "points":697, "town": "Ботевград"},
-	{"name": "Пламена", "surname": "Григотова", "points":402, "town": "Варна"}, {"name": "Николай", "surname": "Балев", "points":341, "town": "Плевен"}];
-	
-	var html = '<table class="table table-hover"><thead><tr><th>N.</th><th>Име</th><th>Фамилия</th><th>Град</th><th>Точки</th></tr></thead><tbody>';
+  
+  var date = new Date();
+  console.log(date);
+  $("#dailydate").append(monthNames[date.getMonth()] + " " + "2016 г.");
+  
+  var users = [{"name": "Емине", "surname": "Башева", "points":913, "town": "Сърница"},
+  {"name": "Христо", "surname": "Тодоров", "points":901, "town": "Ловеч"}, {"name": "Павел", "surname": "Тошев", "points":895, "town": "Бургас"},{"name": "Таня", "surname": "Христова", "points":873, "town": "Добрич"},
+  {"name": "Християн", "surname": "Димитров", "points":872, "town": "Велико Търново"}, {"name": "Елияна", "surname": "Христова", "points":792, "town": "София"},
+  {"name": "Милка", "surname": "Ферезлийска", "points":712, "town": "Пазарджик"}, {"name": "Светимир", "surname": "Игнатор", "points":697, "town": "Ботевград"},
+  {"name": "Пламена", "surname": "Григотова", "points":402, "town": "Варна"}, {"name": "Николай", "surname": "Балев", "points":341, "town": "Плевен"}];
+  
+  var html = '<table class="table table-hover"><thead><tr><th>N.</th><th>Име</th><th>Фамилия</th><th>Град</th><th>Точки</th></tr></thead><tbody>';
 for(var i=0; i<users.length; i++){
 var user = users[i];
     html += "<tr><td>" + (i+1) + "</td><td>" + user.name + "</td><td>" + user.surname + "</td><td>" + user.town + "</td><td>" + user.points + "</td></tr>"
 }
 html+="</tbody></table>";
-	$('#score').html(html);
-	
-	}
-	
-	function userHover(event) {
-		hoverusr = $(this).closest("tr").text().split(/([А-Я][а-я]+)|([0-9]+)/).filter(Boolean);
-	}
-	
-	function showWeekly() {
-		$("#scoretitle").html("<h2 id='dailydate'>Седмична класация</h2>");
-	}
+  $('#score').html(html);
+  
+  }
+  
+  function userHover(event) {
+    hoverusr = $(this).closest("tr").text().split(/([А-Я][а-я]+)|([0-9]+)/).filter(Boolean);
+  }
+  
+  function showWeekly() {
+    $("#scoretitle").html("<h2 id='dailydate'>Седмична класация</h2>");
+  }
 
-		
-	function getPicHtml(name) {
-		if (name == 'Емине') {
-			return '<img class="media-object dp img-circle" src="../imgs/emine.jpg" style="width: 200px;height:200px;"><br>';
-		}
-		if (name == 'Павел') {
-			return '<img class="media-object dp img-circle" src="../imgs/pavel.jpg" style="width: 200px;height:200px;"><br>';
-		}
-		if (name == 'Христо') {
-			return '<img class="media-object dp img-circle" src="../imgs/hristo.jpg" style="width: 200px;height:200px;"><br>';
-		}
-		if (name == 'Милка') {
-			return '<img class="media-object dp img-circle" src="../imgs/milka.jpg" style="width: 200px;height:200px;"><br>';
-		}
-		if (name == 'Таня') {
-			return '<img class="media-object dp img-circle" src="../imgs/tanya.jpg" style="width: 200px;height:200px;"><br>';
-		} 
-		return '<img class="media-object dp img-circle" src="../imgs/no-profile-img.gif" style="width: 200px;height:200px;"><br>';
-	}
+    
+  function getPicHtml(name) {
+    if (name == 'Емине') {
+      return '<img class="media-object dp img-circle" src="../imgs/emine.jpg" style="width: 200px;height:200px;"><br>';
+    }
+    if (name == 'Павел') {
+      return '<img class="media-object dp img-circle" src="../imgs/pavel.jpg" style="width: 200px;height:200px;"><br>';
+    }
+    if (name == 'Христо') {
+      return '<img class="media-object dp img-circle" src="../imgs/hristo.jpg" style="width: 200px;height:200px;"><br>';
+    }
+    if (name == 'Милка') {
+      return '<img class="media-object dp img-circle" src="../imgs/milka.jpg" style="width: 200px;height:200px;"><br>';
+    }
+    if (name == 'Таня') {
+      return '<img class="media-object dp img-circle" src="../imgs/tanya.jpg" style="width: 200px;height:200px;"><br>';
+    } 
+    return '<img class="media-object dp img-circle" src="../imgs/no-profile-img.gif" style="width: 200px;height:200px;"><br>';
+  }
 
 
-	</script>
+  </script>
   </body>
 </html>

@@ -1,0 +1,29 @@
+.page-header {
+  /*background-color: white;*/
+  width: 844px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.carousel-inner {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+.question {
+    text-align: left;
+}
+.infobar .question.jumbotron {
+  background-color: transparent;
+}
+.btn-navigator {
+  margin-bottom: 2em;
+  margin-right: 2em;
+}
+.clock {
+  margin-right: 5em;
+}
