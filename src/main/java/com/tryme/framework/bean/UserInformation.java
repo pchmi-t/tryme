@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.jws.Oneway;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -32,6 +34,8 @@ public class UserInformation {
 	private String fullName = "";
 	
 	@Field
+	@Min(value=1, message="The minimum age should be a positive integer larger or egual to 1.")
+	@Max(value=100, message="The maximum age should be a positive integer smaller or equsl to 100.")
 	private Integer age;
 	
 	@Field
@@ -74,6 +78,7 @@ public class UserInformation {
 	public Badges getBadges() {
 		return badges;
 	}
+
 	public void setBadges(Badges badges) {
 		this.badges = badges;
 	}

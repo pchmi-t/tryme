@@ -145,8 +145,7 @@ public class AccountsResources {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response createAccount(Account account) {
 		try {
-			if (AccountValidationUtils.validateUsername(account) && 
-					AccountValidationUtils.validateEmail(account.getEmail())) {
+			if (AccountValidationUtils.validateUsername(account)) {
 				UserInformation userInfo = new UserInformation();
 				account.setUserInformation(userInfo);
 				account.setPassword(PasswordService
