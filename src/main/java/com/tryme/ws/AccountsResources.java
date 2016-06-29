@@ -134,36 +134,6 @@ public class AccountsResources {
 		}
 	}
 
-
-
-	@GET
-	@Path("{id}/{username}/{email}")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Account getAccountByUsername(@PathParam("id") String id,
-			@PathParam("username") String username, @PathParam("email") String email) {
-
-		AccountCriterion criterion = accountManager.getAccountCriterion();
-		criterion.email(email);
-		criterion.id(id);
-		criterion.username(username);
-		Account account;
-		try {
-			account = accountManager.getAccount(criterion);
-			if (account != null) {
-				return account;
-			} else {
-				throw new WSBaseException("No such account exist");
-			}
-		} catch (Exception e) {
-			if (e instanceof NoSuchAccountException || e instanceof WSBaseException) {
-				throw new WSBaseException("The specified account does not exist.");
-			} else {
-				throw new WSBaseException(Status.INTERNAL_SERVER_ERROR, 
-						CoreConstants.GENERAL_ERROR_MSG);
-			}
-		}
-	}
-
 	/**
 	 * Create an account.
 	 * 
