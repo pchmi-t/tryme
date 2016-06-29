@@ -69,7 +69,7 @@ public class AccountsResources {
 		List<Account> accounts = new LinkedList<>();
 		AccountCriterion criterion = accountManager.getAccountCriterion();
 		try {
-			accounts = accountManager.getAccounts(criterion, Integer.MAX_VALUE, 0);
+			accounts = accountManager.getAccounts(criterion, Integer.MAX_VALUE);
 		} catch (Exception e) {
 			// TODO Throw some exception
 			e.printStackTrace();
@@ -163,44 +163,50 @@ public class AccountsResources {
 		return Response.status(Status.CREATED).entity(account).build();
 	}
 
+	/**
+	 * Update an account.
+	 * 
+	 * @param multiPart the multi-part first part should be the account and the second -
+	 * the updated avatar if exist.
+	 * 
+	 * @return the newly updated account
+	 */
 	@PUT
 	@Consumes({ MediaType.MULTIPART_FORM_DATA })
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Account updateAccount(MultiPart multiPart) {
-		List<BodyPart> bodyParts = multiPart.getBodyParts();
-		Account account = null;
-		Account updatedAccount = null;
-		MediaType type;
-		String fileName = null;
-		InputStream inputStream = null;
-		for (BodyPart bodyPart : bodyParts) {
-			type = bodyPart.getMediaType();
-			if (MediaType.APPLICATION_JSON_TYPE.equals(type) ||
-					MediaType.APPLICATION_XML_TYPE.equals(type)) {
-				updatedAccount = bodyPart.getEntityAs(Account.class);
-			} else if (MediaType.APPLICATION_OCTET_STREAM_TYPE.equals(type)) {
-				fileName = bodyPart.getContentDisposition().getFileName();
-				inputStream = bodyPart.getEntityAs(InputStream.class);
-			}
-		}
-		if (updatedAccount == null) {
-			return null;
-		}
-		AccountCriterion criterion = accountManager.getAccountCriterion();
-		criterion.id(updatedAccount.getId());
-		List<Account> accounts = new LinkedList<>();
+	public Response updateAccount(MultiPart multiPart) {
 		try {
-			accounts = accountManager.getAccounts(criterion, 1, 0);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		if (accounts != null && accounts.isEmpty()) {
-			account = accounts.get(0);
-		}
+			List<BodyPart> bodyParts = multiPart.getBodyParts();
+			Account account = null;
+			Account updatedAccount = null;
+			MediaType type;
+			String fileName = null;
+			InputStream inputStream = null;
+			for (BodyPart bodyPart : bodyParts) {
+				type = bodyPart.getMediaType();
+				if (MediaType.APPLICATION_JSON_TYPE.equals(type) ||
+						MediaType.APPLICATION_XML_TYPE.equals(type)) {
+					updatedAccount = bodyPart.getEntityAs(Account.class);
+				} else if (MediaType.APPLICATION_OCTET_STREAM_TYPE.equals(type)) {
+					fileName = bodyPart.getContentDisposition().getFileName();
+					inputStream = bodyPart.getEntityAs(InputStream.class);
+				}
+			}
+			if (updatedAccount == null) {
+				return Response.notModified().build();
+			}
+			AccountCriterion criterion = accountManager.getAccountCriterion();
+			criterion.id(updatedAccount.getId());
+			List<Account> accounts = new LinkedList<>();
 
-		if (!StringUtils.isBlank(fileName) && inputStream != null) {
-			try {
+			accounts = accountManager.getAccounts(criterion, 1);
+
+			if (accounts != null && accounts.isEmpty()) {
+				account = accounts.get(0);
+			}
+
+			AccountValidationUtils.mergeToDomainAccount(account, updatedAccount);
+			if (!StringUtils.isBlank(fileName) && inputStream != null) {
 				if (AccountValidationUtils.updateAccountAvatar(fileName, inputStream)) {
 					if (updatedAccount != null) {
 						if (updatedAccount.getUserInformation() != null) {
@@ -213,18 +219,12 @@ public class AccountsResources {
 						}
 					}
 				}
-			} catch (IOException e) {
-				return null;
 			}
-		}
-		try {
 			accountManager.updateAccount(updatedAccount);
-			Response.status(Status.NO_CONTENT).build();
+			Response.ok(updatedAccount, MediaType.APPLICATION_JSON).build();
+			return null;
 		} catch (Exception e) {
-			//AccountValidationUtils.rollbackAccountInfo(updatedAccount);
-			Response.status(Status.BAD_REQUEST).build();
+			return Response.serverError().build();
 		}
-		return null;
 	}
-
 }

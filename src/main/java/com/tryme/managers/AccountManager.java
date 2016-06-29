@@ -47,7 +47,7 @@ public interface AccountManager {
 	 * @return the all the accounts matched the given criteria
 	 * @throws Exception 
 	 */
-	List<Account> getAccounts(AccountCriterion criterion, int limit, int offset) throws Exception;
+	List<Account> getAccounts(AccountCriterion criterion, int limit) throws Exception;
 	
 	/**
 	 * Get the account criteria

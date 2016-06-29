@@ -44,9 +44,8 @@ public class AccountManagerImpl implements AccountManager {
 		}
 	}
 
-	//TODO REMOVE OFFSET AND CRITERION
 	@Override
-	public List<Account> getAccounts(AccountCriterion criterion, int limit, int offset) throws Exception {
+	public List<Account> getAccounts(AccountCriterion criterion, int limit) throws Exception {
 		try (Session session = new Session()) {
 			List<Account> allAccounts = 
 					session.openSession().findAll(Account.class, Entity.ACCOUNT);
