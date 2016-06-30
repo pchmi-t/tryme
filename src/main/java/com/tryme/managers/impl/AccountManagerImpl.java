@@ -1,5 +1,6 @@
 package com.tryme.managers.impl;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class AccountManagerImpl implements AccountManager {
 		try (Session session = new Session()) {
 			List<Account> allAccounts = 
 					session.openSession().findAll(Account.class, Entity.ACCOUNT);
-			return allAccounts.subList(0, limit);
+			return limit > allAccounts.size() ? allAccounts : allAccounts.subList(0, limit);
 		}
 	}
 
