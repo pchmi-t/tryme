@@ -1,5 +1,6 @@
 package com.tryme.framework.bean;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.validation.constraints.Pattern;
@@ -26,11 +27,17 @@ public class Test {
 	private String grade;
 
 	@Field
-	private String category;
+	private String title;
+	
+	public Test(String title, String subject, String grade, Question... questions) {
+		this.questions = Arrays.asList(questions);
+		this.subject = subject;
+		this.grade = grade;
+		this.title = title;
+	}
 
-	@Field
-	@Pattern(regexp = "PENDING | ACCEPT | REJECT")
-	private Status status;
+	public Test() {
+	}
 
 	public String getId() {
 		return id;
@@ -64,20 +71,12 @@ public class Test {
 		this.grade = grade;
 	}
 
-	public String getCategory() {
-		return category;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 }

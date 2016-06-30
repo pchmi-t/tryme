@@ -49,16 +49,7 @@ public class AccountManagerImpl implements AccountManager {
 		try (Session session = new Session()) {
 			List<Account> allAccounts = 
 					session.openSession().findAll(Account.class, Entity.ACCOUNT);
-			List<Account> result = new LinkedList<>();
-			for (Iterator iterator = allAccounts.iterator(); iterator.hasNext();) {
-				if (limit > 0) {
-					result.add((Account) iterator.next());
-					limit--;
-				} else {
-					continue;
-				}
-			}
-			return result;
+			return allAccounts.subList(0, limit);
 		}
 	}
 
