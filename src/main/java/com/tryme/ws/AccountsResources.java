@@ -155,7 +155,7 @@ public class AccountsResources {
 		} catch (Exception e) {
 			if (e instanceof InvalidAccountException) {
 				final String errorMessage = "An error occured while saving the account.";
-				throw new WebApplicationException(e, Status.BAD_REQUEST);
+				return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
 			}
 		}
 		return Response.status(Status.CREATED).entity(account).build();
