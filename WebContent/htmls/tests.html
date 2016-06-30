@@ -22,7 +22,7 @@
 <!-- ======================== NAVBAR ======================== -->
   <div class="navWrapper navbar-fixed-top">
     <div class="upper">
-      <img src="../imgs/upperNav.png">
+      <img src="../imgs/upper_Nav.png">
     </div>
     <nav class="navbar navbar-inverse ">
       <div class="navbar-header">
@@ -53,44 +53,42 @@
       <label for="permet">Избери предмет:</label>
       <select class="form-control" id="permet">
         <option value="" selected disabled>Предмети</option>
-        <option>Български език</option>
-        <option>Литература</option>
-        <option>Математика</option>
-        <option>История</option>
-        <option>География</option>
-        <option>Биология</option>
-        <option>Физика</option>
-        <option>Химия</option>
-        <option>Английски език</option>
-        <option>Философски цикъл</option>
+        <option value="bg">Български език</option>
+        <option value="lit">Литература</option>
+        <option value="math">Математика</option>
+        <option value="hist">История</option>
+        <option value="geo">География</option>
+        <option value="bio">Биология</option>
+        <option value="phis">Физика</option>
+        <option value="chem">Химия</option>
+        <option value="en">Английски език</option>
+        <option value="ph">Философски цикъл</option>
       </select>
       
       <div id="graded" hidden>
         <label for="grade" id="gradel">Избери клас:</label>
         <select class="form-control" id="grade">
           <option value="" selected disabled>Класове</option>
-          <option>1 клас</option>
-          <option>2 клас</option>
-          <option>3 клас</option>
-          <option>4 клас</option>
-          <option>5 клас</option>
-          <option>6 клас</option>
-          <option>7 клас</option>
-          <option>8 клас</option>
-          <option>9 клас</option>
-          <option>10 клас</option>
-          <option>11 клас</option>
-          <option>12 клас</option>
-          <option>Матури за 7 клас</option>
-          <option>Матури за 12 клас</option>
+          <option value="class1">1 клас</option>
+          <option value="class2">2 клас</option>
+          <option value="class3">3 клас</option>
+          <option value="class4">4 клас</option>
+          <option value="class5">5 клас</option>
+          <option value="class6">6 клас</option>
+          <option value="class7">7 клас</option>
+          <option value="class8">8 клас</option>
+          <option value="class9">9 клас</option>
+          <option value="class10">10 клас</option>
+          <option value="class11">11 клас</option>
+          <option value="class12">12 клас</option>
         </select>
       </div>
       
       <div id="catd" hidden>
-        <label for="category">Избери категория:</label>
+        <label for="category">Избери тест:</label>
         <select class="form-control" id="category">
-          <option value="" selected disabled>Категории</option>
-          <option>Квадратен корен</option>
+          <option value="" selected disabled>Тестове</option>
+          <!-- <option>Квадратен корен</option>
           <option>Квадратни уравнения</option>
           <option>Системи линейни уравнения</option>
           <option>Системи линейни неравенства</option>
@@ -100,7 +98,7 @@
           <option>Еднаквости в равнината</option>
           <option>Окръжности</option>
           <option>Окръжност и ъгъл</option>
-          <option>Окръжност и многоъгълник</option>
+          <option>Окръжност и многоъгълник</option> -->
         </select>
       </div>
       <br/>
@@ -120,20 +118,22 @@
   
   <script>
   
-  $("#permet").on("change", function() {
-    $("#graded").show();
-  });
+  // $("#permet").on("change", function() {
+  //   $("#graded").show();
+  // });
   
-  $("#graded").on("change", function() {
-    $("#catd").show();
-  });
+  // $("#graded").on("change", function() {
+  //   $("#catd").show();
+  // });
   
-  $("#catd").on("change", function() {
-    $("#starttd").show();
-  });
+  // $("#catd").on("change", function() {
+  //   $("#starttd").show();
+  // });
   
   </script>
   
     <script src="auth.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/tests.js"></script>
   </body>
 </html>
