@@ -9,7 +9,7 @@ import com.tryme.framework.bean.Question;
 import com.tryme.framework.bean.Test;
 import com.tryme.managers.TestManager;
 
-public class DatabaseInitListener implements ServletContextListener {
+public class TestsInitListener implements ServletContextListener {
 
 	private TestManager testManager = Factory.getInstance().getTestManager();
 

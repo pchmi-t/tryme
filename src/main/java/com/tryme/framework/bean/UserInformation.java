@@ -52,8 +52,6 @@ public class UserInformation {
 	
 	@Field
 	private String school;
-	
-	
 
 	public String getTown() {
 		return town;

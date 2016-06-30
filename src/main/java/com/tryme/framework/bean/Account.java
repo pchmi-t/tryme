@@ -60,6 +60,13 @@ public class Account {
 	 */
 	public Account() {
 	}
+	
+	public Account(String username, String email, String password, UserInformation ui) {
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.userInformation = ui;
+	}
 
 	@PersistenceConstructor
 	public Account(String id, String username, String email, String password) {
