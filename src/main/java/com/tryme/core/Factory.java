@@ -2,9 +2,11 @@ package com.tryme.core;
 
 import com.tryme.managers.AccountManager;
 import com.tryme.managers.AuthenticationManager;
+import com.tryme.managers.ScoreManager;
 import com.tryme.managers.TestManager;
 import com.tryme.managers.impl.AccountManagerImpl;
 import com.tryme.managers.impl.AuthenticationManagerImpl;
+import com.tryme.managers.impl.ScoreManagerImpl;
 import com.tryme.managers.impl.TestManagerImpl;
 
 public final class Factory {
@@ -45,6 +47,10 @@ public final class Factory {
 	
 	public static TestManager getTestManager() {
 		return new TestManagerImpl();
+	}
+
+	public ScoreManager getScoreManager() {
+		return new ScoreManagerImpl();
 	}
 	
 }

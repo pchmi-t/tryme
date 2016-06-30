@@ -1,6 +1,7 @@
 package com.tryme.framework.bean;
 
 import java.util.Arrays;
+
 import java.util.List;
 
 import javax.validation.constraints.Pattern;
@@ -12,6 +13,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+@Document
 public class Test {
 
 	@Id
@@ -28,10 +30,10 @@ public class Test {
 
 	@Field
 	private String title;
-	
+
 	@Field
 	private String description;
-	
+
 	public Test(String title, String description, String subject, String grade, Question... questions) {
 		this.questions = Arrays.asList(questions);
 		this.subject = subject;

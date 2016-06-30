@@ -22,7 +22,7 @@ import com.tryme.managers.ScoreManager;
 public class ScoreManagerImpl implements ScoreManager {
 
 	@Override
-	public TreeSet<Score> getScores(Date startDate, Date endDate) throws Exception {
+	public TreeSet<Score> get(Date startDate, Date endDate) throws Exception {
 		List<TakenQuiz> quizesResults = new ArrayList<>();
 		try (Session session = new Session()) {
 			Query dateQuery = new Query();
@@ -48,6 +48,15 @@ public class ScoreManagerImpl implements ScoreManager {
 		}
 		return scores;
 		
+	}
+
+	@Override
+	public TakenQuiz save(Account user, int score) throws Exception {
+		TakenQuiz takenQuiz = new TakenQuiz(user, score);
+		try (Session session = new Session()) {
+			session.openSession().insert(takenQuiz);
+		}
+		return takenQuiz;
 	}
 
 }

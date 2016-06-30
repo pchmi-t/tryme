@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+@Document
 public class TakenQuiz {
 
 	@Id
@@ -15,10 +17,20 @@ public class TakenQuiz {
 	private Account user;
 
 	@Field
-	private LocalDate dateTaken;
+	private Date dateTaken;
 
 	@Field
 	private int score;
+	
+
+	public TakenQuiz(Account user, int score) {
+		this.user = user;
+		this.score = score;
+		this.dateTaken = new Date();
+	}
+
+	public TakenQuiz() {
+	}
 
 	public String getId() {
 		return id;
@@ -36,11 +48,11 @@ public class TakenQuiz {
 		this.user = user;
 	}
 
-	public LocalDate getDateTaken() {
+	public Date getDateTaken() {
 		return dateTaken;
 	}
 
-	public void setDateTaken(LocalDate dateTaken) {
+	public void setDateTaken(Date dateTaken) {
 		this.dateTaken = dateTaken;
 	}
 
