@@ -1,39 +1,51 @@
 package com.tryme.ws;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.tryme.framework.bean.Answer;
-import com.tryme.framework.bean.Question;
+import com.tryme.core.Factory;
 import com.tryme.framework.bean.Test;
+import com.tryme.managers.TestManager;
 
 @Path("/tests")
 @Produces(MediaType.APPLICATION_JSON)
 public class TestsResources {
 	
+	private TestManager testManager = Factory.getInstance().getTestManager();
+
 	@GET
-	public Response getAllTests() {
-		List<Test> tests = new ArrayList<>();
-		Test test = new Test();
-		test.setCategory("Vectors");
-		test.setGrade("12");
-		test.setSubject("Math");
-		List<Question> questions = new ArrayList<>();
-		Question question = new Question();
-		question.setText("Какво наричаме вектор?");
-		question.addAnswer(new Answer("Отсечка, на която единият край е избран за първи (начало), а другият за втори (край).", true));
-		question.addAnswer(new Answer("Отсечка", false));
-		questions.add(question);
-		test.setQuestions(questions);
-		tests.add(test);
+	public Response getTests() throws Exception {
+		List<Test> tests = testManager.getAll();
+		if (tests.isEmpty()) {
+			return Response.status(HttpServletResponse.SC_NOT_FOUND).build();
+		}
 		return Response.ok(tests).build();
-		
+	}
+	
+	@GET
+	@Path("/{id}/")
+	public Response getTest(@PathParam("id") String id) throws Exception {
+		Test test = testManager.get(id);
+		return Response.ok(test).build();
+	}
+	
+	@GET
+	@Path("/{subject}/grades/{grade}/")
+	public Response getTests(@PathParam("subject") String subject, @PathParam("grade") String grade) throws Exception {
+		List<Test> tests = testManager.get(subject, grade);
+		if (tests.isEmpty()) {
+			return Response.status(HttpServletResponse.SC_NOT_FOUND).build();
+		}
+		return Response.ok(tests).build();
 	}
 
 }
