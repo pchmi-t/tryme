@@ -1,13 +1,19 @@
 package com.tryme.framework.bean;
 
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.data.mongodb.core.mapping.Field;
 
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Answer {
 	
+	@Field
 	private String content;
 	 
+	@Field
 	private Boolean correct;
 	
 	public Answer() {	

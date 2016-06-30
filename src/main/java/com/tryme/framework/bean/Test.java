@@ -1,38 +1,36 @@
 package com.tryme.framework.bean;
 
+import java.util.List;
+
 import javax.validation.constraints.Pattern;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import org.hibernate.validator.constraints.Email;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import com.tryme.framework.beans.Questions;
-
-@Document
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Test {
-	
+
 	@Id
 	private String id;
-	
-	@Field
-	private Questions questions;
 
 	@Field
-	private Category category;
+	private List<Question> questions;
+
+	@Field
+	private String subject;
+
+	@Field
+	private String grade;
+
+	@Field
+	private String category;
 
 	@Field
 	@Pattern(regexp = "PENDING | ACCEPT | REJECT")
 	private Status status;
-	
-	/** The default constructor. */
-	public Test() {
-	}
 
 	public String getId() {
 		return id;
@@ -42,19 +40,35 @@ public class Test {
 		this.id = id;
 	}
 
-	public Questions getQuestions() {
+	public List<Question> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(Questions questions) {
+	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
 
-	public Category getCategory() {
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public String getCategory() {
 		return category;
 	}
 
-	public void setCategory(Category category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 
@@ -65,6 +79,5 @@ public class Test {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-	
-	
+
 }

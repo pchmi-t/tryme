@@ -90,28 +90,13 @@
         $(this).html('<h1>' + event.strftime('%M:%S') + '</h1>');
     });
     
-    var questions = [
-        {
-            "text": "Какво наричаме вектор?",
-            "options": ["Отсечка", "Повърхност",
-                "Отсечка, на която единият край е избран за първи (начало), а другият за втори (край).",
-                "Отсечка, на която няма краища", "Насочена отсечка"
-            ]
-        },
-        {
-            "text": "Кое от изброените не е елемент на вектор?",
-            "options": ["Начало", "Среда", "Край", "Посока", "Директриса", "Дължина"]
-        },
-        {
-            "text": "На колко е равна релативната мярка на сбор от два сегмента, взети последователно върху една ос?",
-            "options": [
-            "На разликата от абцисите на края и началото му",
-            "На сбора от релативните мерки на тези сегменти"]
-        }
-
-    ];
     
     var currentQuestion = 0;
+    $.ajaxSetup({async: false});
+    $.get('/tryme/api/v1.0/tests/', function(data){
+    	 questions = data[0].questions;
+    });
+    
     var qHtml = buildQuestion(questions[currentQuestion]);
     $(".question").html(qHtml);
     
@@ -165,8 +150,8 @@
     function buildQuestion(question) {
         var qHtml = '<h2>' + question.text + '</h2>';
         qHtml += ' <br/><form action="demo_form.asp" method="get">';
-        question.options.forEach(function(option) {
-                qHtml += '<input type="radio" name="ans" value="' + option + '">   ' + option +'<br>';
+        question.answers.forEach(function(answer) {
+                qHtml += '<input type="radio" name="ans" value="' + answer.content + '">   ' + answer.content +'<br>';
             }
         );
         qHtml += '<br/></form>';
