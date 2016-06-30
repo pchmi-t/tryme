@@ -24,6 +24,9 @@ public class TestsResources {
 	@GET
 	public Response getTests() throws Exception {
 		List<Test> tests = testManager.getAll();
+		if (tests.isEmpty()) {
+			return Response.status(HttpServletResponse.SC_NOT_FOUND).build();
+		}
 		return Response.ok(tests).build();
 	}
 	
