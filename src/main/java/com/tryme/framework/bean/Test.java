@@ -29,9 +29,13 @@ public class Test {
 	@Field
 	private String title;
 	
-	public Test(String title, String subject, String grade, Question... questions) {
+	@Field
+	private String description;
+	
+	public Test(String title, String description, String subject, String grade, Question... questions) {
 		this.questions = Arrays.asList(questions);
 		this.subject = subject;
+		this.description = description;
 		this.grade = grade;
 		this.title = title;
 	}
@@ -77,6 +81,14 @@ public class Test {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

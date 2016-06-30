@@ -95,7 +95,7 @@
 	 var username = 'TanyaHris';
 	  $.get('/tryme/api/v1.0/accounts/' + username, function(data) {
 		  account = data;
-		  var profileHtml = '<h4 class="media-heading">' + account.userInformation.fullName + ' <small> ' + (!account.userInformation.town ? 'България' : account.userInformation.town) + '</small></h4>';
+		  var profileHtml = '<h4 class="media-heading">' + ((!account.userInformation.fullName) ? account.username : account.userInformation.fullName) + ' <small> ' + (!account.userInformation.town ? 'България' : account.userInformation.town) + '</small></h4>';
 		  profileHtml += ' <h5>Ученик' + (!account.userInformation.school ? '' : (' в ' + account.userInformation.school)) + '</h5><hr style="margin:10px auto">';
 		  profileHtml += '<span class="label label-default">Метаматика</span><span class="label label-default">Физика</span><span class="label label-default">История</span><span class="label label-default">Химия</span><h5>Както можете да се досетите, това съм аз. Както също така можете да видите, да си избирам вкусни неща за ядене, да пътувам и да ми разказват смешни неща.</h5>';
 		  
