@@ -1,9 +1,9 @@
 $(document).ready(function() {
-	console.log("admiiiiiiiin");
 	$.ajaxSetup({async: false});
 	  $.get('/tryme/api/v1.0/scores/',
 		  function (accounts){
 		  accounts.forEach(function(account, index){
+			  index = index + 1;
 			  $('#myTable tr:last').after(
 					  '<tr> <td>' + index + 
 					  '</td> <td>' +  account.user.username
