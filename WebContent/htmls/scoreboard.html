@@ -102,18 +102,17 @@ $("#scoretitle").addClass('page-header').html("<h2 class='text-center' id='daily
   var date = new Date();
   console.log(date);
   $("#dailydate").append(monthNames[date.getMonth()] + " " + "2016 г.");
-    
-    $( document ).ready(function() {
-   	  $.get('/tryme/api/v1.0/scores', function(data) {
-   		var html = '<table class="table table-hover"><thead><tr><th>N.</th><th>Име</th><th>Фамилия</th><th>Град</th><th>Точки</th></tr></thead><tbody>';
-   		data.forEach(function(item, index) {
-   			var fullName = item.user.userInformation.fullName.split(" ");
-   			html += "<tr><td>" + (index+1) + "</td><td>" + fullName[0] + "</td><td>" + fullName[1] + "</td><td>" + item.user.userInformation.town + "</td><td>" + item.totalScore + "</td></tr>"
-   		});
-   		html+="</tbody></table>";
-   		$('#score').html(html);
-   	  });
-    });
+  $.ajaxSetup({async:false});
+ 	  $.get('/tryme/api/v1.0/scores', function(data) {
+ 		var html = '<table class="table table-hover"><thead><tr><th>N.</th><th>Име</th><th>Фамилия</th><th>Град</th><th>Точки</th></tr></thead><tbody>';
+ 		data.forEach(function(item, index) {
+ 			var fullName = item.user.userInformation.fullName.split(" ");
+ 			html += "<tr><td>" + (index+1) + "</td><td>" + fullName[0] + "</td><td>" + fullName[1] + "</td><td>" + item.user.userInformation.town + "</td><td>" + item.totalScore + "</td></tr>"
+ 		});
+ 		html+="</tbody></table>";
+ 		console.log(html);
+ 		$('#score').html(html);
+ 	  });
   }
   
   function userHover(event) {
@@ -135,8 +134,8 @@ $("#scoretitle").addClass('page-header').html("<h2 class='text-center' id='daily
     if (name == 'Христо') {
       return '<img class="media-object dp img-circle" src="../imgs/hristo.jpg" style="width: 200px;height:200px;"><br>';
     }
-    if (name == 'Милка') {
-      return '<img class="media-object dp img-circle" src="../imgs/milka.jpg" style="width: 200px;height:200px;"><br>';
+    if (name == 'Моника') {
+      return '<img class="media-object dp img-circle" src="../imgs/monika.jpg" style="width: 200px;height:200px;"><br>';
     }
     if (name == 'Таня') {
       return '<img class="media-object dp img-circle" src="../imgs/tanya.jpg" style="width: 200px;height:200px;"><br>';

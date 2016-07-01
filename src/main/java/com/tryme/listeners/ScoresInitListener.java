@@ -27,7 +27,7 @@ public class ScoresInitListener implements ServletContextListener {
 			List<Account> allAccounts = accountManager.getAccounts(accountManager.getAccountCriterion(),
 					Integer.MAX_VALUE);
 			for (Account account : allAccounts) {
-				scoreManager.save(account, new Random(new Date().getTime()).nextInt(100));
+				scoreManager.save(account, new Random(new Date().getTime()).nextInt(100) + 10);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
