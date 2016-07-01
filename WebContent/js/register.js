@@ -34,6 +34,7 @@ function register(){
 				$("#validationErrors").css({"display":"none"});
 				$("#errorMsg").css({"display":"none"});
 				$("#successMsg").css({"display":"block"});
+				window.location.href = 'sign-in.html';
 			},
 			error : function (jqXHR, textStatus, errorThrown){
 				console.log("Error!");

@@ -153,7 +153,7 @@ public class AccountsResources {
 	public Response createAccount(Account account) {
 		try {
 			if (AccountValidationUtils.validateUsername(account)) {
-				account.setPassword(PasswordService.getInstance().encrypt(account.getPassword()));
+				account.setPassword(account.getPassword());
 				accountManager.addAccount(account);
 			}
 		} catch (Exception e) {
