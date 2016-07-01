@@ -92,12 +92,13 @@
 	<script>
   
 	$( document ).ready(function() {
-	 var username = 'TanyaHris';
+	 var username = 'eminkaa';
 	  $.get('/tryme/api/v1.0/accounts/' + username, function(data) {
 		  account = data;
 		  var profileHtml = '<h4 class="media-heading">' + ((!account.userInformation.fullName) ? account.username : account.userInformation.fullName) + ' <small> ' + (!account.userInformation.town ? 'България' : account.userInformation.town) + '</small></h4>';
 		  profileHtml += ' <h5>Ученик' + (!account.userInformation.school ? '' : (' в ' + account.userInformation.school)) + '</h5><hr style="margin:10px auto">';
-		  profileHtml += '<span class="label label-default">Метаматика</span><span class="label label-default">Физика</span><span class="label label-default">История</span><span class="label label-default">Химия</span><h5>Както можете да се досетите, това съм аз. Както също така можете да видите, да си избирам вкусни неща за ядене, да пътувам и да ми разказват смешни неща.</h5>';
+		  profileHtml += '<span class="label label-default">Метаматика</span><span class="label label-default">Физика</span><span class="label label-default">История</span><span class="label label-default">Химия</span>';
+		  profileHtml += '<h5>' + account.userInformation.description + '</h5>';
 		  
 		  var imageHtml = '<img class="media-object dp img-circle pull-left"src="../' + account.userInformation.avatar + '"style="width: 200px; height: 200px;">';
 		  $("#profilepic").html(imageHtml);
