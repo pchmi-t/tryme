@@ -107,9 +107,9 @@ public class TestsInitListener implements ServletContextListener {
 				new Answer("Преслав, Плиска, Търново, Охрид", false),
 				new Answer("Плиска, Търново, Преслав, Охрид", false));
 
-		Test test3 = new Test("Средновековна България", "hist", "class12",
-				"Това е тест за Средновековна България. Изисква се напреднало (кандидат-студентско) ниво.", question31,
-				question32, question33, question34, question35);
+		Test test3 = new Test("Средновековна България",
+				"Това е тест за Средновековна България. Изисква се напреднало (кандидат-студентско) ниво.", "hist",
+				"class12", question31, question32, question33, question34, question35);
 
 		try {
 			testManager.save(test1);
