@@ -58,12 +58,12 @@ public class AccountsResources {
 	private AccountManager accountManager = Factory.getInstance().getAccountManager();
 
 	/** The context. */
-	@Context 
-	private HttpServletRequest request;
-	
 	@Context
-	 private HttpServletResponse response;
-	
+	private HttpServletRequest request;
+
+	@Context
+	private HttpServletResponse response;
+
 	/**
 	 * Get all accounts.
 	 * 
@@ -87,11 +87,12 @@ public class AccountsResources {
 	/**
 	 * Get the account, associated with the given id.
 	 * 
-	 * @param id the account id
+	 * @param id
+	 *            the account id
 	 * @return the account
 	 */
 	@GET
-	@Path("{username}")
+	@Path("/{username}")
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Account getAccountByUsername(@PathParam("username") String username) {
 		AccountCriterion criterion = accountManager.getAccountCriterion();
@@ -108,36 +109,32 @@ public class AccountsResources {
 			if (e instanceof NoSuchAccountException || e instanceof WSBaseException) {
 				throw new WSBaseException("The specified account does not exist.");
 			} else {
-				throw new WSBaseException(Status.INTERNAL_SERVER_ERROR, 
-						CoreConstants.GENERAL_ERROR_MSG);
+				throw new WSBaseException(Status.INTERNAL_SERVER_ERROR, CoreConstants.GENERAL_ERROR_MSG);
 			}
 		}
 	}
 
 	@POST
-	@Path("{username}")
-	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Path("/{username}")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-	public Response authenticateAccount(@NotBlank(message="Username can not be empty")
-	@PathParam("username")String username, @NotBlank(message="Please specify the account") UserLogin account) {
+	public Response authenticateAccount(@PathParam("username") String username, UserLogin account) {
 		try {
 			if (!username.equals(account.getUsername())) {
-				return Response.status(Status.BAD_REQUEST).entity("").build();
+				return Response.status(Status.BAD_REQUEST).build();
 			}
 			String plainPassword = account.getPassword();
-			String encryptedPassword = PasswordService.getInstance().encrypt(plainPassword);
 			AccountCriterion criterion = accountManager.getAccountCriterion();
 			criterion.username(username);
-			criterion.password(encryptedPassword);
+			criterion.password(plainPassword);
 			Account domainAccount = accountManager.getAccount(criterion);
 			if (domainAccount != null) {
-				Cookie cookie = new  Cookie("account", username);
-			    cookie.setMaxAge(60 * 5);
-			    //Add the cookie to the response
-			    response.addCookie(cookie);
-				return Response.ok().entity(account).build();
+				Cookie cookie = new Cookie("account", username);
+				cookie.setMaxAge(60 * 5);
+				// Add the cookie to the response
+				response.addCookie(cookie);
+				return Response.ok().build();
 			} else {
-				return Response.status(Status.BAD_REQUEST).entity("").build();
+				return Response.status(Status.UNAUTHORIZED).build();
 			}
 		} catch (Exception e) {
 			return Response.status(Status.BAD_REQUEST).entity("").build();
@@ -147,7 +144,8 @@ public class AccountsResources {
 	/**
 	 * Create an account.
 	 * 
-	 * @param account the account that is about created.
+	 * @param account
+	 *            the account that is about created.
 	 */
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -155,9 +153,7 @@ public class AccountsResources {
 	public Response createAccount(Account account) {
 		try {
 			if (AccountValidationUtils.validateUsername(account)) {
-				account.setPassword(PasswordService
-						.getInstance()
-						.encrypt(account.getPassword()));
+				account.setPassword(PasswordService.getInstance().encrypt(account.getPassword()));
 				accountManager.addAccount(account);
 			}
 		} catch (Exception e) {
@@ -172,8 +168,9 @@ public class AccountsResources {
 	/**
 	 * Update an account.
 	 * 
-	 * @param multiPart the multi-part first part should be the account and the second -
-	 * the updated avatar if exist.
+	 * @param multiPart
+	 *            the multi-part first part should be the account and the second
+	 *            - the updated avatar if exist.
 	 * 
 	 * @return the newly updated account
 	 */
@@ -190,8 +187,7 @@ public class AccountsResources {
 			InputStream inputStream = null;
 			for (BodyPart bodyPart : bodyParts) {
 				type = bodyPart.getMediaType();
-				if (MediaType.APPLICATION_JSON_TYPE.equals(type) ||
-						MediaType.APPLICATION_XML_TYPE.equals(type)) {
+				if (MediaType.APPLICATION_JSON_TYPE.equals(type) || MediaType.APPLICATION_XML_TYPE.equals(type)) {
 					updatedAccount = bodyPart.getEntityAs(Account.class);
 				} else if (MediaType.APPLICATION_OCTET_STREAM_TYPE.equals(type)) {
 					fileName = bodyPart.getContentDisposition().getFileName();
@@ -216,12 +212,12 @@ public class AccountsResources {
 				if (AccountValidationUtils.updateAccountAvatar(fileName, inputStream)) {
 					if (updatedAccount != null) {
 						if (updatedAccount.getUserInformation() != null) {
-							updatedAccount.getUserInformation().setAvatar(
-									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
+							updatedAccount.getUserInformation()
+									.setAvatar(CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
 						} else {
 							updatedAccount.setUserInformation(new UserInformation());
-							updatedAccount.getUserInformation().setAvatar(
-									CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
+							updatedAccount.getUserInformation()
+									.setAvatar(CoreConstants.AVATAR_DIR_PREFIX.concat(fileName));
 						}
 					}
 				}

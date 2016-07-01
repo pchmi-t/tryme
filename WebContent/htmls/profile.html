@@ -88,11 +88,11 @@
 		integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
 		crossorigin="anonymous"></script>
 	<script src="../js/navbar.js"></script>
-	<script src="auth.js"></script>
+	    <script src="../js/auth.js"></script>
 	<script>
   
 	$( document ).ready(function() {
-	 var username = 'eminkaa';
+	 var username = sessionStorage.getItem('accountUser');
 	  $.get('/tryme/api/v1.0/accounts/' + username, function(data) {
 		  account = data;
 		  var profileHtml = '<h4 class="media-heading">' + ((!account.userInformation.fullName) ? account.username : account.userInformation.fullName) + ' <small> ' + (!account.userInformation.town ? 'България' : account.userInformation.town) + '</small></h4>';

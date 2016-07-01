@@ -78,11 +78,12 @@ $(document).ready(function() {
          sessionStorage.setItem("timeRemaining", $('#clock h1').text());
          sessionStorage.setItem("maxScore", questions.length * 10);
 
+         var username = sessionStorage.getItem('accountUser');
          $.ajaxSetup({async:false});
          $.ajax({
               type: "POST",
               url: '/tryme/api/v1.0/scores',
-              data: JSON.stringify({ "username": 'eminkaa', "score" : totalScore }),
+              data: JSON.stringify({ "username": username, "score" : totalScore }),
               contentType : 'application/json',
             });
 

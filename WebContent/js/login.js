@@ -23,15 +23,15 @@ function login(){
 			type : "POST",
 			data : account,
 			headers: {
-				"Accept":"application/json", 
 				"Content-type":"application/json"
 			},
 			success : function (data, textStatus, jqXHR){
 				console.log("success");
 
 				document.cookie = jqXHR.getResponseHeader('Set-Cookie');
-				//console.log(document.cookie);
-					
+				
+				sessionStorage.setItem("accountUser", username);
+				
 				window.location.href = 'profile.html';
 				$("#validationErrors").css({"display":"none"});
 				$("#errorMsg").css({"display":"none"});
@@ -41,9 +41,6 @@ function login(){
 				console.log("Error!");
 				console.log(textStatus);
 				console.log(jqXHR.status);
-				//console.log(jqXHR.responseText);
-				//var responseText = jqXHR.responseText;
-				//$("#validationErrors").css({"display":"block"}).append(divTemplate.replace("{content}", responseText));
 				$("#successMsg").css({"display":"none"});
 				$("#errorMsg").css({"display":"block"});
 			}

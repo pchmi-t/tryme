@@ -1,97 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <meta name="description" content="">
-  <meta name="author" content="TryMe">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<meta name="description" content="">
+<meta name="author" content="TryMe">
 
-  <title>TryMe</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" type="text/css" href="../css/main.css">
-  <link rel="stylesheet" type="text/css" href="../css/nav.css">
-  <link rel="stylesheet" type="text/css" href="../css/tests.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <style type="text/css"></style>
+<title>TryMe</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+	crossorigin="anonymous">
+<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700'
+	rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<link rel="stylesheet" type="text/css" href="../css/nav.css">
+<link rel="stylesheet" type="text/css" href="../css/tests.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style type="text/css"></style>
 </head>
 <body>
-<div class="container" id="page">
-<!-- ======================== NAVBAR ======================== -->
-  <div class="navWrapper navbar-fixed-top">
-    <div class="upper">
-      <img src="../imgs/upper_Nav.png">
-    </div>
-    <nav class="navbar navbar-inverse ">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        </button>
-        <a class="navbar-brand" href="Home.html">TryMe</a>
-      </div>
-      <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li><a class="active" href="Home.html">Начало</a></li>
-          <li><a href="tests.html">Тестове</a></li>
-          <li><a href="scoreboard.html">Класации</a></li>
-          <li><a id="profilebtn" href="profile.html">Профил</a></li>
-        </ul>
-        <form class="navbar-form navbar-right">
-          <a id="loginbtn" class="btn btn-success" href="sign-in.html">Вписване</a>
-          <a id="regbtn" class="btn btn-success" href="sign-up.html">Регистриране</a>
-          <a id="logoutbtn" class="btn btn-success" href="Home.html">Излез</a>
-        </form>
-      </div>
-    </nav>
-  </div>
-<!-- ======================== NAVBAR ======================== -->
+	<div class="container" id="page">
+		<!-- ======================== NAVBAR ======================== -->
+		<div class="navWrapper navbar-fixed-top">
+			<div class="upper">
+				<img src="../imgs/upper_Nav.png">
+			</div>
+			<nav class="navbar navbar-inverse ">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+						aria-controls="navbar"></button>
+					<a class="navbar-brand" href="Home.html">TryMe</a>
+				</div>
+				<div id="navbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li><a class="active" href="Home.html">Начало</a></li>
+						<li><a href="tests.html">Тестове</a></li>
+						<li><a href="scoreboard.html">Класации</a></li>
+						<li><a id="profilebtn" href="profile.html">Профил</a></li>
+					</ul>
+					<form class="navbar-form navbar-right">
+						<a id="loginbtn" class="btn btn-success" href="sign-in.html">Вписване</a>
+						<a id="regbtn" class="btn btn-success" href="sign-up.html">Регистриране</a>
+						<a id="logoutbtn" class="btn btn-success" href="Home.html">Излез</a>
+					</form>
+				</div>
+			</nav>
+		</div>
+		<!-- ======================== NAVBAR ======================== -->
 
-<!-- ======================== CONTENT ======================== -->
-  <div id="content" class="content">
-    <div id="testspage">
-      <label for="permet">Избери предмет:</label>
-      <div id="validationErrors" class="alert alert-danger" role="alert" style="display:none">
-		<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-	  </div>
-      <select class="form-control" id="permet">
-        <option value="" selected disabled>Предмети</option>
-        <option value="bg">Български език</option>
-        <option value="lit">Литература</option>
-        <option value="math">Математика</option>
-        <option value="hist">История</option>
-        <option value="geo">География</option>
-        <option value="bio">Биология</option>
-        <option value="phis">Физика</option>
-        <option value="chem">Химия</option>
-        <option value="en">Английски език</option>
-        <option value="ph">Философски цикъл</option>
-      </select>
-      
-      <div id="graded" hidden>
-        <label for="grade" id="gradel">Избери клас:</label>
-        <select class="form-control" id="grade">
-          <option value="" selected disabled>Класове</option>
-          <option value="class1">1 клас</option>
-          <option value="class2">2 клас</option>
-          <option value="class3">3 клас</option>
-          <option value="class4">4 клас</option>
-          <option value="class5">5 клас</option>
-          <option value="class6">6 клас</option>
-          <option value="class7">7 клас</option>
-          <option value="class8">8 клас</option>
-          <option value="class9">9 клас</option>
-          <option value="class10">10 клас</option>
-          <option value="class11">11 клас</option>
-          <option value="class12">12 клас</option>
-        </select>
-      </div>
-      
-      <div id="catd" hidden>
-        <label for="category">Избери тест:</label>
-        <select class="form-control" id="category">
-          <option value="" selected disabled>Тестове</option>
-          <!-- <option>Квадратен корен</option>
+		<!-- ======================== CONTENT ======================== -->
+		<div id="content" class="content">
+			<div id="testspage">
+				<label for="permet">Избери предмет:</label>
+				<div id="validationErrors" class="alert alert-danger" role="alert"
+					style="display: none">
+					<span class="glyphicon glyphicon-exclamation-sign"
+						aria-hidden="true"></span>
+				</div>
+				<select class="form-control" id="permet">
+					<option value="" selected disabled>Предмети</option>
+					<option value="bg">Български език</option>
+					<option value="lit">Литература</option>
+					<option value="math">Математика</option>
+					<option value="hist">История</option>
+					<option value="geo">География</option>
+					<option value="bio">Биология</option>
+					<option value="phis">Физика</option>
+					<option value="chem">Химия</option>
+					<option value="en">Английски език</option>
+					<option value="ph">Философски цикъл</option>
+				</select>
+
+				<div id="graded" hidden>
+					<label for="grade" id="gradel">Избери клас:</label> <select
+						class="form-control" id="grade">
+						<option value="" selected disabled>Класове</option>
+						<option value="class1">1 клас</option>
+						<option value="class2">2 клас</option>
+						<option value="class3">3 клас</option>
+						<option value="class4">4 клас</option>
+						<option value="class5">5 клас</option>
+						<option value="class6">6 клас</option>
+						<option value="class7">7 клас</option>
+						<option value="class8">8 клас</option>
+						<option value="class9">9 клас</option>
+						<option value="class10">10 клас</option>
+						<option value="class11">11 клас</option>
+						<option value="class12">12 клас</option>
+					</select>
+				</div>
+
+				<div id="catd" hidden>
+					<label for="category">Избери тест:</label> <select
+						class="form-control" id="category">
+						<option value="" selected disabled>Тестове</option>
+						<!-- <option>Квадратен корен</option>
           <option>Квадратни уравнения</option>
           <option>Системи линейни уравнения</option>
           <option>Системи линейни неравенства</option>
@@ -102,41 +111,42 @@
           <option>Окръжности</option>
           <option>Окръжност и ъгъл</option>
           <option>Окръжност и многоъгълник</option> -->
-        </select>
-      </div>
-      <br/>
-      <div hidden id="starttd">
-        <a class="btn btn-success start" href="start-test.html">Започни тест</a>
-      </div>
-      <br/>
-    </div>
-<!-- ======================== CONTENT ======================== -->
-</div><!-- /.container -->
+					</select>
+				</div>
+				<br />
+				<div hidden id="starttd">
+					<a class="btn btn-success start" href="start-test.html">Започни
+						тест</a>
+				</div>
+				<br />
+			</div>
+			<!-- ======================== CONTENT ======================== -->
+		</div>
+		<!-- /.container -->
 
-    <!-- Bootstrap core JavaScript
+		<!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="../js/navbar.js"></script>
-  
-  <script>
-  
-  // $("#permet").on("change", function() {
-  //   $("#graded").show();
-  // });
-  
-  // $("#graded").on("change", function() {
-  //   $("#catd").show();
-  // });
-  
-  // $("#catd").on("change", function() {
-  //   $("#starttd").show();
-  // });
-  
-  </script>
-  
-    <script src="auth.js"></script>
-    <script src="../js/main.js"></script>
-    <script src="../js/tests.js"></script>
-  </body>
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+			integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+			crossorigin="anonymous"></script>
+		<script src="../js/navbar.js"></script>
+		<script>
+			// $("#permet").on("change", function() {
+			//   $("#graded").show();
+			// });
+
+			// $("#graded").on("change", function() {
+			//   $("#catd").show();
+			// });
+
+			// $("#catd").on("change", function() {
+			//   $("#starttd").show();
+			// });
+		</script>
+		<script src="../js/main.js"></script>
+		<script src="../js/tests.js"></script>
+		<script src="../js/auth.js"></script>
+</body>
 </html>
