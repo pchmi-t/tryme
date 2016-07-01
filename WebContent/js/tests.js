@@ -9,7 +9,7 @@ $(document).ready(function() {
         text : "Тестове" 
     }));
     
-    console.log($(this).find('option:selected').val());
+//    console.log($(this).find('option:selected').val());
   });
   
   $("#graded").on("change", function() {
@@ -23,32 +23,35 @@ $(document).ready(function() {
 	  
 	  var subject = $('#permet').find('option:selected').val();
 	  var klass = $('#graded').find('option:selected').val();
-	  console.log($(this).find('option:selected').val());
+//	  console.log($(this).find('option:selected').val());
 	  
 	  $.ajaxSetup({async: false});
 	  $.get('/tryme/api/v1.0/tests/' + subject +'/grades/' + klass,
 		  function (data){
-		  console.log(data);
+//		  console.log(data);
 		  data.forEach(function(item, index){
-			  console.log(item);
-			  console.log(item.id);
-			  console.log(item.title);
+//			  console.log(item);
+//			  console.log(item.id);
+//			  console.log(item.title);
 			  $('#category').append($('<option>', { 
 			        value: item.id,
 			        text : item.title 
 		      }));
 		  });
-		  console.log("the classsssssssss");
+//		  console.log("the classsssssssss");
 		  $("#catd").show();
 	  });
     
   });
-  
+  var themeID;
   $("#catd").on("change", function() {
+	  themeID = $('#catd').find('option:selected').val();
+	  console.log(themeID);
     $("#starttd").show();
   });
 
 
-  var themeID = $('#catd').find('option:selected').val();
-  
+  $('.start').click(function (){
+	  $(this).attr('href', $(this).attr('href') + '?id=' + themeID);
+  });
 });
