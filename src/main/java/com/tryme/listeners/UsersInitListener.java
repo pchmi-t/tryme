@@ -7,6 +7,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import com.tryme.core.Factory;
+import com.tryme.core.PasswordService;
 import com.tryme.framework.bean.Account;
 import com.tryme.framework.bean.UserInformation;
 import com.tryme.framework.criteria.AccountCriterion;
@@ -80,10 +81,12 @@ public class UsersInitListener implements ServletContextListener {
 				criterion.username(account.getUsername());
 				boolean taken = accountManager.getAccount(criterion) != null;
 				if(!taken) {
+					account.setPassword(PasswordService
+							.getInstance()
+							.encrypt(account.getPassword()));
 					accountManager.addAccount(account);
 				}
 			}
-		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
