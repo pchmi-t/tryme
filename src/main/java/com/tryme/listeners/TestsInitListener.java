@@ -9,7 +9,7 @@ import com.tryme.framework.bean.Question;
 import com.tryme.framework.bean.Test;
 import com.tryme.managers.TestManager;
 
-public class DatabaseInitListener implements ServletContextListener {
+public class TestsInitListener implements ServletContextListener {
 
 	private TestManager testManager = Factory.getInstance().getTestManager();
 
@@ -34,7 +34,9 @@ public class DatabaseInitListener implements ServletContextListener {
 				new Answer("На разликата от абцисите на края и началото му", false),
 				new Answer("На сбора от релативните мерки на тези сегменти", true));
 
-		Test test1 = new Test("Вектори", "math", "class8", question11, question12, question13);
+		Test test1 = new Test("Вектори",
+				"Това е тест за вектори. Включва само основните познания за тях. Не е подходящ за по-напреднали.",
+				"math", "class8", question11, question12, question13);
 
 		Question question21 = new Question("Приносът на Ренесанса за развитието на ценностния мироглед се състои от?",
 				new Answer("Почит към индивидуалното право на личността", false),
@@ -58,47 +60,56 @@ public class DatabaseInitListener implements ServletContextListener {
 
 		Question question26 = new Question("Къде възниква Ренесансът?", new Answer("Париж, Франция", false),
 				new Answer("Лондон, Англия", false), new Answer("Флоренция, Италия", true));
-		
-		Question question27 = new Question("Кое от следните не е вярно за Ренесанса?", 
-				new Answer("През Ренесанса възкръсва калокагатийният модел на древните за красивата хармония между дух и материя, човек и свят.", false),
-				new Answer("Ренесансът има тенденция да смята сатирата за нещо незаслужаващо сериозно внимание, предразсъдък, който има влияние и днес.", true), 
-				new Answer("През Ренесанса красотата на голото човешко тяло става символен знак на новия културен модел", false), 
+
+		Question question27 = new Question("Кое от следните не е вярно за Ренесанса?",
+				new Answer(
+						"През Ренесанса възкръсва калокагатийният модел на древните за красивата хармония между дух и материя, човек и свят.",
+						false),
+				new Answer(
+						"Ренесансът има тенденция да смята сатирата за нещо незаслужаващо сериозно внимание, предразсъдък, който има влияние и днес.",
+						true),
+				new Answer(
+						"През Ренесанса красотата на голото човешко тяло става символен знак на новия културен модел",
+						false),
 				new Answer("През Ренесанса светското се отделя от църковно-духовното.", false));
 
-		Test test2 = new Test("Ренесанс", "lit", "class10", question21, question22, question23, question24, question25,
-				question26, question27);
-		
-		Question question31 = new Question("След разгрома на Аварския хаганат България става непосредствен съсед на?", 
-				new Answer("Франкската империя.", true),
-				new Answer("Немското кралство", false), 
-				new Answer("Арабски халифат", false), 
-				new Answer("Римската империя", false));
-		
-		Question question32 = new Question("Какви са последиците от административната реформа на кан Омуртаг?", 
+		Test test2 = new Test("Ренесанс",
+				"Това е тест за Ренесансова литература. Изисква повече от основните познания. Не е подходящ за начинаещи.",
+				"lit", "class10", question21, question22, question23, question24, question25, question26, question27);
+
+		Question question31 = new Question("След разгрома на Аварския хаганат България става непосредствен съсед на?",
+				new Answer("Франкската империя.", true), new Answer("Немското кралство", false),
+				new Answer("Арабски халифат", false), new Answer("Римската империя", false));
+
+		Question question32 = new Question("Какви са последиците от административната реформа на кан Омуртаг?",
 				new Answer("Прабългарската аристокрация засилва позициите си спрямо кана", false),
-				new Answer("Славянската аристокрация получава по-големи правомощия в администрирането на пограничните райони на страната", false), 
-				new Answer("Славянските племена загубват своята автономия", true), 
-				new Answer("Християнското население в завладените от България византийски територии е върнато към езическата религия", false));
-		
-		Question question33 = new Question("Славянската писменост, създадена от Кирил и Методий, е известна като?", 
-				new Answer("Глаголица", true),
-				new Answer("Кирилица", false), 
-				new Answer("Черти и резки", false), 
+				new Answer(
+						"Славянската аристокрация получава по-големи правомощия в администрирането на пограничните райони на страната",
+						false),
+				new Answer("Славянските племена загубват своята автономия", true),
+				new Answer(
+						"Християнското население в завладените от България византийски територии е върнато към езическата религия",
+						false));
+
+		Question question33 = new Question("Славянската писменост, създадена от Кирил и Методий, е известна като?",
+				new Answer("Глаголица", true), new Answer("Кирилица", false), new Answer("Черти и резки", false),
 				new Answer("Димотическо писмо", false));
-		
-		Question question34 = new Question("На политическата карта на Югоизточна Европа в първите години от управлението на цар Иван Асен II НЕ съществува държавата?", 
-				new Answer("Византийска империя", true),
-				new Answer("Латинска империя", false), 
-				new Answer("Епирско деспотство", false), 
-				new Answer("Сръбско кралство", false));
-		
-		Question question35 = new Question("В кой от посочените варианти старите български столици са в хронологична последователност?", 
+
+		Question question34 = new Question(
+				"На политическата карта на Югоизточна Европа в първите години от управлението на цар Иван Асен II НЕ съществува държавата?",
+				new Answer("Византийска империя", true), new Answer("Латинска империя", false),
+				new Answer("Епирско деспотство", false), new Answer("Сръбско кралство", false));
+
+		Question question35 = new Question(
+				"В кой от посочените варианти старите български столици са в хронологична последователност?",
 				new Answer("Плиска, Охрид, Преслав, Търново", false),
-				new Answer("Плиска, Преслав, Охрид, Търново", true), 
-				new Answer("Преслав, Плиска, Търново, Охрид", false), 
+				new Answer("Плиска, Преслав, Охрид, Търново", true),
+				new Answer("Преслав, Плиска, Търново, Охрид", false),
 				new Answer("Плиска, Търново, Преслав, Охрид", false));
-		
-		Test test3 = new Test("Средновековна България", "hist", "class12", question31, question32, question33, question34, question35);
+
+		Test test3 = new Test("Средновековна България", "hist", "class12",
+				"Това е тест за Средновековна България. Изисква се напреднало (кандидат-студентско) ниво.", question31,
+				question32, question33, question34, question35);
 
 		try {
 			testManager.save(test1);

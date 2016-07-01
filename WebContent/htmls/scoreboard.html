@@ -22,7 +22,7 @@
 <!-- ======================== NAVBAR ======================== -->
   <div class="navWrapper navbar-fixed-top">
     <div class="upper">
-      <img src="../imgs/upperNav.png">
+      <img src="../imgs/upper_Nav.png">
     </div>
     <nav class="navbar navbar-inverse ">
       <div class="navbar-header">
@@ -102,21 +102,17 @@ $("#scoretitle").addClass('page-header').html("<h2 class='text-center' id='daily
   var date = new Date();
   console.log(date);
   $("#dailydate").append(monthNames[date.getMonth()] + " " + "2016 г.");
-  
-  var users = [{"name": "Емине", "surname": "Башева", "points":913, "town": "Сърница"},
-  {"name": "Христо", "surname": "Тодоров", "points":901, "town": "Ловеч"}, {"name": "Павел", "surname": "Тошев", "points":895, "town": "Бургас"},{"name": "Таня", "surname": "Христова", "points":873, "town": "Добрич"},
-  {"name": "Християн", "surname": "Димитров", "points":872, "town": "Велико Търново"}, {"name": "Елияна", "surname": "Христова", "points":792, "town": "София"},
-  {"name": "Милка", "surname": "Ферезлийска", "points":712, "town": "Пазарджик"}, {"name": "Светимир", "surname": "Игнатор", "points":697, "town": "Ботевград"},
-  {"name": "Пламена", "surname": "Григотова", "points":402, "town": "Варна"}, {"name": "Николай", "surname": "Балев", "points":341, "town": "Плевен"}];
-  
-  var html = '<table class="table table-hover"><thead><tr><th>N.</th><th>Име</th><th>Фамилия</th><th>Град</th><th>Точки</th></tr></thead><tbody>';
-for(var i=0; i<users.length; i++){
-var user = users[i];
-    html += "<tr><td>" + (i+1) + "</td><td>" + user.name + "</td><td>" + user.surname + "</td><td>" + user.town + "</td><td>" + user.points + "</td></tr>"
-}
-html+="</tbody></table>";
-  $('#score').html(html);
-  
+  $.ajaxSetup({async:false});
+ 	  $.get('/tryme/api/v1.0/scores', function(data) {
+ 		var html = '<table class="table table-hover"><thead><tr><th>N.</th><th>Име</th><th>Фамилия</th><th>Град</th><th>Точки</th></tr></thead><tbody>';
+ 		data.forEach(function(item, index) {
+ 			var fullName = item.user.userInformation.fullName.split(" ");
+ 			html += "<tr><td>" + (index+1) + "</td><td>" + fullName[0] + "</td><td>" + fullName[1] + "</td><td>" + item.user.userInformation.town + "</td><td>" + item.totalScore + "</td></tr>"
+ 		});
+ 		html+="</tbody></table>";
+ 		console.log(html);
+ 		$('#score').html(html);
+ 	  });
   }
   
   function userHover(event) {
@@ -138,8 +134,8 @@ html+="</tbody></table>";
     if (name == 'Христо') {
       return '<img class="media-object dp img-circle" src="../imgs/hristo.jpg" style="width: 200px;height:200px;"><br>';
     }
-    if (name == 'Милка') {
-      return '<img class="media-object dp img-circle" src="../imgs/milka.jpg" style="width: 200px;height:200px;"><br>';
+    if (name == 'Моника') {
+      return '<img class="media-object dp img-circle" src="../imgs/monika.jpg" style="width: 200px;height:200px;"><br>';
     }
     if (name == 'Таня') {
       return '<img class="media-object dp img-circle" src="../imgs/tanya.jpg" style="width: 200px;height:200px;"><br>';

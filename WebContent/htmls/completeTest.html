@@ -22,7 +22,7 @@
 <!-- ======================== NAVBAR ======================== -->
   <div class="navWrapper navbar-fixed-top">
     <div class="upper">
-      <img src="../imgs/upperNav.png">
+      <img src="../imgs/upper_Nav.png">
     </div>
     <nav class="navbar navbar-inverse ">
       <div class="navbar-header">
@@ -54,12 +54,12 @@
         <div class="col-md-12">
             <h4 class="card-title">Вие токущо завършихте теста!</h4>
             <p class="card-text">
-            <h3>Оставащо време: 2 минути 38 секунди</h3>
-            <h2>Резултат: 63 %</h2>
+            <h3 id="remaining"></h3>
+            <h2 id="result"></h2>
+            <h3 id="score"></h3>
             <div class="containerrr">
                 <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100" style="width:63%">
-                        63%
+                    <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">100%
                     </div>
                 </div>
             </div>
@@ -75,9 +75,9 @@
                     <h4 class="modal-title">Сподели с приятели</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="col-sm-4"><a href=""><img src="../mockups/assets/facebook.png" class="thumbnail" height="80" /></a></div>
-                    <div class="col-sm-4"><a href=""><img src="../mockups/assets/twitter.png" class="thumbnail" height="80" /></a></div>
-                    <div class="col-sm-4"><a href=""><img src="../mockups/assets/mail.png" class="thumbnail" height="80" /></a></div>
+                    <div class="col-sm-4"><a href=""><img src="../imgs/facebook.png" class="thumbnail" height="80" /></a></div>
+                    <div class="col-sm-4"><a href=""><img src="../imgs/twitter.png" class="thumbnail" height="80" /></a></div>
+                    <div class="col-sm-4"><a href=""><img src="../imgs/mail.png" class="thumbnail" height="80" /></a></div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Затвори</button>
@@ -96,5 +96,10 @@
         <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="../js/navbar.js"></script>
+    <script>
+    $("#result").text('Резултат: ' + sessionStorage.getItem('result') + " %")
+    $("#remaining").text('Оставащо време: ' + sessionStorage.getItem('timeRemaining'));
+    $("#score").text('Точки: ' + sessionStorage.getItem('totalScore') + '/' + sessionStorage.getItem('maxScore'));
+    </script>
     </body>
 </html>

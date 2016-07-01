@@ -155,8 +155,6 @@ public class AccountsResources {
 	public Response createAccount(Account account) {
 		try {
 			if (AccountValidationUtils.validateUsername(account)) {
-				UserInformation userInfo = new UserInformation();
-				account.setUserInformation(userInfo);
 				account.setPassword(PasswordService
 						.getInstance()
 						.encrypt(account.getPassword()));

@@ -7,4 +7,7 @@ public class Entity {
 	
 	/** The test entity String representation. */
 	public static String TEST = "Test";
+	
+	/** The taken quiz entity String representation. */
+	public static String TAKEN_QUIZ = "TakenQuiz";
 }

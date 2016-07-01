@@ -64,14 +64,15 @@
             </div>
         </div>
          <br/>
-
+<div id="errormsg" class="alert alert-danger" hidden=true>
+         <strong>Грешка!</strong> Моля изберете отговор.</div>
         <div class="question jumbotron"></div>
         <div class="btn-group pull-right btn-navigator" role="group">
             <button id="prev" type="button" class="btn btn-secondary" disabled>
                 <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Предишен
             </button>
             <button id="next" type="button" class="btn btn-secondary">Следващ <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
-            <button type="button" class="btn btn-warning"><a type="button" style="color: black;" href="completeTest.html"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>   Предай теста</a></button>
+            <button id="submit" type="button" class="btn btn-warning"><a type="button" style="color: black;" href="completeTest.html"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>   Предай теста</a></button>
         </div>
     </div><!-- /.container -->
   </div>
@@ -84,82 +85,7 @@
     <script src="../js/navbar.js"></script>
     <script src="../js/main.js"></script>
     <script src="../jquery.countdown/jquery.countdown.js"></script>
-    <script>
-    var endTest = new Date(new Date().getTime() + 30 * 60000);
-    
-    $('#clock').countdown(endTest, function(event) {
-        $(this).html('<h1>' + event.strftime('%M:%S') + '</h1>');
-    });
-    
-    
-    var currentQuestion = 0;
-    $.ajaxSetup({async: false});
-    $.get('/tryme/api/v1.0/tests/', function(data){
-    	 questions = data[0].questions;
-    });
-    
-    var qHtml = buildQuestion(questions[currentQuestion]);
-    $(".question").html(qHtml);
-    
-    $('#next').on('click', getNext);
-    $('#prev').on('click', getPrev);
-    
-    function getNext() {
-    
-    
-        currentQuestion++;
-        if (currentQuestion >= questions.length) {
-            currentQuestion = questions.length - 1;
-            return;
-        }
-        
-        var qHtml = buildQuestion(questions[currentQuestion]);
-        $(".question").html(qHtml);
-        $("#prev").removeAttr('disabled');
-        
-        updateProgress();
-        
-        if (currentQuestion >= questions.length - 1) {
-            $('#next').attr('disabled','disabled');
-            
-        }
-    
-    }
-    
-    function updateProgress() {
-        var percentage = Math.floor((currentQuestion/questions.length)*100);
-        $('.progress-bar').css('width', percentage+'%');
-        $('.progress-bar').html(percentage+'%');
-    }
-    
-    function getPrev() {
-        currentQuestion--;
-        if (currentQuestion < 0 ) {
-            currentQuestion = 0;
-            return;
-        }
-        
-        var qHtml = buildQuestion(questions[currentQuestion]);
-        $(".question").html(qHtml);
-        $("#next").removeAttr('disabled');
-        updateProgress();
-        if (currentQuestion == 0 ) {
-            $('#prev').attr('disabled','disabled');
-        }
-    }
-    
-    function buildQuestion(question) {
-        var qHtml = '<h2>' + question.text + '</h2>';
-        qHtml += ' <br/><form action="demo_form.asp" method="get">';
-        question.answers.forEach(function(answer) {
-                qHtml += '<input type="radio" name="ans" value="' + answer.content + '">   ' + answer.content +'<br>';
-            }
-        );
-        qHtml += '<br/></form>';
-        return qHtml;
-    }
-    
-    </script>
+    <script src="../js/make_test.js"></script>
     
     <script src="auth.js"></script>
   </body>

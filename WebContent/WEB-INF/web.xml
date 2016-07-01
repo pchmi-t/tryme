@@ -13,7 +13,16 @@
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 	<listener>
-		<listener-class>com.tryme.listeners.DatabaseInitListener</listener-class>
+		<listener-class>com.tryme.listeners.CleanDBListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.tryme.listeners.TestsInitListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>com.tryme.listeners.UsersInitListener</listener-class>
+	</listener>
+		<listener>
+		<listener-class>com.tryme.listeners.ScoresInitListener</listener-class>
 	</listener>
 	<servlet>
 		<servlet-name>tryme</servlet-name>
