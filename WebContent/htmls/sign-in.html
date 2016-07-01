@@ -53,21 +53,27 @@
         <h1 class="fontCursive">Влез в профила си :)</h1>
         <h3 class="fontCursive">Решавай тестове</h3>
         <h3 class="fontCursive">и разбери дали си подготвен за училищния тест.</h3>
+        <h3 id="successMsg" style="display:none" class="fontCursive">Вие влязохте успешно в профила си!</h3>
+        <h3 id="errorMsg" style="display:none" class="fontCursive">Неуспешно влизане в профила!</h3>
+        <div id="validationErrors" class="alert alert-danger" role="alert" style="display:none">
+  			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+		</div>
       </div>
+      
       <div id="errormsg" class="alert alert-danger" hidden>
         <strong>Грешка!</strong> Моля въведете валидни имейл и парола
       </div>
       <div class="inputs">
         <div class="input-group input-group-lg">
           <span class="input-group-addon" id="sizing-addon1"></span>
-          <input type="text" id="useremail" class="form-control" placeholder="E-mail" aria-describedby="sizing-addon1">
+          <input id="username" type="text" id="userename" class="form-control" placeholder="Потребителско име" aria-describedby="sizing-addon1">
         </div>
         <div class="input-group input-group-lg">
           <span class="input-group-addon" id="sizing-addon1"></span>
-          <input type="password" class="form-control" placeholder="Парола" aria-describedby="sizing-addon1">
+          <input id="password" type="password" class="form-control" placeholder="Парола" aria-describedby="sizing-addon1">
         </div>
       </div>
-      <button type="submit" id="signin" class="btn btn-success sign">Влез</button>
+      <button type="submit" id="signin" class="btn btn-success sign" onclick="login()">Влез</button>
   </div>
 <!-- ======================== CONTENT ======================== -->
 </div><!-- /.container -->
@@ -77,6 +83,6 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="../js/navbar.js"></script>
-  <script type="text/javascript" src="auth.js"></script>
+	<script src="../js/login.js"></script>
   </body>
 </html>

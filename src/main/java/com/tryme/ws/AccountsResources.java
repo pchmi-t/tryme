@@ -10,7 +10,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -42,6 +44,7 @@ import com.tryme.core.exceptions.NoSuchAccountException;
 import com.tryme.core.exceptions.WSBaseException;
 import com.tryme.framework.bean.Account;
 import com.tryme.framework.bean.UserInformation;
+import com.tryme.framework.bean.UserLogin;
 import com.tryme.framework.criteria.AccountCriterion;
 import com.tryme.framework.validation.AccountValidationUtils;
 import com.tryme.managers.AccountManager;
@@ -57,7 +60,10 @@ public class AccountsResources {
 	/** The context. */
 	@Context 
 	private HttpServletRequest request;
-
+	
+	@Context
+	 private HttpServletResponse response;
+	
 	/**
 	 * Get all accounts.
 	 * 
@@ -113,10 +119,10 @@ public class AccountsResources {
 	@Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	public Response authenticateAccount(@NotBlank(message="Username can not be empty")
-	@PathParam("username")String username, @NotBlank(message="Please specify the account") Account account) {
+	@PathParam("username")String username, @NotBlank(message="Please specify the account") UserLogin account) {
 		try {
 			if (!username.equals(account.getUsername())) {
-				return Response.status(Status.BAD_REQUEST).build();
+				return Response.status(Status.BAD_REQUEST).entity("").build();
 			}
 			String plainPassword = account.getPassword();
 			String encryptedPassword = PasswordService.getInstance().encrypt(plainPassword);
@@ -125,12 +131,16 @@ public class AccountsResources {
 			criterion.password(encryptedPassword);
 			Account domainAccount = accountManager.getAccount(criterion);
 			if (domainAccount != null) {
-				return Response.ok().build();
+				Cookie cookie = new  Cookie("account", username);
+			    cookie.setMaxAge(60 * 5);
+			    //Add the cookie to the response
+			    response.addCookie(cookie);
+				return Response.ok().entity(account).build();
 			} else {
-				return Response.status(Status.BAD_REQUEST).build();
+				return Response.status(Status.BAD_REQUEST).entity("").build();
 			}
 		} catch (Exception e) {
-			return Response.status(Status.BAD_REQUEST).build();
+			return Response.status(Status.BAD_REQUEST).entity("").build();
 		}
 	}
 
