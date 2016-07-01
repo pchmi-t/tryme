@@ -64,14 +64,15 @@
             </div>
         </div>
          <br/>
-
+<div id="errormsg" class="alert alert-danger" hidden=true>
+         <strong>Грешка!</strong> Моля изберете отговор.</div>
         <div class="question jumbotron"></div>
         <div class="btn-group pull-right btn-navigator" role="group">
             <button id="prev" type="button" class="btn btn-secondary" disabled>
                 <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Предишен
             </button>
             <button id="next" type="button" class="btn btn-secondary">Следващ <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></button>
-            <button type="button" class="btn btn-warning"><a type="button" style="color: black;" href="completeTest.html"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>   Предай теста</a></button>
+            <button id="submit" type="button" class="btn btn-warning"><a type="button" style="color: black;" href="completeTest.html"><span class="glyphicon glyphicon-check" aria-hidden="true"></span>   Предай теста</a></button>
         </div>
     </div><!-- /.container -->
   </div>
@@ -91,8 +92,9 @@
         $(this).html('<h1>' + event.strftime('%M:%S') + '</h1>');
     });
     
-    
+    totalScore = 0;
     var currentQuestion = 0;
+    var totalScore = 0;
     $.ajaxSetup({async: false});
     $.get('/tryme/api/v1.0/tests/', function(data){
     	 questions = data[0].questions;
@@ -103,9 +105,18 @@
     
     $('#next').on('click', getNext);
     $('#prev').on('click', getPrev);
+    $('#submit').on('click', submit);
     
     function getNext() {
-    
+    	var q = questions[currentQuestion];
+    	var selected = $('input[name=ans]:checked', '#question');
+    	if (selected.length > 0) {
+    	 checkIfCorrect(selected.val(), q) 	    
+    	} else {
+    		$("#errormsg").show();
+    		$("#errormsg").slideToggle(3000);
+    		return;
+    	}
     
         currentQuestion++;
         if (currentQuestion >= questions.length) {
@@ -123,7 +134,44 @@
             $('#next').attr('disabled','disabled');
             
         }
+    }
     
+    function submit() {
+    	var q = questions[currentQuestion];
+    	var selected = $('input[name=ans]:checked', '#question');
+    	if (selected.length > 0) {
+    	 checkIfCorrect(selected.val(), q)
+    	 sessionStorage.setItem("totalScore", totalScore);
+    	 sessionStorage.setItem("result",  Math.floor((totalScore / (questions.length * 10))*100) );
+    	 sessionStorage.setItem("timeRemaining", $('#clock h1').text());
+    	 sessionStorage.setItem("maxScore", questions.length * 10);
+    	 
+    	 $.ajaxSetup({async:false});
+    	 $.ajax({
+    		  type: "POST",
+    		  url: '/tryme/api/v1.0/scores',
+    		  data: JSON.stringify({ "username": 'eminkaa', "score" : totalScore }),
+    		  contentType : 'application/json',
+    		});
+    	 
+    	 window.location.href= "completeTest.html";
+    	 
+    	} else {
+    		$("#errormsg").show();
+    		$("#errormsg").slideToggle(3000);
+    		return;
+    	}
+    }
+    
+    function checkIfCorrect(selectedVal, q) {
+   	    isCorrect = false;
+   	    q.answers.forEach(function(item) { if (item.content === selectedVal && !isCorrect) {
+   	    	isCorrect = item.correct;
+   	    } });
+   	    
+   	    if (isCorrect) {
+   	    	totalScore += 10;
+   	    }
     }
     
     function updateProgress() {
@@ -150,7 +198,7 @@
     
     function buildQuestion(question) {
         var qHtml = '<h2>' + question.text + '</h2>';
-        qHtml += ' <br/><form action="demo_form.asp" method="get">';
+        qHtml += ' <br/><form id="question">';
         question.answers.forEach(function(answer) {
                 qHtml += '<input type="radio" name="ans" value="' + answer.content + '">   ' + answer.content +'<br>';
             }
