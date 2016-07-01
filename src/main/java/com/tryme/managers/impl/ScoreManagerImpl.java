@@ -41,7 +41,7 @@ public class ScoreManagerImpl implements ScoreManager {
 			}
 		}
 		
-		TreeSet<Score> scores = new TreeSet<>((Score o1, Score o2) -> o1.getTotalScore() -  o2.getTotalScore());
+		TreeSet<Score> scores = new TreeSet<>((Score o1, Score o2) -> o2.getTotalScore() -  o1.getTotalScore());
 		for (Entry<Account, Integer>  userResult : userResults.entrySet()) {
 			Score score = new Score(userResult.getKey(), userResult.getValue());
 			scores.add(score);
